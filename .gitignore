@@ -17,7 +17,6 @@ phue.conf
 .*
 !/.gitignore
 *.jpg
-*.png
 *.tar
 *.sh
 *.sqlite
