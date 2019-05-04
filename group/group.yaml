@@ -1,0 +1,359 @@
+  # financeg:
+  #   name: Crypto Monnaies
+  #   entities:
+  #     # - sensor.trade_volume
+  #     - sensor.exchange_rate_1_btc
+  #     - sensor.ethereum_balance
+  #     # - sensor.bitcoin_balance
+  #     - sensor.ripple_balance
+  #     - sensor.vergeeur
+  #     - sensor.etheur
+  #     - sensor.ripeur
+  #     - sensor.xemeur
+  #     - sensor.gaineth
+  #     - sensor.gainverge
+  #     - sensor.gainripple
+  #     - sensor.gainxem
+  #     - sensor.gaintotal
+  #     # - history_graph.gr1
+  robot:
+    name: Xiaomi Vacuum
+    entities:
+      - input_boolean.vacuumauto
+      - sensor.vacuumalarm_time
+      - input_number.vacuumhour
+      - input_number.vacuuminutes
+      - script.vacuumon
+      - script.vacuumoff
+      - sensor.xiaomibat
+      - sensor.xiaomistatus
+      - sensor.xiaomicleantime
+      - sensor.xiaomicleantimet
+  radiog:
+    name: Radio Maison
+    entities:
+      - input_select.radio_station
+      - input_select.chromecast_radio
+      - script.radiolance
+  conso:
+    name: 'Conso Electrique' 
+    entities:
+      - sensor.linky
+#  polg:
+#    name: Taux de particules (<50 bon)
+#    entities:
+#      - sensor.waqi_gambetta_bordeaux_aquitaine
+#      - sensor.waqi_grand_parc_bordeaux_aquitaine
+#      - sensor.waqi_bastide_bordeaux_aquitaine
+  systemg:
+    name: Systeme GanoVM Ubuntu 64bits
+    entities:
+      - sensor.cpu_used
+      - sensor.ram_available
+      - sensor.ram_used
+      - sensor.disk_used_home
+      - sensor.pihole_ads_blocked_today
+      - sensor.pihole_ads_percentage_blocked_today
+      - sensor.pihole_dns_queries_today
+      - sensor.pihole_domains_blocked
+  deezeripper:
+    name: DeezeRipper
+    entities:
+      - input_text.text2
+      - script.dldeezer
+  themesg:
+    name: Les themes
+    entities:
+      - input_select.themesi     
+  chauffage:
+    name: Chauffage et temperature
+    entities:
+      - sensor.alarmsensor
+      # - sensor.tempext_temperature
+      # - sensor.exterieur_humidity
+      - switch.chambre
+      - sensor.tempchambre_temperature
+      - sensor.tempchambre_humidity
+      - sensor.tempetage_temperature
+      - sensor.tempetage_humidity
+      - sensor.tempsdb_temperature
+      - sensor.tempsdb_humidity
+      - sensor.doucheon
+      - sensor.salon_lux
+      - sensor.salon_motion
+      - sensor.salon_temperature
+  alarmclock:
+    name: Wake Me Up
+    entities: 
+      # - input_boolean.freebox
+      - sensor.alarm_time
+      - input_number.alarmhour
+      - input_number.alarmminutes
+      - input_boolean.alarmweekday
+      - input_boolean.alarmweekon
+  mesrdv:
+    name: mes rdv
+    entities:
+      - sensor.rdv_arno
+      - sensor.rdv_arno_h
+      - sensor.rdv_contact
+      - sensor.rdv_contact_h
+      - sensor.rdv_ferie
+      - sensor.rdv_ferie_h
+  media:
+    name: Les devices TV
+    entities :
+#      - input_boolean.squeeze
+      - sensor.freeplayer
+      - media_player.spotify
+      - media_player.entree_2
+      - media_player.salle_de_bains
+      - media_player.chambre
+      - media_player.shield
+      - media_player.tele_du_salon
+      - media_player.shield_android_tv
+      - group.free
+  # googlemaps:
+  #   name: googlemaps
+  #   entities:
+  #     - sensor.plage
+  #     - sensor.travail
+  stats_sensor:
+    name: Statistics sensor
+    entities:
+      - sensor.presence_a_la_maison
+      - sensor.lumieres_on_today
+      - sensor.ssl_certificate_expiry
+  trackm:
+    name: Automatisation On/Off
+    entities:
+      - input_boolean.stopsoir
+      - input_boolean.automa
+      - input_boolean.trackme_arno
+      - script.surftv
+      - script.previsions
+      # - script.news
+      - script.annoncematin
+      # - script.radar
+      - script.surf
+      - script.meteo
+      - script.trafic
+      - script.rendezvous
+      - script.temperature
+      - script.surveille
+      - script.colorloop
+      - sensor.plextautulli
+  sdb:
+    name: Salle de Bain
+    entities:
+      - light.sdb
+  etage1:
+    name: 1er Etage
+    entities:
+      - light.escalier
+      - light.chambre
+      - light.sdb
+      - input_boolean.tvoffchambre
+      - switch.chambre
+      - light.wc
+      - binary_sensor.mvtsdb
+      - binary_sensor.mvtwc
+  salon:
+    name: Salon
+    entities:
+      - input_number.luminosite
+      - light.hall
+      - light.hue_lightstrip_plus_1
+      - light.hue_lightstrip_1
+      - light.salon_couleur
+      - light.bibliocolor
+      - light.bureau
+      - input_boolean.cast_light
+      - input_boolean.rainbow_light
+  free:
+    name: Freebox
+    entities:
+      - input_select.freeplayon
+      - input_select.chainefree
+  ambiance:
+    name: Ambiances
+    entities:
+      - scene.Salon_normal
+      - scene.RougeLove
+      - scene.Salon_soft
+      - scene.Allume
+      - scene.Eteint
+      - scene.Salon_lumi
+  prises:
+    name: Prises connectees
+    entities:
+      - switch.bureau
+      - switch.chambre
+  todolist:
+    name: ToDo List
+    entities:
+      - input_text.text1
+      - script.effacetodolist
+      - script.effacetodolistid
+      - script.addtodolist
+  courses:
+    name: Liste des courses
+    entities:     
+      - input_boolean.bieres
+      - input_boolean.papierwc
+      - input_boolean.coca
+      - input_boolean.lessive
+      - input_boolean.poulet
+      - input_boolean.steak
+      - input_boolean.poisson
+      - input_boolean.shampooing
+      - input_boolean.geldouche
+      - input_boolean.cafe
+      - input_boolean.petitdej
+      - input_boolean.cremefraiche
+      - input_boolean.tomates
+      - input_boolean.pommedeterre
+      - input_boolean.poivron
+      - input_boolean.oignon
+      - input_boolean.pizza
+      - input_boolean.riz
+      - input_boolean.pates
+      - input_boolean.jambon
+      - input_boolean.apero
+      - input_boolean.sacpoubelle
+      - input_boolean.deo
+      - input_boolean.dentifrice
+      - input_boolean.oeufs
+      - input_boolean.lait
+  salonlight:
+    name: lumieres salon
+    entities:
+      - light.hue_lightstrip_plus_1
+      - light.hue_lightstrip_1
+      - light.salon_couleur
+      - light.bibliocolor
+      - light.bureau
+  salonlightcoul:
+    name: salon couleur
+    entities:
+      - light.hue_lightstrip_plus_1
+      - light.hue_lightstrip_1
+      - light.salon_couleur
+      - light.bibliocolor
+      - light.bureau
+  devices:
+    name: personne
+    entities:
+      - device_tracker.192168107_e3458e9d8f39
+      - sensor.nutblanc
+      - sensor.nutorange
+      # - sensor.miband3
+  internet:
+    name: internet
+    entities:
+      - sensor.fastcom_speedtest
+  meteo_group:
+    name: Prévisions pour demain
+    entities:
+      - sensor.weather_forecast
+      - sun.sun
+      - sensor.weather_cloud_coverage
+      - sensor.weather_humidity
+      - sensor.weather_ozone
+      - sensor.weather_precip_intensity
+      - sensor.weather_precip_probability
+      - sensor.weather_pressure
+      - sensor.weather_temperature
+      - sensor.weather_wind_speed
+      - sensor.weather_minutely_summary
+      - sensor.weather_hourly_summary
+      - sensor.weather_daily_summary
+  wumeteo:
+    name: Meteo
+    entities:
+      - sensor.yweather_current
+      - sensor.pws_temp_c
+      - sensor.pws_feelslike_c
+      - sensor.pws_precip_today_metric
+      - sensor.pws_pressure_in
+      - sensor.pws_pressure_mb
+      - sensor.pws_relative_humidity
+      - sensor.pws_wind_dir
+      - sensor.pws_wind_kph
+  surf:
+    name: Surf group
+    entities:
+      - camera.webcamsurfnord
+      - camera.webcamsurfnord2
+      - camera.webcamsurfcentrale
+      - camera.surf
+      - sensor.surf9h
+      - sensor.surf9h_h
+      - sensor.surf13h
+      - sensor.surf13h_h
+      - sensor.surf17h
+      - sensor.surf17h_h
+      - sensor.tempocean
+      - sensor.mareepm
+      - sensor.mareebm
+#  session:
+#    name: Derniere Session Surf
+#    entities:
+#      - sensor.datesurf
+#      - sensor.lieusurf
+#      - sensor.dureesurf
+#      - sensor.vmaxsurf
+#      - sensor.vmoysurf
+#      - sensor.distasurf
+#      - sensor.ddepsurf
+  ymeteo:
+    name: Prévisions pour demain
+    entities:
+      - sun.sun
+      - sensor.yweather_condition
+      - sensor.yweather_humidity
+      - sensor.yweather_temperature
+      - sensor.yweather_temperature_max
+      - sensor.yweather_temperature_min
+      - sensor.yweather_wind_speed
+      - sensor.yweather_visibility
+  mvt:
+    name: Detection de mouvement
+    entities:
+      - binary_sensor.mvtsdb
+      - binary_sensor.mvtwc
+  octo:
+    name: Creality CR10
+    entities:
+      - switch.raspberry
+      - switch.lampe_print
+      - switch.creality_cr10
+      - input_boolean.autoprint
+      - camera.camcr10
+      - sensor.creality_cr10_actual_bed_temp
+      - sensor.creality_cr10_target_bed_temp
+      - sensor.creality_cr10_actual_tool0_temp
+      - sensor.creality_cr10_target_tool0_temp
+      - sensor.creality_cr10_current_state
+      - sensor.creality_cr10_job_percentage
+  octo2:
+    name: Anet A8
+    entities:
+      - switch.raspberry
+      - switch.lampe_print
+      - switch.anet_a8
+      - input_boolean.autoprint2
+      - camera.cama8
+      - sensor.anet_a8_actual_bed_temp
+      - sensor.anet_a8_target_bed_temp
+      - sensor.anet_a8_actual_tool0_temp
+      - sensor.anet_a8_target_tool0_temp
+      - sensor.anet_a8_current_state
+      - sensor.anet_a8_job_percentage
+      - sensor.anet_a8_time_elapsed
+      - sensor.anet_a8_time_remaining
+  chambreg:
+    name: lumiere de la chambre
+    entities:
+      - light.chambre
+      

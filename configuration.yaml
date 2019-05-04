@@ -1,0 +1,989 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Maison de Gano
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret halatitude
+  longitude: !secret halongitude
+  # C for Celcius, F for Fahrenheit
+  #temperature_unit: C
+ # unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Paris
+  customize: !include devices/customize.yaml
+  whitelist_external_dirs:
+    - /config/www/surf
+
+config:
+
+system_health:
+
+recorder:
+  purge_interval: 2
+  purge_keep_days: 31
+  #db_url: sqlite:///home/gano/.homeassistant/home-assistant_v2.db
+  #db_url: sqlite:///config/home-assistant_v2.db
+
+
+
+lovelace:
+  # mode: yaml
+
+#weblink:
+#    - name: ElasticSearchKibana
+#      url: http://192.168.2.23:5601/
+
+weblink:
+ entities:
+   - name: Pi-Hole
+     url: http://192.168.2.24/admin
+     icon: mdi:router-wireless
+
+
+######### DEFINITION DES ZONES ###########
+zone:
+  name: Travail
+  latitude: !secret travlatitude
+  longitude: !secret travlongitude
+  icon: mdi:castle
+  radius: 500
+
+zone 2:
+  name: Maison de Gano
+  latitude: !secret halatitude
+  longitude: !secret halongitude
+  icon: mdi:home
+  radius: 500
+
+zone 3:
+  name: home
+  latitude: !secret halatitude
+  longitude: !secret halongitude
+  radius: 100
+
+cast:
+  media_player:
+  - host: 192.168.2.2
+  - host: 192.168.10.7
+  # media_player:
+  - host: 192.168.10.36
+  # media_player:
+  - host: 192.168.10.4
+  - host: 192.168.10.39
+
+frontend:
+  javascript_version: latest
+  themes:
+    midnight:
+# Main colors
+      # primary-color: '#5294E2'
+      primary-color: '#1C3033'                                                        # Header
+      accent-color: '#E45E65'
+      divider-color: "rgba(255, 255, 255, 0.12)"                                                         # Accent color
+      dark-primary-color: 'var(--accent-color)'                                       # Hyperlinks                                         
+      light-primary-color: 'var(--accent-color)'                                      # Horizontal line in about                                                                           
+# Text colors                                                                  
+      primary-text-color: '#FFFFFF'                                                   # Primary text colour, here is referencing dark-primary-color
+      text-primary-color: 'var(--primary-text-color)'                                 # Primary text colour
+      secondary-text-color: '#5294E2'                                                 # For secondary titles in more info boxes etc.
+      disabled-text-color: '#7F848E'                                                  # Disabled text colour
+      label-badge-border-color: 'white'                                               # Label badge border, just a reference value   
+# Background colors                                                            
+      primary-background-color: '#383C45'                                             # Settings background
+      secondary-background-color: '#383C45'                                           # Main card UI background  
+      divider-color: 'rgba(0, 0, 0, .12)'                                             # Divider 
+# Table rows                                                                   
+      table-row-background-color: '#353840'                                           # Table row
+      table-row-alternative-background-color: '#3E424B'                               # Table row alternative
+# Nav Menu                                                                   
+      paper-listbox-color: 'var(--primary-color)'                                     # Navigation menu selection hoover
+      paper-listbox-background-color: '#2E333A'                                       # Navigation menu background
+      paper-grey-50: 'var(--primary-text-color)'                                   
+      paper-grey-200: '#414A59'                                                       # Navigation menu selection
+# Paper card                                                               
+      paper-card-header-color: 'var(--accent-color)'                                  # Card header text colour
+      paper-card-background-color: '#434954'                                          # Card background colour
+      paper-dialog-background-color: '#434954'                                        # Card dialog background colour
+      paper-item-icon-color: 'var(--primary-text-color)'                              # Icon color
+      paper-item-icon-active-color: '#ffc107'                                         # Icon color active
+      paper-item-icon_-_color: 'green'           
+      paper-item-selected_-_background-color: '#434954'                               # Popup item select                      
+      paper-tabs-selection-bar-color: 'green'
+# Labels 
+      label-badge-red: 'var(--accent-color)'                                          # References the brand colour label badge border
+      label-badge-text-color: 'var(--primary-text-color)'                             # Now same as label badge border but that's a matter of taste
+      label-badge-background-color: '#2E333A'                                         # Same, but can also be set to transparent here
+# Switches
+      paper-toggle-button-checked-button-color: 'var(--accent-color)'
+      paper-toggle-button-checked-bar-color: 'var(--accent-color)'
+      paper-toggle-button-checked-ink-color: 'var(--accent-color)'
+      paper-toggle-button-unchecked-button-color: 'var(--disabled-text-color)'
+      paper-toggle-button-unchecked-bar-color: 'var(--disabled-text-color)'
+      paper-toggle-button-unchecked-ink-color: 'var(--disabled-text-color)'  
+# Sliders
+      paper-slider-knob-color: 'var(--accent-color)'
+      paper-slider-knob-start-color: 'var(--accent-color)'
+      paper-slider-pin-color: 'var(--accent-color)'
+      paper-slider-active-color: 'var(--accent-color)'
+      paper-slider-container-color: 'linear-gradient(var(--primary-background-color), var(--secondary-background-color)) no-repeat'
+      paper-slider-secondary-color: 'var(--secondary-background-color)'
+      paper-slider-disabled-active-color: 'var(--disabled-text-color)'
+      paper-slider-disabled-secondary-color: 'var(--disabled-text-color)'
+# Google colors
+      google-red-500: '#E45E65'
+      google-green-500: '#39E949'    
+    noir:
+      primary-color: black
+      # paper-card-background-color: "#6e746d"
+      secondary-background-color: grey
+    rouge:
+      primary-color: red
+      # paper-card-background-color: "#6e746d"
+      secondary-background-color: grey
+    vert:
+      primary-color: "#018625"
+      # paper-card-background-color: "#6e746d"
+      secondary-background-color: grey
+    jaune:
+      primary-color: "#E28903"
+      # paper-card-background-color: "#6e746d"
+      secondary-background-color: grey
+    bleu:
+      primary-color: "#10177D"
+      # paper-card-background-color: "#6e746d"
+      secondary-background-color: grey
+    cyan:
+      primary-color: "#149EEF"
+      # paper-card-background-color: "#6e746d"
+      secondary-background-color: grey
+    dark:
+# Main colors that can be changed
+      dark-primary-color: "#c66900"
+      disabled-text-color: "#545454"
+      divider-color: "rgba(255, 255, 255, 0.12)"
+      light-primary-color: "#e06c6c"
+      paper-card-background-color: "#1d1d1d"
+      paper-grey-200: "#191919"
+      paper-item-icon-color: "#d3d3d3"
+      paper-listbox-background-color: "#202020"
+      primary-background-color: "#303030"
+      primary-color: "#d32f2f"
+      primary-text-color: "#cfcfcf"
+      secondary-background-color: "#131313"
+      sidebar-text_-_background: "#62717b" 
+# Colors based on variables, see above
+      paper-card-header-color: "var(--paper-item-icon-color)" 
+      paper-item-icon-active-color: "var(--primary-color)"
+      paper-item-icon_-_color: "var(--primary-text-color)"
+      paper-listbox-color: "var(--primary-text-color)"
+      paper-grey-50: "var(--primary-text-color)"
+      paper-slider-active-color: "var(--primary-color)"
+      paper-slider-knob-color: "var(--primary-color)"
+      paper-slider-knob-start-color: "var(--primary-color)"
+      paper-slider-pin-color: "var(--primary-color)"
+      paper-slider-secondary-color: "var(--light-primary-color)"
+      paper-toggle-button-checked-ink-color: "var(--dark-primary-color)"
+      paper-toggle-button-checked-button-color: "var(--primary-color)"
+      paper-toggle-button-checked-bar-color: "var(--light-primary-color)"
+      paper-toggle-button-unchecked-bar-color: "var(--primary-text-color)"
+      secondary-text-color: "var(--primary-color)"
+      table-row-background-color: "var(--paper-card-background-color)"
+      table-row-alternative-background-color: "var(--sidebar-text_-_background)"
+    white:
+      paper-grey-50: paper-grey-50
+      # paper-card-background-color: "#6e746d"
+      secondary-background-color: grey
+
+#emulated_hue:
+#  type: google_home
+#  host_ip: 192.168.3.8
+#  advertise_ip: 192.168.3.8
+#  upnp_bind_multicast: true
+#  listen_port: 80
+#  off_maps_to_on_domains:
+#    - script
+#    - scene  
+#  expose_by_default: true
+#  exposed_domains:
+#    - light
+#    - script
+#    - media_player
+#    - group
+
+######### DEFINITION DES MOTEURS TTS ###########
+tts:
+  - platform: google_translate
+    service_name: google_say
+    language: 'fr'
+    cache: true
+    cache_dir: /tmp/tts
+    time_memory: 300
+#  - platform: picotts
+#    language: 'fr-FR'
+
+weather:
+  - platform: darksky
+    api_key: !secret darksky_api
+    # forecast:
+    #   - 0
+    #   - 1
+    #   - 2
+    #   - 3
+    #   - 4
+    #   - 5
+    # monitored_conditions:
+    #   - icon
+    #   - summary
+    #   - nearest_storm_distance
+    #   - nearest_storm_bearing
+    #   - humidity
+    #   - temperature
+    #   - temperature_high
+    #   - temperature_low
+    #   - apparent_temperature
+    #   - apparent_temperature_high
+    #   - apparent_temperature_low
+    #   - wind_speed
+    #   - wind_bearing
+    #   - precip_type
+    #   - precip_probability
+    #   - precip_accumulation
+    #   - precip_intensity
+    #   - precip_intensity_max
+    #   - uv_index
+    #   - daily_summary
+    #   - pressure
+    #   - visibility
+    scan_interval:
+      minutes: 5    
+
+######### DEFINITION DES DETECTEURS DE MOUVEMENTS ###########
+meteo_france:
+  - city: 'Eysines'
+    monitored_conditions:
+        - rain_chance
+        - freeze_chance
+        - thunder_chance
+        - snow_chance
+        - weather
+        - next_rain
+        - wind_speed
+        - temperature
+        - uv
+  - city: 'Lacanau'
+    monitored_conditions:
+        - rain_chance
+        - freeze_chance
+        - thunder_chance
+        - snow_chance
+        - weather
+        - next_rain
+        - wind_speed
+        - temperature
+        - uv
+
+binary_sensor:
+   - platform: rfxtrx
+     automatic_add: False
+     # automatic_add: True
+     devices:
+         091300479308f9019a70:
+           name: mvtsdb
+           data_bits: 4
+           command_on: 0x9
+           command_off: 0x0
+           device_class: motion
+           fire_event: True
+           off_delay:
+             seconds: 5
+         09130025ecad69019f80:
+           name: mvtwc
+           data_bits: 4
+           command_on: 0x9
+           command_off: 0x0           
+           device_class: motion
+           fire_event: True
+           off_delay:
+             seconds: 5
+
+timer:
+  timerwc:
+    duration: '00:04:00'
+  timersdb:
+    duration: '00:07:00'
+  timersdbnight:
+    duration: '00:03:00'
+
+
+# apiai:
+#   intents:
+#     GetTemperature:
+#       speech: Voici les temperatures de la maison,  il fait {{ states('sensor.salon_temperature') }} degrés dans le salon, {{ states('sensor.tempchambre_temperature') }} degrés dans le chambre, {{ states('sensor.tempetage_temperature')}} degrés à l etage, {{ states('sensor.tempsdb_temperature')}} degrés dans la salle de bain et {{ states('sensor.tempext_temperature')}} degrés à l'exterieur. 
+#       async_action: False
+#     SurfAi:
+#       speech: Voici les conditions mises à jour !
+#       async_action: False
+#       action:
+#         - service: notify.teleha
+#           data:
+#            title: surfcast
+#            message: Surf Alert
+#            data:
+#              photo:
+#              - file: /home/gano/.homeassistant/www/surf/surf.png
+#     BonjourAction:
+#       async_action: False
+#     RoutesAi:
+#       speech: Pour aller au travail il vous faudra {{ states('sensor.travail') }} minutes et pour la plage il faudra {{ states('sensor.plage') }} minutes. 
+#       async_action: False
+
+octoprint:
+  # - name: aneta8
+  #   host: 192.168.10.5
+  #   api_key: !secret octoapi
+  #   bed: true
+  #   number_of_tools: 1
+  - host: 192.168.10.18
+    api_key: !secret octoapi2
+    name: creality_cr10
+    bed: true
+    number_of_tools: 1
+  - host: 192.168.10.5
+    api_key: !secret octoapi
+    name: anet_a8
+    bed: true
+    number_of_tools: 1
+    # sensors:
+    # monitored_conditions:
+    #   - 'Current State'
+    #   - 'Job Percentage'    
+
+
+######### DEFINITION DU PANNEAU D'ALARME ###########
+alarm_control_panel:
+  platform: manual
+  code: !secret codeal
+
+map:
+  
+######### DEFINITION DU RFXCOM ###########
+rfxtrx:
+  device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A1RTHG3-if00-port0
+  # debug:
+
+
+################### HISTORY GRAPH ########
+history_graph:
+  gr1:
+    name: Crypto Graph
+    entities:
+#       - sensor.gaineth
+#       - sensor.gainripple
+#       - sensor.gainltc
+      - sensor.gaintotal
+    hours_to_show: 240
+    refresh: 120
+
+######### DEFINITION DU PANEL ###########
+panel_custom: 
+  - name: floorplan
+    sidebar_title: Floorplan
+    sidebar_icon: mdi:home
+    url_path: floorplan
+    config: !include floorplan.yaml
+    
+
+# image_processing:
+#  - platform: dlib_face_identify
+#    source:
+#     - entity_id: camera.salon1
+#     - entity_id: camera.salon2
+#     - entity_id: camera.salon3
+#    faces:
+#      Arnaud: /home/gano/.homeassistant/faces/arno2.jpg
+#      Maeva: /home/gano/.homeassistant/faces/maeva.jpg
+#      Marina: /home/gano/.homeassistant/faces/marina.jpg
+
+
+######### DEFINITION DU BROKER MQTT LOCAL ###########
+mqtt:
+  #broker: 192.168.10.21
+  broker: 192.168.3.8
+  port: 1883
+  client_id: hadash
+  keepalive: 60
+  username: hadash
+  password: hadash
+
+input_text:
+  text1:
+    name: Text 1
+    pattern: '[a-fA-F0-9]*'
+  text2:
+    name: Deezer link here
+    pattern: '[a-fA-F0-9]*'
+
+
+######### DEFINITION DES INPUT_SLIDER ###########
+input_number:
+  vacuumhour:
+    name: Heure
+    icon: mdi:timer
+    initial: 9
+    min: 0
+    max: 23
+    step: 1
+    mode: slider
+  vacuuminutes:
+    name: Minutes
+    icon: mdi:timer
+    initial: 45
+    min: 0
+    max: 59
+    step: 5
+    mode: slider
+  alarmhour:
+    name: Heure
+    icon: mdi:timer
+    initial: 6
+    min: 0
+    max: 23
+    step: 1
+    mode: slider
+  alarmminutes:
+    name: Minutes
+    icon: mdi:timer
+    initial: 35
+    min: 0
+    max: 59
+    step: 5
+    mode: slider
+  luminosite:
+    name: Luminosité salon
+    icon: mdi:light
+    initial: 255
+    min: 0
+    max: 255
+    step: 5
+    mode: slider
+  temperature:
+    name: Temperature Maison
+    icon: mdi:timer
+    initial: 20
+    min: 10
+    max: 30
+    step: 0.5
+    mode: slider
+
+ 
+ 
+######### DEFINITION DES INPUT_BOOLEAN ###########
+input_boolean:
+  vacuumauto:
+    name: Mode Auto
+    initial: off
+  stopsoir:
+    name: Eteint la lumiere la nuit
+    initial: on
+  autoprint2:
+    name: Extinction auto A8
+    initial: off
+  autoprint:
+    name: Extinction auto CR10
+    initial: off
+  squeeze:
+    name: Squeeze PI Etat
+    initial: off
+  bonjour:
+    name: Service bonjour
+    initial: on
+  bye:
+    name: Service bye
+    initial: on
+  automa:
+    name: Automatisation
+    initial: on
+  alarmweekday:
+    name: Les jours de la semaine 
+    initial: on
+    icon: mdi:calendar
+  alarmweekon:
+    name: Activee     
+    initial: on
+  tvoffchambre:
+    name: Allume le radiateur la nuit
+    initial: off
+  envoipic:
+    name: Envoi video capturee
+    initial: off
+  cast_light:
+    name: Chromecast lumieres
+    initial: off
+    icon: mdi:spotlight-beam
+  freebox:
+    name: Reveil Freebox
+    initial: off
+    icon: mdi:power
+  rainbow_light:
+    name: Effet Lumieres
+    initial: off
+    icon: mdi:traffic-light
+  bieres:
+    name: bieres
+    initial: off
+    icon: mdi:bitbucket
+  papierwc:
+    name: papier wc
+    initial: off
+    icon: mdi:emoticon-poop
+  coca:
+    name: coca
+    initial: off
+    icon: mdi:bitbucket
+  lessive:
+    name: lessive
+    initial: off
+    icon: mdi:car-wash
+  poulet:
+    name: poulet
+    initial: off
+    icon: mdi:paw
+  steak:
+    name: steak
+    initial: off
+    icon: mdi:paw
+  poisson:
+    name: poisson
+    initial: off
+    icon: mdi:fish
+  shampooing:
+    name: shampooing
+    initial: off
+    icon: mdi:car-wash
+  geldouche:
+    name: gel douche
+    initial: off
+    icon: mdi:car-wash
+  cafe:
+    name: cafe
+    initial: off
+    icon: mdi:coffee
+  petitdej:
+    name: a bouffer pour le matin
+    initial: off
+    icon: mdi:coffee
+  cremefraiche:
+    name: creme fraiche
+    initial: off
+    icon: mdi:bitbucket
+  tomates:
+    name: tomates
+    initial: off
+    icon: mdi:food-apple
+  pommedeterre:
+    name: pommes de terre
+    initial: off
+    icon: mdi:food
+  poivron:
+    name: poivrons
+    initial: off
+    icon: mdi:food-apple
+  oignon:
+    name: oignons
+    initial: off
+    icon: mdi:food-apple
+  pizza:
+    name: pizzas
+    initial: off
+    icon: mdi:pizza
+  riz:
+    name: Riz
+    initial: off
+    icon: mdi:food
+  pates:
+    name: pates
+    initial: off
+    icon: mdi:food-variant
+  jambon:
+    name: jambon
+    initial: off
+    icon: mdi:food
+  apero:
+    name: apero
+    initial: off
+    icon: mdi:food
+  sacpoubelle:
+    name: sacs poubelle
+    initial: off
+    icon: mdi:delete
+  deo:
+    name: déodorant
+    initial: off
+    icon: mdi:weather-windy
+  dentifrice:
+    name: dentifrice
+    initial: off
+    icon: mdi:brush
+  oeufs:
+    name: oeufs
+    initial: off
+    icon: mdi:food
+  lait:
+    name: lait
+    initial: off
+    icon: mdi:food
+  trackme_arno:
+    name: tracking arnaud
+    initial: on
+
+
+######### DEFINITION DES INPUT_SELECT ###########
+input_select:
+  themesi:
+    name: 'Themes'
+    options:
+      - noir
+      - rouge
+      - vert
+      - jaune
+      - bleu
+      - cyan
+      - dark
+      - white
+    initial: noir
+  categorie2:
+    name: 'Type'
+    options:
+      - Choisir
+      - divertissement
+      - documentaires
+      - films-telefilms
+      - jeunesse
+      - magazine
+      - sport
+    initial: Choisir
+  radio_station:
+    name: 'Radio Station:'
+    options:
+      - Franceinfo
+      - Jazz
+      - Nova Sauvagine
+  chromecast_radio:
+    name: 'Select Speakers:'
+    options:
+      - Google Home
+      - Raspberry PI2
+      - Shield
+    initial: Google Home
+    icon: mdi:speaker-wireless
+  freeplayon:
+    name: "Etat Allume Eteint Freebox"
+    initial: "Off"
+    options:
+      - "On"
+      - "Off"
+  # chainefree:
+  #   name: "Freebox Chaines"
+  #   icon: mdi:remote
+  #   initial: "iTele"
+  #   options:
+  #     - "TF1"
+  #     - "France2"
+  #     - "France3"
+  #     - "CanalPlus"
+  #     - "France5"
+  #     - "M6"
+  #     - "Arte"
+  #     - "D8"
+  #     - "W9"
+  #     - "TMC"
+  #     - "NT1"
+  #     - "NRJ12"
+  #     - "LCP"
+  #     - "France4"
+  #     - "BFMTv"
+  #     - "iTele"
+  #     - "D17"
+  #     - "Gulli"
+  #     - "FranceÃ”"
+  #     - "HD1"
+  #     - "LEquipe21"
+  #     - "6Ter"
+  #     - "Numero23"
+  #     - "RMC Decouverte"
+  #     - "Cherie25"
+  #     - "RTL9"
+
+
+######### DEFINITION DES COMMANDES SHELL POUR LA FREEBOX ###########
+shell_command: !include shell_commands.yaml
+
+
+alexa:
+  flash_briefings:
+    surfcastalexa:
+      title: surf ?
+      text: Les conditions de surf sont les suivantes, L'océan est a {{ states.sensor.tempocean.state }} degres, a 9h ce matin, {{ states.sensor.surf9h.state }} avec {{ states.sensor.surf9h_h.state }}, a 13h, {{ states.sensor.surf13h.state }}, avec {{ states.sensor.surf13h_h.state }}, et a 17h, {{ states.sensor.surf17h.state }}, avec {{ states.sensor.surf17h_h.state }}
+
+######### DEFINITION DU COMPTE GOOGLE ###########
+google:
+  client_id: !secret googleclient_id
+  client_secret: !secret googleclient_secret
+
+
+google_assistant:
+  project_id: arno-ac1da
+  # client_id: 390885640788lpb
+  # access_token: ge1NN52dKMekngarSOyJKHbX 
+  # agent_user_id: "dalliesa@gmail.com dallies"
+  api_key: !secret gpass 
+  expose_by_default: false
+  exposed_domains:
+    - switch
+    - light
+    - media_player
+    - script
+    - scene
+    - input_boolean
+  entity_config:
+    switch.anet_a8:
+      name: anet A8
+      expose: true
+      aliases:
+        - anet a8
+        - anet
+    switch.creality_cr10:
+      name: Creality CR10
+      expose: true
+      aliases:
+        - creality cr10
+        - cr10
+    input_boolean.cast_light:
+      name: mode cinema
+      expose: true
+      aliases:
+        - mode cinema
+    input_boolean.rainbow_light:
+      name: mode soiree
+      expose: true
+      aliases:
+        - mode soirée
+    media_player.shield:
+      name: nvidia shield
+      expose: true
+      aliases:
+        - shield
+        - nvidia shield
+    script.surftv:
+      name: Surf TV
+      expose: true
+      aliases:
+        - webcam lacanau
+        - webcam surf
+    script.vacuumon:
+      name: Vacuum On
+      expose: true
+      aliases:
+        - l'aspirateur
+    script.vacuumoff:
+      name: Surf TV
+      expose: true
+      aliases:
+        - retour à la base
+        - arret aspirateur
+    script.entreeVacuum:
+      name: Vacuum Entree
+      expose: true
+      aliases:
+        - l'aspirateur dans l'entree
+    script.cuisineVacuum:
+      name: Vacuum Cuisine
+      expose: true
+      aliases:
+        - l'aspirateur dans la cuisine
+    light.lumieres_du_salon:
+      name: lumières salon
+      expose: true
+      aliases:
+        - les lumières du salon
+    light.bureau:
+      name: lumières du bureau
+      expose: true
+      aliases:
+        - la lumière du bureau
+    light.chambre:
+      name: lumières de la chambre
+      expose: true
+      aliases:
+        - la lumière de la chambre
+
+
+######## #DEFINITION DES SENSORS ###########
+sensor: !include devices/sensors.yaml
+
+
+######### DEFINITION DES SWITCH WEMO ET DES DETECTEUR DE MVT RFX ###########
+switch:
+    - platform: wemo
+      static: []
+      scan_interval: 10
+    - platform: broadlink
+      host: 192.168.10.3
+      mac: '34:EA:34:C9:A0:4D'
+      friendly_name: MP1
+      type: mp1
+      slots:
+      # friendly name of slots - optional
+      # if not set, slot name will be switch's friendly_name + 'slot {slot_index}'. e.g 'MP1 slot 1'
+       slot_1: 'Lampe Print'
+       slot_2: 'Raspberry'
+       slot_3: 'Creality CR10'
+       slot_4: 'Anet A8'
+
+vacuum:
+    - platform: xiaomi_miio
+      host: 192.168.3.45
+      #token: 72506f6c724975316453796254733453
+      token: 3046316142784d725568526f58356139
+      name: Xiaomi vacuum
+
+# Enables support for tracking state changes over time.
+history:
+
+# Track the sun
+sun:
+
+# Show links to resources in log and frontend
+
+# View all events in a logbook
+logbook:
+
+logger:
+  default: warn
+  logs:
+    # homeassistant.components.camera: fatal
+    requests.packages.urllib3: critical
+    urllib3.connectionpool: critical
+
+http:
+  api_password: !secret httpapi_password
+  base_url: !secret httpbase_url
+
+
+device_tracker: !include devices/tracker.yaml
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend
+conversation:
+
+# Checks for available updates
+updater:
+
+telegram_bot:
+#- platform: broadcast
+  - platform: polling
+    api_key: !secret teleapi_key
+#    parse_mode: html
+    allowed_chat_ids:
+      - !secret telechat_id
+
+######### DEFINITION DES SYSTEMES DE NOTIFICATION ###########
+notify:
+  # - platform: pushbullet
+  #   api_key: !secret pushapi_key
+  #   name: pushgano
+  - platform: telegram
+    name: teleha
+    api_key: !secret teleapi_key
+    chat_id: !secret telechat_id
+
+media_player: !include devices/media_players.yaml
+
+######### DEFINITION DES LUMIERES ###########
+#light:
+#  platform: hue
+#  host: 192.168.3.50
+#  scan_interval: 4
+#  allow_hue_groups: true
+
+hue:
+  bridges:
+    - host: 192.168.3.50
+      allow_hue_groups: true
+      allow_unreachable: true
+   # scan_interval: 4
+
+light: !include devices/lights.yaml
+
+# stream:
+
+
+######### DEFINITION DES CAMERAS / IMAGES ###########
+camera:
+  - platform: generic
+    still_image_url: http://api.sat24.com/animated/EU/infraPolair/2/Romance%20Standard%20Time/628670
+    #still_image_url: http://api.sat24.com/crop?type=visual5hdcomplete&lat=44.8378&lon=-0.5792&width=300&height=300&zoom=0.70&continent=eu
+    name: infrarouge
+  - platform: generic
+    still_image_url: http://api.sat24.com/animated/EU/visual/2/Romance%20Standard%20Time/555674
+    name: france
+  - platform: local_file
+    file_path: /config/www/surf/surf.png
+    #file_path: /home/gano/.homeassistant/www/surf/surf.png
+    name: surf
+  - platform: local_file
+    #file_path: /home/gano/.homeassistant/www/QR_CODE.png
+    file_path: /config/www/QR_CODE.png
+    name: qrcode
+  - platform: generic
+    still_image_url: http://192.168.3.8:8123/local/surf/surf.png
+    # stream_source: http://192.168.3.8:8123/local/surf/surf.png
+    #file_path: /home/gano/.homeassistant/www/surf/surf.png
+    name: surf2
+#  - platform: zoneminder
+  # - platform: mjpeg
+  #   mjpeg_url: http://192.168.10.15:9900
+  #   #name: ganovideo
+  #   name: salon1
+  # - platform: mjpeg
+  #   mjpeg_url: http://192.168.10.15:9902
+  #   name: salon2
+  - platform: ffmpeg
+    input: /config/www/surf/webcamsurf_nord.mp4
+    #input: /home/gano/.homeassistant/www/surf/webcamsurf.mp4
+    name: webcamsurfnord
+  - platform: ffmpeg
+    input: /config/www/surf/webcamsurf_nord2.mp4
+    #input: /home/gano/.homeassistant/www/surf/webcamsurf.mp4
+    name: webcamsurfnord2
+  - platform: ffmpeg
+    input: /config/www/surf/webcamsurf_centrale.mp4
+    #input: /home/gano/.homeassistant/www/surf/webcamsurf.mp4
+    name: webcamsurfcentrale
+  - platform: mjpeg
+    mjpeg_url: http://192.168.10.18:8080/?action=stream
+    name: camcr10
+    still_image_url: http://192.168.10.18:8080/?action=stream
+  - platform: mjpeg
+    mjpeg_url: http://192.168.10.5:8080/?action=stream
+    name: cama8
+    still_image_url: http://192.168.10.5:8080/?action=stream
+
+
+######### DEFINITION DES GROUPES ###########
+group: !include_dir_merge_named group
+
+
+######### DEFINITION DES SCENES ###########
+scene: !include scenes.yaml
+
+######### DEFINITION DES AUTOMATISATIONS ###########
+#automation: !include automations.yaml
+#automation: !include automations.yaml
+#automation: !include automations.yaml
+automation: !include automations.yaml
+
+######### DEFINITION DES SCRIPTS ###########
+script: !include scripts.yaml
+

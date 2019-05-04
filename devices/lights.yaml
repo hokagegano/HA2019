@@ -1,0 +1,15 @@
+# # - light:
+# #    platform: hue
+# - hue:
+#    host: 192.168.3.50
+#    scan_interval: 10
+#    # allow_hue_groups: true
+
+- platform: group
+  name: lumieres du salon
+  entities:
+    - light.bibliocolor
+    - light.bureau
+    - light.hue_lightstrip_1
+    - light.hue_lightstrip_plus_1
+    - light.salon_couleur

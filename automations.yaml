@@ -1,0 +1,1180 @@
+- id: Demande des temperatures
+  alias: Demande des temperatures
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: /temperatures
+  action:
+  - service: notify.teleha
+    data:
+      message: Voici les temperatures de la maison,  il fait {{ states('sensor.salon_temperature')
+        }} degrés dans le salon, {{ states('sensor.tempchambre_temperature') }} degrés
+        dans le chambre, {{ states('sensor.tempetage_temperature')}} degrés à l etage,
+        {{ states('sensor.tempsdb_temperature')}} degrés dans la salle de bain et
+        {{ states('sensor.tempext_temperature')}} degrés à l'exterieur.
+- id: Annonce Matin Telegram
+  alias: 'Annonce Matin Telegram '
+  trigger:
+  - platform: state
+    entity_id: sensor.salon_motion
+    from: '0'
+    to: '1'
+  condition:
+  - condition: time
+    after: 05:00
+    before: '10:00'
+  - condition: state
+    entity_id: input_boolean.bonjour
+    state: 'on'
+  action:
+  - service: notify.teleha
+    data:
+      message: Arnaud, la météo prévoit, {{ states.sensor.meteotoday.state }} pour
+        aujourd'hui. La température exterieure est de {{ states.sensor.tempext_temperature.state
+        | round }} degrés. Concernant les conditions de surf, {%- if (states.sensor.surf9h.state
+        != "mauvais surf, session médiocre") and (states.sensor.surf13h.state != "mauvais
+        surf, session médiocre") and (states.sensor.surf17h.state != "mauvais surf,
+        session médiocre") -%} c'est bien toute la journée {%- endif %} {%- if (states.sensor.surf9h.state
+        == "mauvais surf, session médiocre") and (states.sensor.surf13h.state == "mauvais
+        surf, session médiocre") and (states.sensor.surf17h.state == "mauvais surf,
+        session médiocre") -%} c'est pourri toute la journée {%- endif %} {%- if (states.sensor.surf9h.state
+        != "mauvais surf, session médiocre") and (states.sensor.surf13h.state == "mauvais
+        surf, session médiocre") and (states.sensor.surf17h.state == "mauvais surf,
+        session médiocre") -%} c'est bien le matin tot {%- endif %} {%- if (states.sensor.surf9h.state
+        != "mauvais surf, session médiocre") and (states.sensor.surf13h.state != "mauvais
+        surf, session médiocre") and (states.sensor.surf17h.state == "mauvais surf,
+        session médiocre") -%} c'est bien jusqu'en fin d'après midi {%- endif %} {%-
+        if (states.sensor.surf9h.state != "mauvais surf, session médiocre") and (states.sensor.surf13h.state
+        == "mauvais surf, session médiocre") and (states.sensor.surf17h.state != "mauvais
+        surf, session médiocre") -%} c'est bien le matin et le soir {%- endif %} {%-
+        if (states.sensor.surf9h.state == "mauvais surf, session médiocre") and (states.sensor.surf13h.state
+        != "mauvais surf, session médiocre") and (states.sensor.surf17h.state == "mauvais
+        surf, session médiocre") -%} c'est bien l'après midi {%- endif %} {%- if as_timestamp(states.calendar.dalliesagmailcom.attributes.start_time)
+        - as_timestamp(now().strftime("%Y-%m-%d %H:%M:%S")) < 86400 -%} .  N'oubliez
+        pas vous avez un rendez vous aujourd'hui.  {{ states.calendar.dalliesagmailcom.attributes.message
+        }}.{%- endif %} {%- if (states.calendar.contacts.state == 'on') -%} N'oubliez
+        pas vous avez un anniversaire a souhaiter, celui de {{ states.calendar.contacts.attributes.message
+        }} {%- endif %}
+- id: Demande du mode Surf
+  alias: Demande du mode Surf
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: /surf
+  action:
+  - service: notify.teleha
+    data:
+      message: 'Voici les conditions de surf à jour :'
+      data:
+        photo:
+        - file: /config/www/surf/surf.png
+- id: Demande ajout ToDo
+  alias: Demande ajout ToDo
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: /todo
+  action:
+  - service: notify.teleha
+    data_template:
+      message: 'Message contenu : {{ trigger.event.data["args"] }}'
+  - service: shell_command.todoadd
+    data_template:
+      text: '{{ trigger.event.data["args"] }}'
+- id: Demande suppr ToDo
+  alias: Demande suppr ToDo
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: /tododel
+  action:
+  - service: notify.teleha
+    data_template:
+      message: 'Message contenu : {{ trigger.event.data["args"] }}'
+  - service: shell_command.tododel
+    data_template:
+      text: '{{ trigger.event.data["args"] }}'
+- id: Clean ToDo
+  alias: Clean ToDo
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: /todoclear
+  action:
+  - service: shell_command.todoclear
+- id: SqueezeBox PI On
+  alias: SqueezeBox PI On
+  trigger:
+  - platform: state
+    entity_id: media_player.pine64
+    to: paused
+  action:
+    service: shell_command.squeezeon
+- id: SqueezeBox PI On
+  alias: SqueezeBox PI On
+  trigger:
+  - platform: state
+    entity_id: media_player.pine64
+    to: playing
+  action:
+    service: shell_command.squeezeoff
+- id: Temperature choix
+  alias: Temperature choix
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: /degres
+  action:
+  - service: notify.teleha
+    data:
+      message: Quelle temperature voulez vous ?
+      data:
+        keyboard:
+        - /Chambre
+        - /Salon
+        - /Etage
+        - /Sdb
+- id: Videos surf
+  alias: Videos surf
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: /webcam
+  action:
+  - service: notify.teleha
+    data:
+      message: Quelle Vidéos voulez vous ?
+      data:
+        keyboard:
+        - /PlageNord1
+        - /PlageNord2
+        - /PlageCentrale1
+        - /PlageCentrale2
+- id: Plage Centrale 1
+  alias: Plage Centrale 1
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: /PlageCentrale1
+  action:
+  - service: telegram_bot.send_video
+    data:
+      caption: Voici la webcam Centrale numero 1
+      file: /config/www/surf/teleha_webcamsurf_centrale.mp4
+- id: Plage Centrale 2
+  alias: Plage Centrale 2
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: /PlageCentrale2
+  action:
+  - service: telegram_bot.send_video
+    data:
+      caption: Voici la webcam Centrale numero 2
+      file: /config/www/surf/teleha_webcamsurf.mp4
+- id: Plage Nord 1
+  alias: Plage Nord 1
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: /PlageNord1
+  action:
+  - service: telegram_bot.send_video
+    data:
+      caption: Voici la webcam Nord numero 1
+      file: /config/www/surf/teleha_webcamsurf_nord.mp4
+- id: Plage Nord 2
+  alias: Plage Nord 2
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: /PlageNord2
+  action:
+  - service: telegram_bot.send_video
+    data:
+      caption: Voici la webcam Nord numero 2
+      file: /config/www/surf/teleha_webcamsurf_nord2.mp4      
+- id: Temperature Chambre
+  alias: Temperature Chambre
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: /Chambre
+  action:
+  - service: notify.teleha
+    data:
+      message: Il fait {{ states('sensor.tempchambre_temperature') }} degrés dans
+        la chambre.
+- id: Temperature Salon
+  alias: Temperature Salon
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: /Salon
+  action:
+  - service: notify.teleha
+    data:
+      message: Il fait {{ states('sensor.salon_temperature') }} degrés dans le salon.
+- id: Temperature Etage
+  alias: Temperature Etage
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: /Etage
+  action:
+  - service: notify.teleha
+    data:
+      message: Il fait {{ states('sensor.tempetage_temperature')}} degrés à l'etage.
+- id: Temperature Salle de bain
+  alias: Temperature Salle de bain
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: /Sdb
+  action:
+  - service: notify.teleha
+    data:
+      message: Il fait {{ states('sensor.tempsdb_temperature')}} degrés dans la salle
+        de bain.
+- id: Surf Alert 13h
+  alias: Surf Alert 13h
+  trigger:
+  - platform: state
+    entity_id: sensor.surf13h
+    from: mauvais surf, session médiocre
+    to: bon surf, session sympa
+  condition:
+  - condition: time
+    after: 09:00
+    before: '18:00'
+  action:
+  - service: media_player.volume_set
+    data_template:
+      entity_id: media_player.mpd
+      volume_level: 0.72
+  - service: tts.google_say
+    entity_id: media_player.mpd
+    data_template:
+      message: Surf ALERTE !!!! les conditions ont changées pour ce debut d'après
+        midi
+      cache: false
+  - service: notify.teleha
+    data:
+      title: surfcast
+      message: Surf Alert
+      data:
+        photo:
+        - file: /home/gano/.homeassistant/www/surf/surf.png
+- id: Alerte SSL
+  alias: Alerte SSL
+  trigger:
+  - platform: state
+    entity_id: sensor.ssl_certificate_expiry
+    from: '11'
+    to: '10'
+  action:
+  - service: notify.teleha
+    data:
+      title: Alerte ssl
+      message: Le certificat SSL est a renouveller dans 10 jours
+- id: Update HA
+  alias: Update HA
+  trigger:
+  - platform: state
+    entity_id: updater.updater
+  action:
+  - service: notify.teleha
+    data:
+      message: Mise à jour disponible de Home Assistant.
+- id: Surf Alert 17h
+  alias: Surf Alert 17h
+  trigger:
+  - platform: state
+    entity_id: sensor.surf17h
+    from: mauvais surf, session médiocre
+    to: bon surf, session sympa
+  condition:
+  - condition: time
+    after: 09:00
+    before: '20:00'
+  action:
+  - service: media_player.volume_set
+    data_template:
+      entity_id: media_player.mpd
+      volume_level: 0.72
+  - service: tts.google_say
+    entity_id: media_player.mpd
+    data_template:
+      message: Surf ALERTE !!!! les conditions ont changées pour la fin d'après midi
+      cache: false
+  - service: notify.teleha
+    data:
+      title: surfcast
+      message: Surf Alert
+      data:
+        photo:
+        - file: /home/gano/.homeassistant/www/surf/surf.png
+- id: Retour maison
+  alias: Retour maison
+  trigger:
+  - platform: state
+    entity_id: sensor.nutblanc
+    from: not_home
+    to: home
+  condition:
+  - condition: time
+    after: '16:00'
+    before: '23:30'
+  action:
+  - service: media_player.volume_set
+    data_template:
+      entity_id: media_player.entree
+      volume_level: 0.4
+  - service: tts.google_say
+    entity_id: media_player.entree
+    data_template:
+      message: '{{ [''Heureux de vous voir Arnaud'',''Bon retour à la maison Arnaud'',''Salut
+        Arnaud''] | random }},  {%- if states.sensor.salon_temperature.state | int
+        < 17 -%} pour information il fait un peu froid dans le salon {%- endif %}'
+      cache: false
+- id: Set alarmtime_hour
+  alias: Set alarmtime_hour
+  trigger:
+  - platform: mqtt
+    topic: setHour
+  action:
+  - service: input_number.set_value
+    data_template:
+      entity_id: input_number.alarmhour
+      value: '{{ trigger.payload}}'
+  - service: notify.pushgano
+    data:
+      message: Reveil positionne
+- id: Set alarmtime_minutes
+  alias: Set alarmtime_minutes
+  trigger:
+  - platform: mqtt
+    topic: setMinutes
+  action:
+  - service: input_number.set_value
+    data_template:
+      entity_id: input_number.alarmminutes
+      value: '{{ trigger.payload}}'
+- id: Luminosite salon
+  alias: Luminosite salon
+  trigger:
+  - platform: state
+    entity_id: input_number.luminosite
+  action:
+  - service: light.turn_on
+    data_template:
+      entity_id: group.salonlight
+      brightness: '{{ trigger.to_state.state | int }}'
+- id: Rainbow light sur la lumiere du salon
+  alias: Rainbow light sur la lumiere du salon
+  trigger:
+  - platform: time_pattern
+    minutes: /1
+    seconds: 0
+  condition:
+    condition: state
+    entity_id: input_boolean.rainbow_light
+    state: 'on'
+  action:
+    service: light.turn_on
+    entity_id: group.salonlightcoul
+    data:
+      effect: random
+      transition: 5
+      brightness: 255
+- id: Rainbow light Stop sur la lumiere du salon
+  alias: Rainbow light Stop sur la lumiere du salon
+  trigger:
+  - platform: state
+    entity_id: input_boolean.rainbow_light
+    to: 'off'
+  action:
+    service: scene.turn_on
+    entity_id: scene.salon_normal
+- id: Media player paused/stopped
+  alias: Media player paused/stopped
+  trigger:
+  - platform: state
+    entity_id: sensor.plextautulli
+    to: paused
+  condition:
+  - condition: state
+    entity_id: input_boolean.cast_light
+    state: 'on'
+  action:
+  - service: light.turn_on
+    entity_id: group.salonlight
+  - service: light.turn_on
+    entity_id: light.bureau
+- id: Media player paused/stopped
+  alias: Media player paused/stopped
+  trigger:
+  - platform: state
+    entity_id: sensor.plextautulli
+    to: stopped
+  condition:
+  - condition: state
+    entity_id: input_boolean.cast_light
+    state: 'on'
+  action:
+  - service: light.turn_on
+    entity_id: group.salonlight
+  - service: light.turn_on
+    entity_id: light.bureau
+- id: Media player playing
+  alias: Media player playing
+  trigger:
+  - platform: state
+    entity_id: sensor.plextautulli
+    to: playing
+  condition:
+  - condition: state
+    entity_id: input_boolean.cast_light
+    state: 'on'
+  action:
+  - service: light.turn_off
+    entity_id: group.salonlight
+  - service: light.turn_off
+    entity_id: light.bureau
+- id: Media player playing
+  alias: Media player playing
+  trigger:
+  - platform: state
+    entity_id: sensor.plextautulli
+    to: resumed
+  condition:
+  - condition: state
+    entity_id: input_boolean.cast_light
+    state: 'on'
+  action:
+  - service: light.turn_off
+    entity_id: group.salonlight
+  - service: light.turn_off
+    entity_id: light.bureau
+- id: Allume chambre le soir
+  alias: Allume chambre le soir
+  trigger:
+  - entity_id: sensor.salon_motion
+    from: '0'
+    platform: state
+    to: '1'
+  condition:
+  - condition: state
+    entity_id: input_boolean.automa
+    state: 'on'
+  - condition: state
+    entity_id: media_player.panasonic_viera_tv
+    state: 'off'
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  - condition: state
+    entity_id: input_boolean.bye
+    state: 'on'
+  - after: '22:30:00'
+    before: 05:00:00
+    condition: time
+  - condition: state
+    entity_id: input_boolean.stopsoir
+    state: 'on'
+  - condition: state
+    entity_id: device_tracker.192168107_e3458e9d8f39
+    for:
+      minutes: 5
+    state: home
+  action:
+  - data_template:
+      entity_id: media_player.entree
+      volume_level: 0.3
+    service: media_player.volume_set
+  - data_template:
+      cache: true
+      message: Vous allez vous coucher, bonne nuit Arnaud
+    entity_id: media_player.entree
+    service: tts.google_say
+  - data:
+      brightness: 155
+    entity_id: light.chambre
+    service: light.turn_on
+  - delay: 00:01:00
+  - entity_id: light.chambre
+    service: light.turn_off
+  - entity_id: scene.Eteint
+    service: scene.turn_on
+  - entity_id: light.bureau
+    service: light.turn_off
+  - entity_id: input_boolean.bye
+    service: input_boolean.turn_off
+- id: Mouvement salon absent
+  alias: Mouvement salon absent
+  initial_state: 'off'
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.entree_motion_active
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: sensor.nutblanc
+    state: not_home
+  - condition: state
+    entity_id: input_boolean.trackme_arno
+    state: 'on'
+  action:
+  - service: notify.teleha
+    data:
+      title: detection intrus
+      message: Intrusion dans la maison
+- id: Mouvement escalier absent
+  alias: Mouvement escalier absent
+  initial_state: 'off'
+  trigger:
+  - platform: state
+    entity_id: sensor.salon_motion
+    from: '0'
+    to: '1'
+  condition:
+  - condition: state
+    entity_id: sensor.nutblanc
+    state: not_home
+  - condition: state
+    entity_id: input_boolean.trackme_arno
+    state: 'on'
+  action:
+  - service: notify.teleha
+    data:
+      title: detection intrus
+      message: Intrusion dans la maison
+- id: Eteint WC
+  alias: Eteint WC
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.timerwc
+  action:
+  - service: light.turn_off
+    data:
+      entity_id: light.wc
+- id: Mouvement WC
+  alias: Mouvement WC
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.mvtwc
+    from: 'off'
+    to: 'on'
+  action:
+  - service: light.turn_on
+    entity_id: light.wc
+  - service: timer.start
+    entity_id: timer.timerwc
+- id: Positionne le flag pour l'annonce le matin
+  alias: Positionne le flag pour l'annonce le matin
+  trigger:
+  - platform: time_pattern
+    hours: '04'
+    minutes: '0'
+    seconds: 0
+  condition:
+  - condition: state
+    entity_id: input_boolean.automa
+    state: 'on'
+  action:
+    service: input_boolean.turn_on
+    entity_id: input_boolean.bonjour
+- id: Positionne le flag pour l'annonce le soir se coucher
+  alias: Positionne le flag pour l'annonce le soir se coucher
+  trigger:
+  - platform: time_pattern
+    hours: '04'
+    minutes: '0'
+    seconds: 0
+  condition:
+  - condition: state
+    entity_id: input_boolean.automa
+    state: 'on'
+  action:
+    service: input_boolean.turn_on
+    entity_id: input_boolean.bye
+- id: Allume Radiateur le matin
+  alias: Allume Radiateur le matin
+  trigger:
+  - platform: time_pattern
+    hours: '04'
+    minutes: '0'
+    seconds: 0
+  condition:
+  - condition: state
+    entity_id: input_boolean.automa
+    state: 'on'
+  action:
+    service: switch.turn_on
+    entity_id: switch.chambre
+- id: Eteint Radiateur dans la nuit
+  alias: Eteint Radiateur dans la nuit
+  trigger:
+  - platform: time_pattern
+    hours: '02'
+    minutes: '0'
+    seconds: 0
+  condition:
+  - condition: state
+    entity_id: input_boolean.automa
+    state: 'on'
+  action:
+    service: switch.turn_off
+    entity_id: switch.chambre
+- id: Eteint Radiateur le matin
+  alias: Eteint Radiateur le matin
+  trigger:
+  - platform: time_pattern
+    hours: '06'
+    minutes: '0'
+    seconds: 0
+  condition:
+  - condition: state
+    entity_id: input_boolean.automa
+    state: 'on'
+  action:
+    service: switch.turn_off
+    entity_id: switch.chambre
+- id: Allume les lumieres quand le soleil se couche Arnaud
+  alias: Allume les lumieres quand le soleil se couche Arnaud
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: -00:09:00
+  condition:
+  - condition: state
+    entity_id: sensor.nutblanc
+    state: home
+  action:
+    service: light.turn_on
+    entity_id: group.salonlight
+    data:
+      transition: 2700
+      brightness: 255
+- id: Allume les lumieres quand le soleil se couche Arnaud decalage
+  alias: Allume les lumieres quand le soleil se couche Arnaud decalage
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: -00:10:00
+  condition:
+  - condition: state
+    entity_id: sensor.nutblanc
+    state: home    
+  action:
+    service: light.turn_on
+    entity_id: group.salonlight
+    data:
+      transition: 1800
+      brightness: 255
+- id: Allume tout en arrivant a la maison
+  alias: Allume tout en arrivant a la maison
+  trigger:
+  - platform: state
+    entity_id: sensor.nutblanc
+    from: not_home
+    to: home
+  condition:
+  - condition: time
+    after: '19:00'
+    before: '23:59'
+  - condition: state
+    entity_id: input_boolean.trackme_arno
+    state: 'on'
+  action:
+  - service: light.turn_on
+    entity_id: group.salonlight
+  - service: scene.turn_on
+    entity_id: scene.Salon_normal
+- id: Eteint SDB la nuit
+  alias: Eteint SDB la nuit
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.timersdbnight
+  condition:
+  - condition: time
+    after: '19:00'
+    before: 04:59
+  action:
+  - service: light.turn_off
+    data:
+      entity_id: light.sdb
+- id: Eteint SDB
+  alias: Eteint SDB
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.timersdb
+  action:
+  - service: light.turn_off
+    data:
+      entity_id: light.sdb
+- id: Eteint SDB quand on est en humidité normale
+  alias: Eteint SDB quand on est en humidité normale
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.tempsdb_humidity
+    below: 70
+  action:
+  - service: light.turn_off
+    data:
+      entity_id: light.sdb
+- id: Mouvement SDB
+  alias: Mouvement SDB
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.mvtsdb
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: time
+    after: 05:00
+    before: '18:59'
+  action:
+  - service: timer.start
+    entity_id: timer.timersdb
+  - service: light.turn_on
+    entity_id: light.sdb
+- id: Mouvement SDB night
+  alias: Mouvement SDB night
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.mvtsdb
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: time
+    after: '19:00'
+    before: 04:59
+  action:
+  - service: timer.start
+    entity_id: timer.timersdbnight
+  - service: light.turn_on
+    entity_id: light.sdb
+- id: Annonce voix
+  alias: Annonce voix
+  trigger:
+  - platform: state
+    entity_id: sensor.salon_motion
+    from: '0'
+    to: '1'
+  condition:
+  - condition: time
+    after: 05:00
+    before: '10:00'
+  - condition: state
+    entity_id: input_boolean.bonjour
+    state: 'on'
+  action:
+  - service: media_player.volume_set
+    data_template:
+      entity_id: media_player.entree
+      volume_level: 0.3
+  - service: tts.google_say
+    entity_id: media_player.entree
+    data_template:
+      message: 'Arnaud, la météo prévoit, {{ states.sensor.meteotoday.state }} pour
+        aujourd''hui. La température exterieure est de {{ states.sensor.tempext_temperature.state
+        | round }} degrés. {%- if states.sensor.travail.state | int < 14 -%} il n''y
+        a pas de monde sur la route {%- else -%} attention la route est chargée il
+        vous faudra {{ states.sensor.google_travel_time__driving.state }} minutes
+        pour aller au travail{%- endif %}, concernant les conditions de surf, {%-
+        if (states.sensor.surf9h.state != "mauvais surf, session médiocre") and (states.sensor.surf13h.state
+        != "mauvais surf, session médiocre") and (states.sensor.surf17h.state != "mauvais
+        surf, session médiocre") -%} c''est bien toute la journée {%- endif %} {%-
+        if (states.sensor.surf9h.state == "mauvais surf, session médiocre") and (states.sensor.surf13h.state
+        == "mauvais surf, session médiocre") and (states.sensor.surf17h.state == "mauvais
+        surf, session médiocre") -%} c''est pourri toute la journée {%- endif %} {%-
+        if (states.sensor.surf9h.state != "mauvais surf, session médiocre") and (states.sensor.surf13h.state
+        == "mauvais surf, session médiocre") and (states.sensor.surf17h.state == "mauvais
+        surf, session médiocre") -%} c''est bien le matin tot {%- endif %} {%- if
+        (states.sensor.surf9h.state != "mauvais surf, session médiocre") and (states.sensor.surf13h.state
+        != "mauvais surf, session médiocre") and (states.sensor.surf17h.state == "mauvais
+        surf, session médiocre") -%} c''est bien jusqu''en fin d''après midi {%- endif
+        %} {%- if (states.sensor.surf9h.state != "mauvais surf, session médiocre")
+        and (states.sensor.surf13h.state == "mauvais surf, session médiocre") and
+        (states.sensor.surf17h.state != "mauvais surf, session médiocre") -%} c''est
+        bien le matin et le soir {%- endif %} {%- if (states.sensor.surf9h.state ==
+        "mauvais surf, session médiocre") and (states.sensor.surf13h.state != "mauvais
+        surf, session médiocre") and (states.sensor.surf17h.state == "mauvais surf,
+        session médiocre") -%} c''est bien l''après midi {%- endif %} #{%- if as_timestamp(states.calendar.dalliesagmailcom.attributes.start_time)
+        - as_timestamp(now().strftime("%Y-%m-%d %H:%M:%S")) < 86400 -%} .  N''oubliez
+        pas vous avez un rendez vous aujourd''hui.  {{ states.calendar.dalliesagmailcom.attributes.message
+        }}.{%- endif %} #{%- if (states.calendar.contacts.state == ''on'') -%} N''oubliez
+        pas vous avez un anniversaire a souhaiter, celui de {{ states.calendar.contacts.attributes.message
+        }} {%- endif %}'
+      cache: false
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.bonjour
+- id: Eteint tout en partant de la maison
+  alias: Eteint tout en partant de la maison
+  trigger:
+  - platform: state
+    entity_id: sensor.nutblanc
+    from: home
+    to: not_home
+  action:
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.rainbow_light
+  - service: light.turn_off
+    entity_id: group.salonlight
+  - service: light.turn_off
+    entity_id: light.chambre
+  - delay: 00:00:02
+  - service: light.turn_off
+    entity_id: group.salonlight
+  - service: light.turn_off
+    entity_id: light.chambre
+- id: theme noir
+  alias: theme noir
+  trigger:
+  - platform: state
+    entity_id: input_select.themesi
+    to: noir
+  action:
+  - service: frontend.set_theme
+    data:
+      name: noir
+- id: theme jaune
+  alias: theme jaune
+  trigger:
+  - platform: state
+    entity_id: input_select.themesi
+    to: jaune
+  action:
+  - service: frontend.set_theme
+    data:
+      name: jaune
+- id: theme dark
+  alias: theme dark
+  trigger:
+  - platform: state
+    entity_id: input_select.themesi
+    to: dark
+  action:
+  - service: frontend.set_theme
+    data:
+      name: dark
+- id: theme white
+  alias: theme white
+  trigger:
+  - platform: state
+    entity_id: input_select.themesi
+    to: white
+  action:
+  - service: frontend.set_theme
+    data:
+      name: white
+- id: theme cyan
+  alias: theme cyan
+  trigger:
+  - platform: state
+    entity_id: input_select.themesi
+    to: cyan
+  action:
+  - service: frontend.set_theme
+    data:
+      name: cyan
+- id: theme bleu
+  alias: theme bleu
+  trigger:
+  - platform: state
+    entity_id: input_select.themesi
+    to: bleu
+  action:
+  - service: frontend.set_theme
+    data:
+      name: bleu
+- id: theme rouge
+  alias: theme rouge
+  trigger:
+  - platform: state
+    entity_id: input_select.themesi
+    to: rouge
+  action:
+  - service: frontend.set_theme
+    data:
+      name: rouge
+- id: theme vert
+  alias: theme vert
+  trigger:
+  - platform: state
+    entity_id: input_select.themesi
+    to: vert
+  action:
+  - service: frontend.set_theme
+    data:
+      name: vert
+- id: FreeBox Allume
+  alias: FreeBox Allume
+  trigger:
+  - platform: state
+    entity_id: input_select.freeplayon
+    to: 'On'
+  action:
+    service: shell_command.allumefreebox
+- id: FreeBox Eteinte
+  alias: FreeBox Eteinte
+  trigger:
+  - platform: state
+    entity_id: input_select.freeplayon
+    to: 'Off'
+  action:
+    service: shell_command.eteintfreebox
+- id: reveil matin Freebox
+  alias: reveil matin Freebox
+  trigger:
+  - platform: time_pattern
+    minutes: /5
+    seconds: 0
+  condition:
+  - condition: state
+    entity_id: input_boolean.automa
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.alarmweekon
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.alarmweekday
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.freebox
+    state: 'on'
+  - condition: state
+    entity_id: calendar.jours_feries_en_france
+    state: 'off'
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  - condition: template
+    value_template: '{{ now().strftime("%H:%M") == states.sensor.alarm_time.state
+      }}'
+  action:
+    service: shell_command.allumefreebox
+- id: reveil matin Aurore Semaine
+  alias: reveil matin Aurore Semaine
+  trigger:
+  - platform: time_pattern
+    minutes: /1
+    seconds: 0
+  condition:
+  - condition: state
+    entity_id: input_boolean.automa
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.alarmweekon
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.alarmweekday
+    state: 'on'
+  - condition: state
+    entity_id: calendar.jours_feries_en_france
+    state: 'off'
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  - condition: template
+    value_template: '{{ ((now().strftime("%s") | int + 300) | timestamp_custom("%H:%M")
+      == states.sensor.alarm_time.state) }}'
+  action:
+  - service: light.turn_on
+    entity_id: light.chambre
+    data:
+      transition: 600
+      brightness: 255
+- id: reveil matin Aurore les weekend
+  alias: reveil matin Aurore les weekend
+  trigger:
+  - platform: time_pattern
+    minutes: /1
+    seconds: 0
+  condition:
+  - condition: state
+    entity_id: input_boolean.automa
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.alarmweekon
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.alarmweekday
+    state: 'off'
+  - condition: time
+    weekday:
+    - sat
+    - sun
+  - condition: template
+    value_template: '{{ now().strftime("%H:%M") == states.sensor.alarm_time.state
+      }}'
+  action:
+    service: light.turn_on
+    entity_id: light.chambre
+    data:
+      transition: 600
+      brightness: 255
+- id: Alarm Away when Leave home
+  alias: Alarm Away when Leave home
+  trigger:
+  - platform: state
+    entity_id: sensor.nutblanc
+    from: home
+    to: not_home
+  condition:
+  - condition: state
+    entity_id: input_boolean.trackme_arno
+    state: 'on'
+  action:
+  - service: alarm_control_panel.alarm_arm_away
+    entity_id: alarm_control_panel.ha_alarm
+    data:
+      code: 7
+- id: Alarm Auto DISARM when Enter home
+  alias: Alarm Auto DISARM when Enter home
+  trigger:
+  - platform: state
+    entity_id: sensor.nutblanc
+    from: not_home
+    to: home
+  condition:
+  - condition: state
+    entity_id: input_boolean.trackme_arno
+    state: 'on'
+  action:
+  - service: alarm_control_panel.alarm_disarm
+    entity_id: alarm_control_panel.ha_alarm
+    data:
+      code: 7
+- id: Print 3D fini sur la CR10
+  alias: Print 3D fini sur la CR10
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.creality_cr10_job_percentage
+    above: 96
+  action:
+  - service: notify.teleha
+    data:
+      message: Print presque fini !!!
+- id: Print 3D fini sur la Anet A8
+  alias: Print 3D fini sur la Anet A8
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.anet_a8_job_percentage
+    above: 96
+  action:
+  - service: notify.teleha
+    data:
+      message: Print presque fini !!!
+- id: Print 3D fini stop Creality CR10
+  alias: Print 3D fini stop Creality CR10
+  trigger:
+  - platform: state
+    entity_id: sensor.creality_cr10_current_state
+    from: Printing
+    to: Operational
+  condition:
+  - condition: state
+    entity_id: input_boolean.autoprint
+    state: 'on'
+  action:
+  - delay: 00:05:00
+  - service: switch.turn_off
+    entity_id: switch.creality_cr10
+- id: Print 3D fini stop Creality Anet A8
+  alias: Print 3D fini stop Creality Anet A8
+  trigger:
+  - platform: state
+    entity_id: sensor.anet_a8_current_state
+    from: Printing
+    to: Operational
+  condition:
+  - condition: state
+    entity_id: input_boolean.autoprint2
+    state: 'on'
+  action:
+  - delay: 00:05:00
+  - service: switch.turn_off
+    entity_id: switch.anet_a8
+- id: Print 3D pas fini la nuit stop auto CR10
+  alias: Print 3D pas fini la nuit stop auto CR10
+  trigger:
+  - platform: state
+    entity_id: input_boolean.bye
+    from: 'on'
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: sensor.creality_cr10_current_state
+    state: Printing
+  action:
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.autoprint
+- id: Print 3D pas fini la nuit stop auto Anet A8
+  alias: Print 3D pas fini la nuit stop auto Anet A8
+  trigger:
+  - platform: state
+    entity_id: input_boolean.bye
+    from: 'on'
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: sensor.anet_a8_current_state
+    state: Printing
+  action:
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.autoprint2
+- id: Passe l'aspirateur la journée
+  alias: Passe l'aspirateur la journée
+  trigger:
+  - platform: time_pattern
+    minutes: /1
+    seconds: 0
+  condition:
+  - condition: template
+    value_template: '{{ ((now().strftime("%s") | int ) | timestamp_custom("%H:%M")
+      == states.sensor.vacuumalarm_time.state) }}'
+  - condition: state
+    entity_id: input_boolean.vacuumauto
+    state: 'on'
+  action:
+    service: script.turn_on
+    entity_id: script.vacuumon

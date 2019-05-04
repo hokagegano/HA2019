@@ -1,0 +1,394 @@
+{
+  "monthly": [
+    {
+      "conso": 0,
+      "time": "Feb"
+    },
+    {
+      "conso": 0,
+      "time": "Mar"
+    },
+    {
+      "conso": 0,
+      "time": "Apr"
+    },
+    {
+      "conso": 0,
+      "time": "May"
+    },
+    {
+      "conso": 0,
+      "time": "Jun"
+    },
+    {
+      "conso": 0,
+      "time": "Jul"
+    },
+    {
+      "conso": 0,
+      "time": "Aug"
+    },
+    {
+      "conso": 0,
+      "time": "Sep"
+    },
+    {
+      "conso": 0,
+      "time": "Oct"
+    },
+    {
+      "conso": 378.859,
+      "time": "Nov"
+    },
+    {
+      "conso": 925.206,
+      "time": "Dec"
+    },
+    {
+      "conso": 790.381,
+      "time": "Jan"
+    },
+    {
+      "conso": 480.774,
+      "time": "Feb"
+    }
+  ],
+  "yearly": [
+    {
+      "conso": 0,
+      "time": "2016"
+    },
+    {
+      "conso": 0,
+      "time": "2017"
+    },
+    {
+      "conso": 1304.065,
+      "time": "2018"
+    },
+    {
+      "conso": 1271.155,
+      "time": "2019"
+    }
+  ],
+  "daily": [
+    {
+      "conso": 23.452,
+      "time": "27 Jan"
+    },
+    {
+      "conso": 23.508,
+      "time": "28 Jan"
+    },
+    {
+      "conso": 22.903,
+      "time": "29 Jan"
+    },
+    {
+      "conso": 24.841,
+      "time": "30 Jan"
+    },
+    {
+      "conso": 21.155,
+      "time": "31 Jan"
+    },
+    {
+      "conso": 19.763,
+      "time": "01 Feb"
+    },
+    {
+      "conso": 25.62,
+      "time": "02 Feb"
+    },
+    {
+      "conso": 30.166,
+      "time": "03 Feb"
+    },
+    {
+      "conso": 29.728,
+      "time": "04 Feb"
+    },
+    {
+      "conso": 20.56,
+      "time": "05 Feb"
+    },
+    {
+      "conso": 18.874,
+      "time": "06 Feb"
+    },
+    {
+      "conso": 16.955,
+      "time": "07 Feb"
+    },
+    {
+      "conso": 18.86,
+      "time": "08 Feb"
+    },
+    {
+      "conso": 17.83,
+      "time": "09 Feb"
+    },
+    {
+      "conso": 18.376,
+      "time": "10 Feb"
+    },
+    {
+      "conso": 22.371,
+      "time": "11 Feb"
+    },
+    {
+      "conso": 21.364,
+      "time": "12 Feb"
+    },
+    {
+      "conso": 22.67,
+      "time": "13 Feb"
+    },
+    {
+      "conso": 21.447,
+      "time": "14 Feb"
+    },
+    {
+      "conso": 17.764,
+      "time": "15 Feb"
+    },
+    {
+      "conso": 19.688,
+      "time": "16 Feb"
+    },
+    {
+      "conso": 19.51,
+      "time": "17 Feb"
+    },
+    {
+      "conso": 16.133,
+      "time": "18 Feb"
+    },
+    {
+      "conso": 17.571,
+      "time": "19 Feb"
+    },
+    {
+      "conso": 15.712,
+      "time": "20 Feb"
+    },
+    {
+      "conso": 10.6,
+      "time": "21 Feb"
+    },
+    {
+      "conso": 15.121,
+      "time": "22 Feb"
+    },
+    {
+      "conso": 15.415,
+      "time": "23 Feb"
+    },
+    {
+      "conso": 16.646,
+      "time": "24 Feb"
+    },
+    {
+      "conso": 12.03,
+      "time": "25 Feb"
+    },
+    {
+      "conso": 0,
+      "time": "26 Feb"
+    }
+  ],
+  "hourly": [
+    {
+      "conso": 1.492,
+      "time": "00:00"
+    },
+    {
+      "conso": 1.46,
+      "time": "00:30"
+    },
+    {
+      "conso": 1.404,
+      "time": "01:00"
+    },
+    {
+      "conso": 1.388,
+      "time": "01:30"
+    },
+    {
+      "conso": 1.022,
+      "time": "02:00"
+    },
+    {
+      "conso": 0.3,
+      "time": "02:30"
+    },
+    {
+      "conso": 0.306,
+      "time": "03:00"
+    },
+    {
+      "conso": 0.296,
+      "time": "03:30"
+    },
+    {
+      "conso": 0.206,
+      "time": "04:00"
+    },
+    {
+      "conso": 0.236,
+      "time": "04:30"
+    },
+    {
+      "conso": 0.23,
+      "time": "05:00"
+    },
+    {
+      "conso": 0.344,
+      "time": "05:30"
+    },
+    {
+      "conso": 0.388,
+      "time": "06:00"
+    },
+    {
+      "conso": 0.394,
+      "time": "06:30"
+    },
+    {
+      "conso": 0.416,
+      "time": "07:00"
+    },
+    {
+      "conso": 0.25,
+      "time": "07:30"
+    },
+    {
+      "conso": 0.3,
+      "time": "08:00"
+    },
+    {
+      "conso": 0.412,
+      "time": "08:30"
+    },
+    {
+      "conso": 0.326,
+      "time": "09:00"
+    },
+    {
+      "conso": 0.268,
+      "time": "09:30"
+    },
+    {
+      "conso": 0.244,
+      "time": "10:00"
+    },
+    {
+      "conso": 0.26,
+      "time": "10:30"
+    },
+    {
+      "conso": 0.258,
+      "time": "11:00"
+    },
+    {
+      "conso": 0.408,
+      "time": "11:30"
+    },
+    {
+      "conso": 0.32,
+      "time": "12:00"
+    },
+    {
+      "conso": 0.252,
+      "time": "12:30"
+    },
+    {
+      "conso": 0.242,
+      "time": "13:00"
+    },
+    {
+      "conso": 0.252,
+      "time": "13:30"
+    },
+    {
+      "conso": 0.25,
+      "time": "14:00"
+    },
+    {
+      "conso": 0.32,
+      "time": "14:30"
+    },
+    {
+      "conso": 0.312,
+      "time": "15:00"
+    },
+    {
+      "conso": 0.226,
+      "time": "15:30"
+    },
+    {
+      "conso": 0.218,
+      "time": "16:00"
+    },
+    {
+      "conso": 0.22,
+      "time": "16:30"
+    },
+    {
+      "conso": 0.226,
+      "time": "17:00"
+    },
+    {
+      "conso": 0.344,
+      "time": "17:30"
+    },
+    {
+      "conso": 0.612,
+      "time": "18:00"
+    },
+    {
+      "conso": 0.938,
+      "time": "18:30"
+    },
+    {
+      "conso": 0.384,
+      "time": "19:00"
+    },
+    {
+      "conso": 0.398,
+      "time": "19:30"
+    },
+    {
+      "conso": 0.32,
+      "time": "20:00"
+    },
+    {
+      "conso": 0.376,
+      "time": "20:30"
+    },
+    {
+      "conso": 0.406,
+      "time": "21:00"
+    },
+    {
+      "conso": 0.356,
+      "time": "21:30"
+    },
+    {
+      "conso": 0.302,
+      "time": "22:00"
+    },
+    {
+      "conso": 1.19,
+      "time": "22:30"
+    },
+    {
+      "conso": 1.484,
+      "time": "23:00"
+    },
+    {
+      "conso": 1.504,
+      "time": "23:30"
+    }
+  ]
+}
