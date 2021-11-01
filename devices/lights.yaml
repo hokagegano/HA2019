@@ -13,3 +13,11 @@
     - light.hue_lightstrip_1
     - light.hue_lightstrip_plus_1
     - light.salon_couleur
+
+# - platform: yeelight
+#   devices:
+#     192.168.3.130:
+#       name: Lampe chevet    
+- platform: hyperion
+  host: 192.168.10.40
+#  name: hyperion

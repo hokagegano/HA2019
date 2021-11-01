@@ -1,6 +1,5 @@
 - id: Demande des temperatures
   alias: Demande des temperatures
-  hide_entity: true
   trigger:
     platform: event
     event_type: telegram_command
@@ -17,49 +16,32 @@
 - id: Annonce Matin Telegram
   alias: 'Annonce Matin Telegram '
   trigger:
-  - platform: state
-    entity_id: sensor.salon_motion
+  - entity_id: sensor.salon_motion
     from: '0'
+    platform: state
     to: '1'
   condition:
-  - condition: time
-    after: 05:00
+  - after: 05:00
     before: '10:00'
+    condition: time
   - condition: state
     entity_id: input_boolean.bonjour
     state: 'on'
   action:
-  - service: notify.teleha
-    data:
-      message: Arnaud, la météo prévoit, {{ states.sensor.meteotoday.state }} pour
-        aujourd'hui. La température exterieure est de {{ states.sensor.tempext_temperature.state
-        | round }} degrés. Concernant les conditions de surf, {%- if (states.sensor.surf9h.state
-        != "mauvais surf, session médiocre") and (states.sensor.surf13h.state != "mauvais
-        surf, session médiocre") and (states.sensor.surf17h.state != "mauvais surf,
-        session médiocre") -%} c'est bien toute la journée {%- endif %} {%- if (states.sensor.surf9h.state
-        == "mauvais surf, session médiocre") and (states.sensor.surf13h.state == "mauvais
-        surf, session médiocre") and (states.sensor.surf17h.state == "mauvais surf,
-        session médiocre") -%} c'est pourri toute la journée {%- endif %} {%- if (states.sensor.surf9h.state
-        != "mauvais surf, session médiocre") and (states.sensor.surf13h.state == "mauvais
-        surf, session médiocre") and (states.sensor.surf17h.state == "mauvais surf,
-        session médiocre") -%} c'est bien le matin tot {%- endif %} {%- if (states.sensor.surf9h.state
-        != "mauvais surf, session médiocre") and (states.sensor.surf13h.state != "mauvais
-        surf, session médiocre") and (states.sensor.surf17h.state == "mauvais surf,
-        session médiocre") -%} c'est bien jusqu'en fin d'après midi {%- endif %} {%-
-        if (states.sensor.surf9h.state != "mauvais surf, session médiocre") and (states.sensor.surf13h.state
-        == "mauvais surf, session médiocre") and (states.sensor.surf17h.state != "mauvais
-        surf, session médiocre") -%} c'est bien le matin et le soir {%- endif %} {%-
-        if (states.sensor.surf9h.state == "mauvais surf, session médiocre") and (states.sensor.surf13h.state
-        != "mauvais surf, session médiocre") and (states.sensor.surf17h.state == "mauvais
-        surf, session médiocre") -%} c'est bien l'après midi {%- endif %} {%- if as_timestamp(states.calendar.dalliesagmailcom.attributes.start_time)
-        - as_timestamp(now().strftime("%Y-%m-%d %H:%M:%S")) < 86400 -%} .  N'oubliez
-        pas vous avez un rendez vous aujourd'hui.  {{ states.calendar.dalliesagmailcom.attributes.message
-        }}.{%- endif %} {%- if (states.calendar.contacts.state == 'on') -%} N'oubliez
+  - data:
+      message: Arnaud, La température exterieure est de {{ states.sensor.dark_sky_temperature.state
+        | round }} degrés. {%- if as_timestamp(states.calendar.dalliesagmailcom.attributes.start_time)
+        - as_timestamp(now().strftime("%Y-%m-%d %H:%M:%S")) < 86400 -%} .  Noubliez
+        pas vous avez un rendez vous aujourdhui.  {{ states.calendar.dalliesagmailcom.attributes.message
+        }}.{%- endif %} {%- if (states.calendar.contacts.state == 'on') -%} Noubliez
         pas vous avez un anniversaire a souhaiter, celui de {{ states.calendar.contacts.attributes.message
         }} {%- endif %}
+    service: notify.teleha
+  - data: {}
+    entity_id: input_boolean.bonjour
+    service: input_boolean.turn_off
 - id: Demande du mode Surf
   alias: Demande du mode Surf
-  hide_entity: true
   trigger:
     platform: event
     event_type: telegram_command
@@ -74,7 +56,6 @@
         - file: /config/www/surf/surf.png
 - id: Demande ajout ToDo
   alias: Demande ajout ToDo
-  hide_entity: true
   trigger:
     platform: event
     event_type: telegram_command
@@ -89,7 +70,6 @@
       text: '{{ trigger.event.data["args"] }}'
 - id: Demande suppr ToDo
   alias: Demande suppr ToDo
-  hide_entity: true
   trigger:
     platform: event
     event_type: telegram_command
@@ -104,7 +84,6 @@
       text: '{{ trigger.event.data["args"] }}'
 - id: Clean ToDo
   alias: Clean ToDo
-  hide_entity: true
   trigger:
     platform: event
     event_type: telegram_command
@@ -130,7 +109,6 @@
     service: shell_command.squeezeoff
 - id: Temperature choix
   alias: Temperature choix
-  hide_entity: true
   trigger:
     platform: event
     event_type: telegram_command
@@ -148,7 +126,6 @@
         - /Sdb
 - id: Videos surf
   alias: Videos surf
-  hide_entity: true
   trigger:
     platform: event
     event_type: telegram_command
@@ -175,7 +152,7 @@
   - service: telegram_bot.send_video
     data:
       caption: Voici la webcam Centrale numero 1
-      file: /config/www/surf/teleha_webcamsurf_centrale.mp4
+      file: /config/www/surf/videos/webcamsurf_centrale.mp4
 - id: Plage Centrale 2
   alias: Plage Centrale 2
   trigger:
@@ -187,7 +164,7 @@
   - service: telegram_bot.send_video
     data:
       caption: Voici la webcam Centrale numero 2
-      file: /config/www/surf/teleha_webcamsurf.mp4
+      file: /config/www/surf/videos/webcamsurf.mp4
 - id: Plage Nord 1
   alias: Plage Nord 1
   trigger:
@@ -199,7 +176,7 @@
   - service: telegram_bot.send_video
     data:
       caption: Voici la webcam Nord numero 1
-      file: /config/www/surf/teleha_webcamsurf_nord.mp4
+      file: /config/www/surf/videos/webcamsurf_nord.mp4
 - id: Plage Nord 2
   alias: Plage Nord 2
   trigger:
@@ -211,7 +188,7 @@
   - service: telegram_bot.send_video
     data:
       caption: Voici la webcam Nord numero 2
-      file: /config/www/surf/teleha_webcamsurf_nord2.mp4      
+      file: /config/www/surf/videos/webcamsurf_nord2.mp4
 - id: Temperature Chambre
   alias: Temperature Chambre
   trigger:
@@ -339,26 +316,27 @@
 - id: Retour maison
   alias: Retour maison
   trigger:
-  - platform: state
-    entity_id: sensor.nutblanc
-    from: not_home
+  - from: not_home
+    platform: state
     to: home
+    entity_id: person.arnaud
   condition:
-  - condition: time
-    after: '16:00'
-    before: '23:30'
+  - after: '16:00'
+    condition: time
+    before: 08:30
   action:
-  - service: media_player.volume_set
-    data_template:
+  - data_template:
       entity_id: media_player.entree
       volume_level: 0.4
-  - service: tts.google_say
-    entity_id: media_player.entree
-    data_template:
+    service: media_player.volume_set
+  - data_template:
+      cache: false
       message: '{{ [''Heureux de vous voir Arnaud'',''Bon retour à la maison Arnaud'',''Salut
         Arnaud''] | random }},  {%- if states.sensor.salon_temperature.state | int
         < 17 -%} pour information il fait un peu froid dans le salon {%- endif %}'
-      cache: false
+    entity_id: media_player.entree
+    service: tts.google_say
+  mode: single
 - id: Set alarmtime_hour
   alias: Set alarmtime_hour
   trigger:
@@ -395,20 +373,20 @@
 - id: Rainbow light sur la lumiere du salon
   alias: Rainbow light sur la lumiere du salon
   trigger:
-  - platform: time_pattern
-    minutes: /1
-    seconds: 0
+  - minutes: /3
+    platform: time_pattern
+    seconds: '0'
   condition:
-    condition: state
+  - condition: state
     entity_id: input_boolean.rainbow_light
     state: 'on'
   action:
-    service: light.turn_on
-    entity_id: group.salonlightcoul
-    data:
-      effect: random
-      transition: 5
+  - data:
       brightness: 255
+      effect: random
+      transition: 10
+    entity_id: group.salonlightcoul
+    service: light.turn_on
 - id: Rainbow light Stop sur la lumiere du salon
   alias: Rainbow light Stop sur la lumiere du salon
   trigger:
@@ -422,12 +400,15 @@
   alias: Media player paused/stopped
   trigger:
   - platform: state
-    entity_id: sensor.plextautulli
+    entity_id: media_player.android_tv_shield
     to: paused
   condition:
   - condition: state
     entity_id: input_boolean.cast_light
     state: 'on'
+  - condition: template
+    value_template: '{{ states.media_player.android_tv_shield.attributes.app_name
+      == "Plex" }}'
   action:
   - service: light.turn_on
     entity_id: group.salonlight
@@ -437,12 +418,15 @@
   alias: Media player paused/stopped
   trigger:
   - platform: state
-    entity_id: sensor.plextautulli
+    entity_id: media_player.android_tv_shield
     to: stopped
   condition:
   - condition: state
     entity_id: input_boolean.cast_light
     state: 'on'
+  - condition: template
+    value_template: '{{ states.media_player.android_tv_shield.attributes.app_name
+      == "Plex" }}'
   action:
   - service: light.turn_on
     entity_id: group.salonlight
@@ -452,12 +436,15 @@
   alias: Media player playing
   trigger:
   - platform: state
-    entity_id: sensor.plextautulli
+    entity_id: media_player.android_tv_shield
     to: playing
   condition:
   - condition: state
     entity_id: input_boolean.cast_light
     state: 'on'
+  - condition: template
+    value_template: '{{ states.media_player.android_tv_shield.attributes.app_name
+      == "Plex" }}'
   action:
   - service: light.turn_off
     entity_id: group.salonlight
@@ -467,12 +454,15 @@
   alias: Media player playing
   trigger:
   - platform: state
-    entity_id: sensor.plextautulli
+    entity_id: media_player.android_tv_shield
     to: resumed
   condition:
   - condition: state
     entity_id: input_boolean.cast_light
     state: 'on'
+  - condition: template
+    value_template: '{{ states.media_player.android_tv_shield.attributes.app_name
+      == "Plex" }}'
   action:
   - service: light.turn_off
     entity_id: group.salonlight
@@ -505,7 +495,7 @@
     entity_id: input_boolean.stopsoir
     state: 'on'
   - condition: state
-    entity_id: device_tracker.192168107_e3458e9d8f39
+    entity_id: person.arnaud
     for:
       minutes: 5
     state: home
@@ -516,16 +506,13 @@
     service: media_player.volume_set
   - data_template:
       cache: true
-      message: Vous allez vous coucher, bonne nuit Arnaud
+      message: Bonne nuit
     entity_id: media_player.entree
     service: tts.google_say
   - data:
       brightness: 155
-    entity_id: light.chambre
+    entity_id: light.chambrechevet
     service: light.turn_on
-  - delay: 00:01:00
-  - entity_id: light.chambre
-    service: light.turn_off
   - entity_id: scene.Eteint
     service: scene.turn_on
   - entity_id: light.bureau
@@ -542,7 +529,7 @@
     to: 'on'
   condition:
   - condition: state
-    entity_id: sensor.nutblanc
+    entity_id: device_tracker.mi9tpro_t_l_phonem
     state: not_home
   - condition: state
     entity_id: input_boolean.trackme_arno
@@ -562,7 +549,7 @@
     to: '1'
   condition:
   - condition: state
-    entity_id: sensor.nutblanc
+    entity_id: device_tracker.mi9tpro_t_l_phonem
     state: not_home
   - condition: state
     entity_id: input_boolean.trackme_arno
@@ -575,26 +562,30 @@
 - id: Eteint WC
   alias: Eteint WC
   trigger:
-  - platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.timerwc
+  - platform: state
+    entity_id: binary_sensor.pt2262_ecad69
+    to: 'off'
+    for: 00:04
   action:
-  - service: light.turn_off
-    data:
+  - data:
       entity_id: light.wc
+      transition: 3
+    service: light.turn_off
+  mode: single
 - id: Mouvement WC
   alias: Mouvement WC
   trigger:
-  - platform: state
-    entity_id: binary_sensor.mvtwc
+  - entity_id: binary_sensor.pt2262_ecad69
     from: 'off'
+    platform: state
     to: 'on'
   action:
-  - service: light.turn_on
+  - data:
+      brightness: 250
+      transition: 2
     entity_id: light.wc
-  - service: timer.start
-    entity_id: timer.timerwc
+    service: light.turn_on
+  mode: restart
 - id: Positionne le flag pour l'annonce le matin
   alias: Positionne le flag pour l'annonce le matin
   trigger:
@@ -668,61 +659,62 @@
 - id: Allume les lumieres quand le soleil se couche Arnaud
   alias: Allume les lumieres quand le soleil se couche Arnaud
   trigger:
-  - platform: sun
-    event: sunset
-    offset: -00:09:00
+  - event: sunset
+    offset: -00:15:00
+    platform: sun
   condition:
   - condition: state
-    entity_id: sensor.nutblanc
+    entity_id: person.arnaud
     state: home
   action:
-    service: light.turn_on
-    entity_id: group.salonlight
-    data:
-      transition: 2700
+  - data:
       brightness: 255
+      transition: 2700
+    entity_id: group.salonlight
+    service: light.turn_on
 - id: Allume les lumieres quand le soleil se couche Arnaud decalage
   alias: Allume les lumieres quand le soleil se couche Arnaud decalage
   trigger:
-  - platform: sun
-    event: sunset
-    offset: -00:10:00
+  - event: sunset
+    offset: -00:15:00
+    platform: sun
   condition:
   - condition: state
-    entity_id: sensor.nutblanc
-    state: home    
+    entity_id: person.arnaud
+    state: home
   action:
-    service: light.turn_on
-    entity_id: group.salonlight
-    data:
-      transition: 1800
+  - data:
       brightness: 255
+      transition: 1800
+    entity_id: group.salonlight
+    service: light.turn_on
 - id: Allume tout en arrivant a la maison
   alias: Allume tout en arrivant a la maison
   trigger:
-  - platform: state
-    entity_id: sensor.nutblanc
+  - entity_id: person.arnaud
     from: not_home
+    platform: state
     to: home
   condition:
   - condition: time
-    after: '19:00'
-    before: '23:59'
+    after: '18:00'
+    before: 08:30
   - condition: state
     entity_id: input_boolean.trackme_arno
     state: 'on'
   action:
-  - service: light.turn_on
-    entity_id: group.salonlight
-  - service: scene.turn_on
-    entity_id: scene.Salon_normal
+  - entity_id: group.salonlight
+    service: light.turn_on
+  - entity_id: scene.Salon_normal
+    service: scene.turn_on
+  mode: single
 - id: Eteint SDB la nuit
   alias: Eteint SDB la nuit
   trigger:
-  - platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.timersdbnight
+  - platform: state
+    entity_id: binary_sensor.pt2262_9308f9
+    to: 'off'
+    for: 00:03
   condition:
   - condition: time
     after: '19:00'
@@ -731,59 +723,67 @@
   - service: light.turn_off
     data:
       entity_id: light.sdb
+  mode: single
 - id: Eteint SDB
   alias: Eteint SDB
   trigger:
-  - platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.timersdb
+  - platform: state
+    entity_id: binary_sensor.pt2262_9308f9
+    to: 'off'
+    for: 00:07
   action:
-  - service: light.turn_off
-    data:
+  - data:
       entity_id: light.sdb
+      transition: 3
+    service: light.turn_off
+  mode: single
 - id: Eteint SDB quand on est en humidité normale
   alias: Eteint SDB quand on est en humidité normale
   trigger:
   - platform: numeric_state
-    entity_id: sensor.tempsdb_humidity
-    below: 70
+    entity_id: sensor.alecto_ws1700_df_01_humidity
+    below: '70'
   action:
   - service: light.turn_off
     data:
       entity_id: light.sdb
+  mode: single
 - id: Mouvement SDB
   alias: Mouvement SDB
   trigger:
-  - platform: state
-    entity_id: binary_sensor.mvtsdb
+  - entity_id: binary_sensor.pt2262_9308f9
     from: 'off'
+    platform: state
     to: 'on'
   condition:
-  - condition: time
-    after: 05:00
+  - after: 05:00
     before: '18:59'
+    condition: time
   action:
-  - service: timer.start
-    entity_id: timer.timersdb
-  - service: light.turn_on
+  - data:
+      brightness: 250
+      transition: 2
     entity_id: light.sdb
+    service: light.turn_on
+  mode: restart
 - id: Mouvement SDB night
   alias: Mouvement SDB night
   trigger:
-  - platform: state
-    entity_id: binary_sensor.mvtsdb
+  - entity_id: binary_sensor.pt2262_9308f9
     from: 'off'
+    platform: state
     to: 'on'
   condition:
-  - condition: time
-    after: '19:00'
+  - after: '19:00'
     before: 04:59
+    condition: time
   action:
-  - service: timer.start
-    entity_id: timer.timersdbnight
-  - service: light.turn_on
+  - data:
+      brightness: 200
+      transition: 2
     entity_id: light.sdb
+    service: light.turn_on
+  mode: restart
 - id: Annonce voix
   alias: Annonce voix
   trigger:
@@ -842,22 +842,22 @@
 - id: Eteint tout en partant de la maison
   alias: Eteint tout en partant de la maison
   trigger:
-  - platform: state
-    entity_id: sensor.nutblanc
+  - entity_id: device_tracker.mi_9t_pro
     from: home
+    platform: state
     to: not_home
   action:
-  - service: input_boolean.turn_off
-    entity_id: input_boolean.rainbow_light
-  - service: light.turn_off
-    entity_id: group.salonlight
-  - service: light.turn_off
-    entity_id: light.chambre
+  - entity_id: input_boolean.rainbow_light
+    service: input_boolean.turn_off
+  - entity_id: group.salonlight
+    service: light.turn_off
+  - entity_id: light.chambre
+    service: light.turn_off
   - delay: 00:00:02
-  - service: light.turn_off
-    entity_id: group.salonlight
-  - service: light.turn_off
-    entity_id: light.chambre
+  - entity_id: group.salonlight
+    service: light.turn_off
+  - entity_id: light.chambre
+    service: light.turn_off
 - id: theme noir
   alias: theme noir
   trigger:
@@ -991,9 +991,9 @@
 - id: reveil matin Aurore Semaine
   alias: reveil matin Aurore Semaine
   trigger:
-  - platform: time_pattern
-    minutes: /1
-    seconds: 0
+  - minutes: /1
+    platform: time_pattern
+    seconds: '0'
   condition:
   - condition: state
     entity_id: input_boolean.automa
@@ -1015,20 +1015,22 @@
     - thu
     - fri
   - condition: template
-    value_template: '{{ ((now().strftime("%s") | int + 300) | timestamp_custom("%H:%M")
-      == states.sensor.alarm_time.state) }}'
+    value_template: '{{ now().strftime("%H:%M") == states.sensor.alarm_time.state
+      }}'
   action:
-  - service: light.turn_on
-    entity_id: light.chambre
-    data:
-      transition: 600
-      brightness: 255
+  - data:
+      brightness: 50
+      entity_id: light.chambrechevet
+      transition: 300
+    entity_id: light.chambrechevet
+    service: light.turn_on
+  mode: single
 - id: reveil matin Aurore les weekend
   alias: reveil matin Aurore les weekend
   trigger:
   - platform: time_pattern
     minutes: /1
-    seconds: 0
+    seconds: '0'
   condition:
   - condition: state
     entity_id: input_boolean.automa
@@ -1047,43 +1049,45 @@
     value_template: '{{ now().strftime("%H:%M") == states.sensor.alarm_time.state
       }}'
   action:
-    service: light.turn_on
-    entity_id: light.chambre
+  - service: light.turn_on
+    entity_id: light.chambrechevet
     data:
       transition: 600
       brightness: 255
+      entity_id: light.chambrechevet
+  mode: single
 - id: Alarm Away when Leave home
   alias: Alarm Away when Leave home
   trigger:
-  - platform: state
-    entity_id: sensor.nutblanc
+  - entity_id: person.arnaud
     from: home
+    platform: state
     to: not_home
   condition:
   - condition: state
     entity_id: input_boolean.trackme_arno
     state: 'on'
   action:
-  - service: alarm_control_panel.alarm_arm_away
+  - data:
+      code: '0007'
     entity_id: alarm_control_panel.ha_alarm
-    data:
-      code: 7
+    service: alarm_control_panel.alarm_arm_away
 - id: Alarm Auto DISARM when Enter home
   alias: Alarm Auto DISARM when Enter home
   trigger:
-  - platform: state
-    entity_id: sensor.nutblanc
+  - entity_id: person.arnaud
     from: not_home
+    platform: state
     to: home
   condition:
   - condition: state
     entity_id: input_boolean.trackme_arno
     state: 'on'
   action:
-  - service: alarm_control_panel.alarm_disarm
+  - data:
+      code: '0007'
     entity_id: alarm_control_panel.ha_alarm
-    data:
-      code: 7
+    service: alarm_control_panel.alarm_disarm
 - id: Print 3D fini sur la CR10
   alias: Print 3D fini sur la CR10
   trigger:
@@ -1133,7 +1137,8 @@
   action:
   - delay: 00:05:00
   - service: switch.turn_off
-    entity_id: switch.anet_a8
+    entity_id: switch.broadlink_s4
+  mode: single
 - id: Print 3D pas fini la nuit stop auto CR10
   alias: Print 3D pas fini la nuit stop auto CR10
   trigger:
@@ -1178,3 +1183,612 @@
   action:
     service: script.turn_on
     entity_id: script.vacuumon
+- id: '1575718982718'
+  alias: allumechevet
+  description: ''
+  trigger:
+  - entity_id: sensor.salon_motion
+    from: '0'
+    platform: state
+    to: '1'
+  condition:
+  - condition: state
+    entity_id: person.arnaud
+    state: home
+  - after: '22:30'
+    before: 04:00
+    condition: time
+  - condition: state
+    entity_id: media_player.panasonic_viera_tv
+    state: 'off'
+  action:
+  - data: {}
+    entity_id: light.chambrechevet
+    service: light.turn_on
+  - data: {}
+    entity_id: light.lumieres_du_salon
+    service: light.turn_off
+- id: '1582997995534'
+  alias: Alarme status sensor
+  description: Alarme status sensor
+  trigger:
+  - entity_id: alarm_control_panel.ha_alarm
+    platform: state
+    to: armed_away
+  condition: []
+  action:
+  - data:
+      xy_color:
+      - 0.95
+      - 0.05
+    entity_id: light.salon_status_alarme
+    service: light.turn_on
+  - data:
+      xy_color:
+      - 0.95
+      - 0.05
+    entity_id: light.couloir_status_alarme_2
+    service: light.turn_on
+- id: '1582999038207'
+  alias: alarme sensor home
+  description: alarme sensor home
+  trigger:
+  - entity_id: alarm_control_panel.ha_alarm
+    platform: state
+    to: disarmed
+  condition: []
+  action:
+  - entity_id: light.salon_status_alarme
+    service: light.turn_off
+  - entity_id: light.couloir_status_alarme_2
+    service: light.turn_off
+- id: '1583098452750'
+  alias: alarm led night
+  description: Alarme led night
+  trigger:
+  - entity_id: alarm_control_panel.ha_alarm
+    platform: state
+    to: armed_night
+  condition: []
+  action:
+  - data:
+      xy_color:
+      - 0.05
+      - 0.1
+    entity_id: light.salon_status_alarme
+    service: light.turn_on
+  - data:
+      xy_color:
+      - 0.05
+      - 0.01
+    entity_id: light.couloir_status_alarme
+    service: light.turn_on
+- id: '1585155954250'
+  alias: CubeMotionLightOff
+  description: CubeMotionLightOff
+  trigger:
+  - entity_id: sensor.move
+    platform: state
+    to: Eteint
+  condition: []
+  action:
+  - scene: scene.eteint
+- id: '1585242287474'
+  alias: CubeMotionLightOn
+  description: ''
+  trigger:
+  - entity_id: sensor.move
+    platform: state
+    to: Allume
+  condition: []
+  action:
+  - scene: scene.allume
+- id: '1585242437775'
+  alias: CubeMotionLightCinema
+  description: CubeMotionLightCinema
+  trigger:
+  - entity_id: sensor.move
+    platform: state
+    to: Cinema
+  condition: []
+  action:
+  - data: {}
+    entity_id: input_boolean.cast_light
+    service: input_boolean.turn_on
+- id: '1585242563432'
+  alias: CubeMotionLightCinemaOff
+  description: CubeMotionLightCinemaOff
+  trigger:
+  - entity_id: sensor.move
+    from: Cinema
+    platform: state
+  condition: []
+  action:
+  - data: {}
+    entity_id: input_boolean.cast_light
+    service: input_boolean.turn_off
+- id: '1585242744900'
+  alias: CubeMotionLightSoireeOn
+  description: CubeMotionLightSoireeOn
+  trigger:
+  - entity_id: sensor.move
+    platform: state
+    to: Soiree
+  condition: []
+  action:
+  - data: {}
+    entity_id: input_boolean.rainbow_light
+    service: input_boolean.turn_on
+- id: '1585242852448'
+  alias: CubeMotionLightSoireeOff
+  description: CubeMotionLightSoireeOff
+  trigger:
+  - entity_id: sensor.move
+    from: Soiree
+    platform: state
+  condition: []
+  action:
+  - data: {}
+    entity_id: input_boolean.rainbow_light
+    service: input_boolean.turn_off
+- id: Servo Up
+  alias: Write Servo Value to ESP
+  trigger:
+  - entity_id: input_number.servo_control
+    platform: state
+  action:
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 0
+      milliseconds: 0
+  - service: esphome.autocamjardin_control_servo
+    data:
+      level: '{{ trigger.to_state.state | int }}'
+  mode: single
+- id: '1596022266399'
+  alias: ambilight coupe ledtv
+  description: ambilight coupe ledtv
+  trigger:
+  - entity_id: light.wled_3
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - service: media_player.turn_off
+    target:
+      entity_id: media_player.panasonic_viera_tv
+  mode: single
+- id: '1597299643327'
+  alias: tvoff amibilight off
+  description: tvoff amibilight off
+  trigger:
+  - entity_id: media_player.panasonic_viera_tv
+    from: 'on'
+    platform: state
+  condition: []
+  action:
+  - data: {}
+    service: light.turn_off
+    target:
+      entity_id: light.wled_3
+  mode: single
+- id: '1608064898667'
+  alias: wled non dispo
+  description: ''
+  use_blueprint:
+    path: ini/simple-mobile-notification-when-device-becomes-unavailable.yaml
+    input:
+      notify_device: c9310c8d01704af0bd00b3356557492c
+      entity_name: light.wled
+- id: '1608202114202'
+  alias: tvon amibilight on
+  description: tvon amibilight on
+  trigger:
+  - entity_id: media_player.panasonic_viera_tv
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data: {}
+    service: light.turn_on
+    target:
+      entity_id: light.wled_3
+  mode: single
+- id: '1608731955405'
+  alias: La balise maison est analysée
+  description: Lance Spotify sur Freebox player
+  trigger:
+  - platform: tag
+    tag_id: d4461284-19d1-4a84-9e57-79b18feccbb0
+  condition: []
+  action:
+  - service: light.turn_off
+    entity_id: light.lumieres_du_salon
+  - service: light.turn_on
+    data: {}
+    entity_id: light.chambrechevet
+  mode: single
+- id: '1608735066027'
+  alias: 'La balise rap us est analysée '
+  description: Lance Spotify sur Freebox player
+  trigger:
+  - platform: tag
+    tag_id: 88d97a12-36a2-4c18-bc01-7fd45a45b46f
+  condition: []
+  action:
+  - service: media_player.select_source
+    entity_id: media_player.spotify_arnaud
+    data:
+      source: Freebox Player
+  - service: media_player.shuffle_set
+    data:
+      shuffle: true
+    entity_id: media_player.spotify_arnaud
+  - service: media_player.play_media
+    data:
+      media_content_id: spotify:playlist:6wN6qRLetX7NIxVXUuRd3H?si=c1TTDYWgTSGCHgFo7anIJA
+      media_content_type: playlist
+    entity_id: media_player.spotify_arnaud
+  mode: single
+- id: '1608735883777'
+  alias: 'La balise ganorap est analysée '
+  description: Lance Spotify sur Freebox player
+  trigger:
+  - platform: tag
+    tag_id: 7dc7afba-d40e-4047-b81b-9980b25e5c74
+  condition: []
+  action:
+  - service: media_player.select_source
+    entity_id: media_player.spotify_arnaud
+    data:
+      source: Freebox Player
+  - service: media_player.shuffle_set
+    data:
+      shuffle: true
+    entity_id: media_player.spotify_arnaud
+  - service: media_player.play_media
+    data:
+      media_content_id: spotify:playlist:3YoPsHHEwIRvjqEpoRJp2r?si=sC7gLdUbT_-2jt93hfQyeA
+      media_content_type: playlist
+    entity_id: media_player.spotify_arnaud
+  mode: single
+- id: '1609672455080'
+  alias: Theme switcher
+  description: on switch selon l'heure de la journée
+  use_blueprint:
+    path: KTibow/light-dark-theme-switcher-based-on-sun.yaml
+    input:
+      light_theme: ios-light-mode
+      dark_theme: slate
+- id: '1609696836642'
+  alias: Themes sun
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sun.sun
+    to: above_horizon
+  condition: []
+  action:
+  - service: frontend.set_theme
+    data:
+      name: ios-light-mode
+  mode: single
+- id: '1609696872663'
+  alias: Themes sun Dark
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sun.sun
+    to: below_horizon
+  condition: []
+  action:
+  - service: frontend.set_theme
+    data:
+      name: slate
+  mode: single
+- id: '1610636564864'
+  alias: Alarme Video
+  description: alarme video
+  trigger:
+  - platform: state
+    entity_id: sensor.salon_motion
+    to: '1'
+  - platform: state
+    entity_id: sensor.salon_motion
+    to: '2'
+  condition:
+  - condition: state
+    entity_id: person.arnaud
+    state: not_home
+  action:
+  - service: camera.snapshot
+    data:
+      filename: /config/www/surf/videos/Alarme/Hall_{{ now().strftime("%Y%m%d-%H%M%S")
+        }}.jpg
+    entity_id: camera.cr10_cam_esp
+  - service: notify.teleha
+    data:
+      message: Intrus detecté
+      data:
+        photo:
+        - file: /config/www/surf/videos/Alarme/Hall_{{ now().strftime("%Y%m%d-%H%M%S")
+            }}.jpg
+          caption: Photo intrus
+  mode: single
+- id: '1610882853050'
+  alias: Allume cuisine jour
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.couloir_motion
+    to: 'on'
+  condition: []
+  action:
+  - service: light.turn_on
+    data: {}
+    entity_id: light.chambre_2
+  mode: single
+- id: '1610882962514'
+  alias: Mouvement Cuisine
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.couloir_motion
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - service: light.turn_on
+    data:
+      entity_id: light.cuisine
+      brightness: 250
+  mode: restart
+- id: '1610883093468'
+  alias: Eteint Cuisine
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.couloir_motion
+    to: 'off'
+    for: 00:01
+  condition: []
+  action:
+  - data:
+      entity_id: light.cuisine
+    service: light.turn_off
+  mode: single
+- id: '1611322002967'
+  alias: Alarme Video fichier video
+  description: alarme video fichier video
+  trigger:
+  - platform: state
+    entity_id: sensor.salon_motion
+    to: '1'
+  - platform: state
+    entity_id: sensor.salon_motion
+    to: '2'
+  condition:
+  - condition: state
+    entity_id: person.arnaud
+    state: not_home
+  action:
+  - service: shell_command.videocam
+    entity_id: camera.cr10_cam_esp
+    data: {}
+  - delay: 00:01:00
+  mode: single
+- id: '1613026816242'
+  alias: deepstack telegram
+  description: ''
+  trigger:
+  - platform: event
+    event_type: deepstack.object_detected
+    event_data:
+      name: person
+  condition: []
+  action:
+  - service: telegram_bot.send_photo
+    data:
+      caption: New person detection with confidence {{ trigger.event.data.confidence
+        }}
+      file: '{{ trigger.event.data.saved_file  }}'
+  mode: single
+- id: '1613027170365'
+  alias: scan deepstack
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.couloir_motion
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: person.arnaud
+    state: not_home
+  action:
+  - service: image_processing.scan
+    data: {}
+    entity_id: image_processing.deepstack_person_detector
+  mode: single
+- id: '1613035774394'
+  alias: Allume Couloir et Hall
+  description: Allume Couloir et Hall mvt ESP
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.salon_motion
+    to: 'on'
+  condition:
+  - condition: time
+    after: 07:00
+    before: '19:00'
+  action:
+  - service: light.turn_on
+    data:
+      brightness: 250
+    entity_id: light.hall
+  - service: light.turn_on
+    data:
+      brightness: 250
+    entity_id: light.escalier
+  mode: single
+- id: '1613035895897'
+  alias: Eteint Hall Escalier
+  description: Eteint Hall Escalier
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.salon_motion
+    to: 'off'
+    for: 00:01
+  condition: []
+  action:
+  - data:
+      entity_id: light.hall
+    service: light.turn_off
+  - service: light.turn_off
+    data:
+      entity_id: light.escalier
+  mode: single
+- id: '1613375781958'
+  alias: scan deepstack Jardin
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.salon_motion
+    to: 'on'
+  condition: []
+  action:
+  - service: image_processing.scan
+    data: {}
+    entity_id: image_processing.deepstack_person_detector
+  mode: single
+- id: '1613572788943'
+  alias: Write Servo Value to ESP Pan
+  description: ''
+  trigger:
+  - entity_id: input_number.servo_control2
+    platform: state
+  condition: []
+  action:
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 0
+      milliseconds: 0
+  - service: esphome.servo_control_servo2
+    data:
+      level: '{{ trigger.to_state.state | int }}'
+  mode: single
+- id: '1613829385662'
+  alias: Allume Couloir et Hall absent
+  description: Allume Couloir et Hall mvt ESP
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.salon_motion
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: person.arnaud
+    state: not_home
+  action:
+  - service: light.turn_on
+    data:
+      brightness: 250
+    entity_id: light.hall
+  - service: light.turn_on
+    data:
+      brightness: 250
+    entity_id: light.escalier
+  mode: single
+- id: '1613829588898'
+  alias: Allume Couloir et Hall nuit
+  description: Allume Couloir et Hall mvt ESP
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.salon_motion
+    to: 'on'
+  condition:
+  - condition: time
+    after: '19:00'
+    before: 07:00
+  action:
+  - service: light.turn_on
+    data:
+      brightness: 110
+    entity_id: light.hall
+  - service: light.turn_on
+    data:
+      brightness: 110
+    entity_id: light.escalier
+  mode: single
+- id: '1613943840576'
+  alias: wled chambre 3d
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: switch.broadlink_s4
+    to: 'on'
+  - platform: state
+    entity_id: switch.broadlink_s3
+    to: 'on'
+  condition: []
+  action:
+  - service: light.turn_on
+    data: {}
+    entity_id: light.wled_2
+  mode: single
+- id: '1614328270681'
+  alias: Eteint WC (Dupliquer)
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.pt2262_ecad69
+    to: 'off'
+    for: 00:06
+  condition: []
+  action:
+  - data:
+      entity_id: light.wc
+    service: light.turn_off
+  mode: single
+- id: '1614328307114'
+  alias: Eteint SDB (Dupliquer)
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.pt2262_9308f9
+    to: 'off'
+    for: 00:10
+  condition: []
+  action:
+  - data:
+      entity_id: light.sdb
+    service: light.turn_off
+  mode: single
+- id: '1615538506175'
+  alias: Timelapse
+  description: alarme video
+  trigger:
+  - platform: time
+    at: '14:00'
+  condition: []
+  action:
+  - service: camera.snapshot
+    data:
+      filename: /config/www/surf/videos/Alarme/TimeLapse_{{ now().strftime("%Y%m%d-%H%M%S")
+        }}.jpg
+    entity_id: camera.creality
+  mode: single
+- id: '1627974999432'
+  alias: Freeplayer coupe ledtv
+  description: Freeplayer coupe ledtv
+  trigger:
+  - entity_id: sensor.freeplayer
+    from: '1'
+    platform: state
+  condition: []
+  action:
+  - service: media_player.turn_off
+    target:
+      entity_id: media_player.panasonic_viera_tv
+  mode: single

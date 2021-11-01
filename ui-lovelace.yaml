@@ -9,11 +9,15 @@ resources:
     type: module
   # - url: /local/custom_ui/linky-card.js?v=1
   #   type: module
-  - url: /local/custom-lovelace/swipe-card/swipe-card.js?v=1.1.0
+#  - url: /local/custom-lovelace/swipe-card/swipe-card.js?v=1.1.0
+#    type: module
+  - url: https://cdn.jsdelivr.net/gh/bramkragten/custom-ui@master/swipe-card/swipe-card.js
     type: module
   - url: https://unpkg.com/moment@2.22.2/moment.js
     type: js
   - url: /local/calendar-card.js?v=1.0.1
+    type: module
+  - url: /local/card-mod.js
     type: module
   # - url: /local/custom_ui/dark-sky-weather-card.js?v=7.1
   #   type: module        
@@ -21,9 +25,12 @@ resources:
   #   type: module    
 #  - url: /local/alarm_control_panel-card.js?v=1
 #    type: js
-
+ha-card-box-shadow: "10px 10px 17px -8px #A9A9A9" # Shadows on cards. Same as `shadow-elevation-2dp_-_box-shadow:
+ha-card-border-radius: "10px" # Rounded corners on cards. NOTE: may not work with custom cards.
+ha-card-padding: 25px
 # Optional background for all views. Check https://developer.mozilla.org/en-US/docs/Web/CSS/background for more examples.
-background: center / cover no-repeat url("/background.png") fixed
+#background: center / cover no-repeat url("/background.png") fixed
+background: center / cover no-repeat url("/local/bg.jpeg")
 # background: center / cover no-repeat url("/local/beach.png") fixed
 # Exclude entities from "Unused entities" view
 excluded_entities:
@@ -31,11 +38,11 @@ excluded_entities:
 views:
   - title: Home
     id: home
-    background: grey
+    background: center / cover no-repeat url("/local/bg.jpeg")
     theme: dark-mode
     cards:
       - type: "custom:calendar-card"
-        name: "Rendez Vous"
+        name: "Rendez Vous Arnaud"
         showProgressBar: false
         numberOfDays: 30
         entities:
@@ -200,7 +207,7 @@ views:
     # Optional unique id for direct access /lovelace/${id}
     id: Infos
     # Optional background (overwrites the global background).
-    background: grey
+    background: center / cover no-repeat url("/local/bg.jpeg")
     #background: radial-gradient(crimson, skyblue)
     # background: url("/local/beach.jpg") repeat-y;
     # Each view can have a different theme applied. Theme should be defined in the frontend.
@@ -397,10 +404,17 @@ views:
     # Optional unique id for direct access /lovelace/${id}
     id: surf
     # Optional background (overwrites the global background).
-    background: grey
+    background: center / cover no-repeat url("/local/bg.jpeg")
     theme: dark-mode
     # The cards to show on this view.
     cards:
+      - type: entities
+        title: Entities card sample
+        show_header_toggle: true
+        entities:
+          - type: cast
+            name: cast
+            view: surf
         # The filter card will filter entities for their state
       - type: vertical-stack
         cards:
@@ -447,7 +461,7 @@ views:
     # Optional unique id for direct access /lovelace/${id}
     id: 3D
     # Optional background (overwrites the global background).
-    background: grey
+    background: center / cover no-repeat url("/local/bg.jpeg")
     theme: dark-mode
     # The cards to show on this view.
     cards:
@@ -590,7 +604,7 @@ views:
   - title: Actions
     id: actions
     # Optional background (overwrites the global background).
-    background: grey
+    background: center / cover no-repeat url("/local/bg.jpeg")
     theme: dark-mode
     # The cards to show on this view.
     cards:
@@ -606,7 +620,7 @@ views:
           action: toggle
   - title: Plans RDC
     panel: true
-    background: grey
+    background: center / cover no-repeat url("/local/bg.jpeg")
     theme: dark-mode
     cards:
         # Entities card will take a list of entities and show their state.
@@ -661,7 +675,7 @@ views:
             left: 28%            
   - title: Plans Etage
     panel: true
-    background: grey
+    background: center / cover no-repeat url("/local/bg.jpeg")
     theme: dark-mode
     cards:            
       - type: picture-elements
@@ -709,5 +723,17 @@ views:
           style:
             top: 64%
             left: 21%            
-          
+  - title: Print3D Cast
+    id: cast3d
+    # Optional background (overwrites the global background).
+    background: center / cover no-repeat url("/local/bg.jpeg")
+    theme: dark-mode
+    # The cards to show on this view.
+    cards:
+      - type: picture-glance
+        title: Camera
+        entities:
+          - sensor.anet_a8_actual_bed_temp
+          - sensor.anet_a8_actual_tool0_temp
+        camera_image: camera.cama8         
     # View tab title.

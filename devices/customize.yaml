@@ -67,6 +67,14 @@ sensor.plage:
 device_tracker.192168107_e3458e9d8f39:
   entity_picture: /local/hokagegano.jpg
   friendly_name: Arnaud
+device_tracker.mi9tpro_t_l_phonem:
+  entity_picture: /local/hokagegano.jpg
+  friendly_name: Arnaud FreeBox
+device_tracker.mi_9t_pro:
+  entity_picture: /local/hokagegano.jpg
+  friendly_name: Arnaud GPS
+person.arnaud:
+  entity_picture: /local/hokagegano.jpg
 sensor.nutblanc:
 #  entity_picture: /local/nut.jpg
   entity_picture: /local/hokagegano.jpg

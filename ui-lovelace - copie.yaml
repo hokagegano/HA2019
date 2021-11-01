@@ -1,0 +1,715 @@
+title: Gano Home
+# Include external resources
+resources:
+  - url: /local/my-custom-card.js
+    type: js
+  - url: /local/my-webfont.css
+    type: css
+  - url: /local/circle-sensor-card.js?v=0
+    type: module
+  # - url: /local/custom_ui/linky-card.js?v=1
+  #   type: module
+#  - url: /local/custom-lovelace/swipe-card/swipe-card.js?v=1.1.0
+#    type: module
+  - url: https://cdn.jsdelivr.net/gh/bramkragten/custom-ui@master/swipe-card/swipe-card.js
+    type: module
+  - url: https://unpkg.com/moment@2.22.2/moment.js
+    type: js
+  - url: /local/calendar-card.js?v=1.0.1
+    type: module
+  # - url: /local/custom_ui/dark-sky-weather-card.js?v=7.1
+  #   type: module        
+  # - url: /local/battery-entity.js?v=0.1
+  #   type: module    
+#  - url: /local/alarm_control_panel-card.js?v=1
+#    type: js
+
+# Optional background for all views. Check https://developer.mozilla.org/en-US/docs/Web/CSS/background for more examples.
+background: center / cover no-repeat url("/background.png") fixed
+# background: center / cover no-repeat url("/local/beach.png") fixed
+# Exclude entities from "Unused entities" view
+excluded_entities:
+  - weblink.router
+views:
+  - title: Home
+    id: home
+    background: grey
+    theme: dark-mode
+    cards:
+      - type: "custom:calendar-card"
+        name: "Rendez Vous"
+        showProgressBar: false
+        numberOfDays: 30
+        entities:
+          - calendar.dalliesagmailcom
+          - calendar.contacts
+      - type: "custom:calendar-card"
+        name: "Anniversaire"
+        showProgressBar: false
+        numberOfDays: 30
+        entities:
+          - calendar.contacts
+      - type: "custom:calendar-card"
+        name: "Jours Feries"
+        showProgressBar: false
+        numberOfDays: 30
+        entities:
+          - calendar.jours_feries_en_france
+          - calendar.rtt                      
+      - type: picture-glance
+        title: Chambre
+        entities:
+          - light.chambre
+          - sensor.tempchambre_temperature
+          - sensor.tempchambre_humidity
+        image: /local/chambre.png
+        state_image:
+          - "off": /local/chambre_off.png
+        entity: light.chambre         
+      - type: picture-glance
+        title: Sdb
+        entities:
+          - light.sdb
+          - sensor.tempsdb_temperature
+          - sensor.tempsdb_humidity
+          - binary_sensor.mvtsdb
+        image: /local/sdb.png
+        state_image:
+          - "off": /local/sdb_off.png
+        entity: light.sdb         
+      - type: picture-glance
+        title: Salon
+        entities:
+          - group.salonlight
+          - sensor.salon_temperature
+          - sensor.salon_motion
+        image: /local/salon.png  
+        state_image:
+          - "off": /local/salon_off.png
+        entity: group.salonlight  
+      - type: picture-glance
+        title: Wc
+        entities:
+          - light.wc
+          # - sensor.tempwc_temperature
+          # - sensor.tempwc_humidity
+          - binary_sensor.mvtwc
+        image: /local/wc.png
+        state_image:
+          - "off": /local/wc_off.png
+        entity: light.wc                 
+      - type: picture-glance
+        title: Vaccum
+        entities:
+          - sensor.xiaomibat
+          - sensor.xiaomistat
+          - sensor.xiaomicleantime
+          - sensor.xiaomicleantimet
+          - input_boolean.vacuumauto
+        image: /local/vaccum.png
+      - type: picture-glance
+        title: Reveil
+        entities:
+          - input_boolean.alarmweekon
+        image: /local/reveil.png        
+        state_image:
+          - "off": /local/reveil_off.png
+        entity: input_boolean.alarmweekon
+      # - type: 'custom:dark-sky-weather-card'
+      #   entity_current_conditions: sensor.dark_sky_icon
+      #   entity_temperature: sensor.dark_sky_temperature
+      #   entity_forecast_high_temp_1: sensor.dark_sky_daytime_high_temperature_1
+      #   entity_forecast_high_temp_2: sensor.dark_sky_daytime_high_temperature_2
+      #   entity_forecast_high_temp_3: sensor.dark_sky_daytime_high_temperature_3
+      #   entity_forecast_high_temp_4: sensor.dark_sky_daytime_high_temperature_4
+      #   entity_forecast_high_temp_5: sensor.dark_sky_daytime_high_temperature_5
+      #   entity_forecast_icon_1: sensor.dark_sky_icon_1
+      #   entity_forecast_icon_2: sensor.dark_sky_icon_2
+      #   entity_forecast_icon_3: sensor.dark_sky_icon_3
+      #   entity_forecast_icon_4: sensor.dark_sky_icon_4
+      #   entity_forecast_icon_5: sensor.dark_sky_icon_5
+      #   entity_forecast_low_temp_1: sensor.dark_sky_overnight_low_temperature_0
+      #   entity_forecast_low_temp_2: sensor.dark_sky_overnight_low_temperature_1
+      #   entity_forecast_low_temp_3: sensor.dark_sky_overnight_low_temperature_2
+      #   entity_forecast_low_temp_4: sensor.dark_sky_overnight_low_temperature_3
+      #   entity_forecast_low_temp_5: sensor.dark_sky_overnight_low_temperature_4
+      #   entity_summary_1: sensor.dark_sky_summary_1
+      #   entity_summary_2: sensor.dark_sky_summary_2
+      #   entity_summary_3: sensor.dark_sky_summary_3
+      #   entity_summary_4: sensor.dark_sky_summary_4
+      #   entity_summary_5: sensor.dark_sky_summary_5
+      #   locale: fr
+      #   static_icons: false
+      #   tooltip_bg_color: 'rgb( 75,155,239)'
+      #   tooltip_border_color: orange
+      #   tooltip_border_width: 3
+      #   tooltip_caret_size: 10
+      #   tooltip_fg_color: '#fff'
+      #   tooltip_left_offset: -12
+      #   tooltip_width: 100
+      #   tooltips: true
+      #   old_daily_format: false
+      #   time_format: 24
+      #   show_beaufort: true
+      - type: weather-forecast
+        title: Meteo Eysines
+        entity: weather.dark_sky
+      - type: weather-forecast
+        title: Meteo France Eysines
+        entity: weather.eysines
+      - type: entity-filter
+        title: Presence
+        entities:
+          #- device_tracker.192168107_e3458e9d8f39
+          - sensor.nutblanc
+            # - sensor.nuorange
+        state_filter:
+          - home
+        card:
+          type: glance
+          title: Presence               
+      # - type: picture-glance
+      #   title: Surf
+      #   entities:
+      #     - sensor.tempocean
+      #   camera_image: camera.surf
+      # - type: iframe
+      #   url: https://embed.windy.com/embed2.html?lat=44.992&lon=-1.044&zoom=10&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=44.884&detailLon=-0.647&metricWind=default&metricTemp=default&radarRange=-1
+#https://embed.windy.com/embed2.html
+      - type: media-control
+        entity: media_player.spotify
+      - type: gauge
+        title: Anet Bed
+        unit_of_measurement: 'KwH'
+        entity: sensor.linky
+        severity:
+           green: 0
+           yellow: 11
+           red: 15
+      # - type: custom:linky-card
+      #   cons_2d: sensor.linky_daily_2d_consumption
+      #   cons_3d: sensor.linky_daily_3d_consumption
+      #   cons_4d: sensor.linky_daily_4d_consumption
+      #   cons_5d: sensor.linky_daily_5d_consumption
+      #   cons_6d: sensor.linky_daily_6d_consumption
+      #   hp_cons: sensor.conso_hp
+      #   hc_cons: sensor.conso_hc
+      #   hc_hp_percent: sensor.rapport_hc_hp
+      #   daily_cost: sensor.cout
+      #   monthly_cons_evol: sensor.evolution_conso_mensuelle
+    # View tab title.
+  - title: Infos
+    # Optional unique id for direct access /lovelace/${id}
+    id: Infos
+    # Optional background (overwrites the global background).
+    background: grey
+    #background: radial-gradient(crimson, skyblue)
+    # background: url("/local/beach.jpg") repeat-y;
+    # Each view can have a different theme applied. Theme should be defined in the frontend.
+    theme: dark-mode
+    # The cards to show on this view.
+    cards:
+        # The filter card will filter entities for their state
+      - type: entity-filter
+        entities:
+          #- device_tracker.192168107_e3458e9d8f39
+          - sensor.nutblanc
+          # - sensor.nutorange
+        state_filter:
+          - 'home'
+        card:
+          type: glance
+          title: Presence
+      - type: weather-forecast
+        title: Meteo Eysines
+        entity: weather.dark_sky
+#      - type: custom:alarm_control_panel-card
+#        entity:  alarm_control_panel.ha_alarm
+#        title: Alarme
+      - type: custom:swipe-card
+        card_width: '185px'
+        start_card: 1
+        parameters:
+          effect: 'coverflow'
+          grabCursor: true
+          centeredSlides: true
+          slidesPerView: 'auto'
+          coverflowEffect:
+            rotate: 50
+            stretch: 0
+            depth: 100
+            modifier: 1
+            slideShadows : true
+          pagination:
+            type: 'bullets'
+        cards:
+          - type: sensor
+            entity: sensor.tempchambre_temperature
+            name: Chambre
+            graph: line
+            line_width: 8
+            line_color: '#FF6384'
+          - type: sensor
+            entity: sensor.salon_temperature
+            name: Salon
+            graph: line
+            line_color: '#36A2EB'
+            line_width: 8
+          - type: sensor
+            entity: sensor.tempetage_temperature
+            name: Chambre 3D
+            graph: line
+            line_color: '#ffce57'
+            line_width: 8
+          - type: sensor
+            entity: sensor.tempsdb_temperature
+            name: Salle de Bain
+            graph: line
+            line_color: "#4BC0C0"
+            line_width: 8
+#      - type: horizontal-stack
+#        cards:
+#          - type: gauge
+#            title: Chambre
+            # unit_of_measurement: '%'
+#            entity: sensor.tempchambre_temperature
+#            severity:
+#              green: 0
+#              yellow: 19
+#              red: 24
+#          - type: gauge
+#            title: Salon
+#            # unit_of_measurement: '%'
+#            entity: sensor.salon_temperature
+#            severity:
+#              green: 0
+#              yellow: 19
+#              red: 24
+#      - type: horizontal-stack
+#        cards:        
+#          - type: gauge
+#            title: Etage
+#            # unit_of_measurement: '%'
+#            entity: sensor.tempetage_temperature
+#            severity:
+#              green: 0
+#              yellow: 19
+#              red: 24
+#          - type: gauge
+#            title: Salle de Bain
+#            # unit_of_measurement: '%'
+#            entity: sensor.tempsdb_temperature
+#            severity:
+#              green: 0
+#              yellow: 19
+#              red: 24  
+      - type: custom:swipe-card
+        card_width: '185px'
+        start_card: 1
+        parameters:
+          effect: 'coverflow'
+          grabCursor: true
+          centeredSlides: true
+          slidesPerView: 'auto'
+          coverflowEffect:
+            rotate: 50
+            stretch: 0
+            depth: 100
+            modifier: 1
+            slideShadows : true
+          pagination:
+            type: 'bullets'
+        cards:
+          - type: sensor
+            entity: sensor.tempchambre_humidity
+            name: Chambre
+            graph: line
+            line_width: 8
+            line_color: '#FF6384'
+          - type: sensor
+            entity: sensor.tempetage_humidity
+            name: Chambre 3D
+            graph: line
+            line_color: '#ffce57'
+            line_width: 8
+          - type: sensor
+            entity: sensor.tempsdb_humidity
+            name: Salle de Bain
+            graph: line
+            line_color: "#4BC0C0"
+            line_width: 8      
+#      - type: horizontal-stack
+#        cards:        
+#          - type: sensor
+#            name: Etage humidite
+#            # unit_of_measurement: '%'
+#            entity: sensor.tempetage_humidity
+#            height: 100
+#            line_color: "#FB9307"   
+#          - type: sensor
+#            name: chambre humidite
+            # unit_of_measurement: '%'
+#            entity: sensor.tempchambre_humidity
+#            height: 100
+#            line_color: "#FB0707" 
+#      - type: horizontal-stack
+#        cards:        
+#          - type: sensor
+#            name: Sdb humidite
+#            # unit_of_measurement: '%'
+#            entity: sensor.tempsdb_humidity
+#            height: 100
+#            line_color: "#07FBF4"                                               
+      - type: glance
+        title: Les lumieres
+        entities:
+          - input_number.luminosite
+          - light.hue_lightstrip_plus_1
+          - light.bureau
+          - light.bibliocolor
+          - light.salon_couleur
+          - light.hue_lightstrip_1
+          - light.chambre
+          - light.wc
+          - light.sdb
+          - light.escalier
+          - light.hall
+      - type: glance
+        title: Les Actions
+        entities:
+          - input_boolean.cast_light
+          - input_boolean.rainbow_light
+          - script.vacuumon
+          - scene.allume
+          - scene.eteint             
+#      - type: iframe
+#        image: /local/surf/surf.png
+      # - type: picture-glance
+      #   title: Surf
+      #   entities:
+      #     - sensor.tempocean
+      #   camera_image: camera.surf
+      # - type: sensor
+      #   entity: sensor.tempocean
+      #   name: Ocean
+      #   graph: line
+      #   height: 25
+      #   line_color: "#3498db"    
+  - title: surf
+    # Optional unique id for direct access /lovelace/${id}
+    id: surf
+    # Optional background (overwrites the global background).
+    background: grey
+    theme: dark-mode
+    # The cards to show on this view.
+    cards:
+        # The filter card will filter entities for their state
+      - type: vertical-stack
+        cards:
+          - type: picture-glance
+            title: Webcam Lacanau Nord
+            entities:
+              - sensor.tempocean
+            # unit_of_measurement: '%'
+            camera_image: camera.webcamsurfnord
+          - type: picture-glance
+            title: Webcam Lacanau Nord vue 2
+            entities:
+              - sensor.tempocean
+            # unit_of_measurement: '%'
+            camera_image: camera.webcamsurfnord2
+          - type: picture-glance
+            title: Webcam Lacanau Centrale
+            entities:
+              - sensor.tempocean
+            # unit_of_measurement: '%'
+            camera_image: camera.webcamsurfcentrale
+          # - type: picture-glance
+          #   title: Camera
+          #   entities:
+          #     - sensor.anet_a8_actual_bed_temp
+          #     - sensor.anet_a8_actual_tool0_temp
+          #   camera_image: camera.cama8
+      - type: vertical-stack
+        cards:
+          - type: picture-glance
+            title: Surf
+            entities:
+              - sensor.tempocean
+            camera_image: camera.surf
+          - type: sensor
+            entity: sensor.tempocean
+            name: Ocean
+            graph: line
+            height: 25
+            line_color: "#3498db"
+          - type: iframe
+            url: https://embed.windy.com/embed2.html?lat=44.992&lon=-1.044&zoom=10&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=44.884&detailLon=-0.647&metricWind=default&metricTemp=default&radarRange=-1
+  - title: 3D
+    # Optional unique id for direct access /lovelace/${id}
+    id: 3D
+    # Optional background (overwrites the global background).
+    background: grey
+    theme: dark-mode
+    # The cards to show on this view.
+    cards:
+        # The filter card will filter entities for their state
+      - type: vertical-stack
+        cards:
+          - type: gauge
+            title: Anet Bed
+            # unit_of_measurement: '%'
+            entity: sensor.anet_a8_actual_bed_temp
+            severity:
+              green: 0
+              yellow: 35
+              red: 60
+          - type: gauge
+            title: Anet Buse
+            # unit_of_measurement: '%'
+            entity: sensor.anet_a8_actual_tool0_temp
+            severity:
+              green: 0
+              yellow: 35
+              red: 180
+          - type: conditional
+            conditions:
+              - entity: switch.anet_a8
+                state: "on"
+            card:
+              type: custom:circle-sensor-card
+              entity: sensor.anet_a8_job_percentage
+              max: 100
+              min: 0
+              fill: grey
+              stroke_width: 10
+              gradient: true
+              units: '%'
+              show_max: true
+              font_style:
+                color: red
+                font-size: 1.5em
+                text-shadow: '2px 2px black'
+                font-family: 'Trebuchet MS'
+              color_stops:
+                50: '#55FF55'
+                75: '#5555FF'
+                100: '#FF5555'
+              style:
+                top: 10%
+                left: 10%
+                width: 50px
+                height: 50px              
+      - type: vertical-stack
+        cards:
+          - type: gauge
+            title: temps restant (min)
+            # unit_of_measurement: '%'
+            entity: sensor.octotime
+            severity:
+              green: 0
+              yellow: 50
+              red: 100          
+          - type: gauge
+            title: CR10 Bed
+            # unit_of_measurement: '%'
+            entity: sensor.creality_cr10_actual_bed_temp
+            severity:
+              green: 0
+              yellow: 35
+              red: 60
+          - type: gauge
+            title: CR10 Buse
+            # unit_of_measurement: '%'
+            entity: sensor.creality_cr10_actual_tool0_temp
+            severity:
+              green: 0
+              yellow: 35
+              red: 180
+          - type: conditional
+            conditions:
+              - entity: switch.creality_cr10
+                state: "on"
+            card:
+              type: custom:circle-sensor-card
+              entity: sensor.creality_cr10_job_percentage
+              max: 100
+              min: 0
+              fill: grey
+              stroke_width: 10
+              gradient: true
+              units: '%'
+              show_max: true
+              font_style:
+                color: red
+                font-size: 1.5em
+                text-shadow: '2px 2px black'
+                font-family: 'Trebuchet MS'
+              color_stops:
+                50: '#55FF55'
+                75: '#5555FF'
+                100: '#FF5555'
+              style:
+                top: 10%
+                left: 10%
+                width: 50px
+                height: 50px
+      - type: vertical-stack
+        cards:    
+          - type: picture-entity
+            entity: switch.anet_a8
+            image: /local/anet.png
+            tap_action:
+              action: toggle
+          - type: picture-entity
+            entity: switch.creality_cr10
+            image: /local/cr10.png
+            tap_action:
+              action: toggle
+      - type: conditional
+        conditions:
+          - entity: switch.anet_a8
+            state: "on"
+        card:
+          type: picture-glance
+          title: Camera
+          entities:
+            - sensor.anet_a8_actual_bed_temp
+            - sensor.anet_a8_actual_tool0_temp
+          camera_image: camera.cama8
+      - type: conditional
+        conditions:
+          - entity: switch.creality_cr10
+            state: "on"
+        card:
+          type: picture-glance
+          title: Camera
+          entities:
+            - sensor.creality_cr10_actual_bed_temp
+            - sensor.creality_cr10_actual_tool0_temp
+            - input_boolean.autoprint
+          camera_image: camera.camcr10
+  - title: Actions
+    id: actions
+    # Optional background (overwrites the global background).
+    background: grey
+    theme: dark-mode
+    # The cards to show on this view.
+    cards:
+      - type: picture-entity
+        image: /local/randomhue.png
+        entity: input_boolean.rainbow_light
+        tap_action:
+          action: toggle
+      - type: picture-entity
+        image: /local/cinema.jpg
+        entity: input_boolean.cast_light
+        tap_action:
+          action: toggle
+  - title: Plans RDC
+    panel: true
+    background: grey
+    theme: dark-mode
+    cards:
+        # Entities card will take a list of entities and show their state.
+      - type: picture-elements
+        image: /local/HD.png
+        elements:
+        - type: state-icon
+          tap_action:
+            action: toggle
+          entity: light.bibliocolor
+          state_filter:
+            "on": brightness(110%) saturate(1.2)
+            "off": brightness(10%) hue-rotate(45deg)
+          style:
+            top: 13%
+            left: 42%
+        - type: state-icon
+          tap_action:
+            action: toggle
+          entity: light.hue_lightstrip_1
+          style:
+            top: 19%
+            left: 66%
+        - type: state-icon
+          tap_action:
+            action: toggle
+          entity: light.salon_couleur
+          icon: mdi:lightbulb
+          style:
+            top: 59%
+            left: 67%
+        - type: state-icon
+          tap_action:
+            action: toggle
+          entity: light.hue_lightstrip_plus_1
+          style:
+            top: 45%
+            left: 69%
+        - type: state-icon
+          tap_action:
+            action: toggle
+          entity: light.bureau
+          style:
+            top: 45%
+            left: 38%
+        - type: state-icon
+          tap_action:
+            action: toggle
+          entity: script.vacuumon
+          style:
+            top: 70%
+            left: 28%            
+  - title: Plans Etage
+    panel: true
+    background: grey
+    theme: dark-mode
+    cards:            
+      - type: picture-elements
+        image: /local/HD_etage.png
+        elements:
+        - type: state-icon
+          tap_action:
+            action: toggle
+          entity: light.chambre
+          style:
+            top: 9%
+            left: 57%
+        - type: state-icon
+          tap_action:
+            action: toggle
+          entity: light.sdb
+          style:
+            top: 34%
+            left: 60%
+        - type: state-icon
+          tap_action:
+            action: toggle
+          entity: light.escalier
+          style:
+            top: 26%
+            left: 33%            
+        - type: state-icon
+          tap_action:
+            action: toggle
+          entity: light.wc
+          style:
+            top: 45%
+            left: 57%
+        - type: state-icon
+          tap_action:
+            action: toggle
+          entity: switch.creality_cr10
+          style:
+            top: 75%
+            left: 17%            
+        - type: state-icon
+          tap_action:
+            action: toggle
+          entity: switch.anet_a8
+          style:
+            top: 64%
+            left: 21%            
+          
+    # View tab title.

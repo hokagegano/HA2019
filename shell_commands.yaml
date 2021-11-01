@@ -1,5 +1,6 @@
 adon: /usr/bin/curl --request GET 'http://192.168.2.24/admin/api.php?enable&auth=d33b3755ad7feca3dfadaeeff34944558c9bed8ca3bc9a44d286c855b2ef31fb'
 adoff: /usr/bin/curl --request GET 'http://192.168.2.24/admin/api.php?disable&auth=d33b3755ad7feca3dfadaeeff34944558c9bed8ca3bc9a44d286c855b2ef31fb'
+videocam: /config/scripts/videocam.sh {{ state_attr("camera.cr10_cam_esp", "access_token") }}
 # octocr10: /config/scripts/octopiconnect.sh
 eteintfreebox: /usr/bin/curl --request GET 'http://hd1.freebox.fr/pub/remote_control?code=88907591&key=power'
 allumefreebox: /usr/bin/curl --request GET 'http://hd1.freebox.fr/pub/remote_control?code=88907591&key=power'; sleep 5; /usr/bin/curl --request GET 'http://hd1.freebox.fr/pub/remote_control?code=88907591&key=ok'; sleep 2; /usr/bin/curl --request GET 'http://hd1.freebox.fr/pub/remote_control?code=88907591&key=1&key=6'

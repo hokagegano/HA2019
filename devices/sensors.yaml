@@ -1,3 +1,46 @@
+- platform: template
+  sensors:
+    cam_token:
+      value_template: "{{ state_attr('camera.cr10_cam_esp', 'access_token') }}" 
+
+- platform: command_line
+  name: freeplayer
+  command: "nc -zv 192.168.10.20 7000 2>&1 |grep -E 'open|succeeded'| wc -l"
+  scan_interval: 5
+     
+
+- platform: template
+  sensors:
+    time:
+      value_template: "{{ now().strftime('%H:%M') }}" 
+
+- platform: template
+  sensors:
+    date_string:
+      value_template: "{{ now().strftime('%d / %m / %y') }}" 
+
+- platform: plex_recently_added
+  token: !secret plex
+  host: 192.168.10.40
+  port: 32400
+
+
+- platform: plex_recently_added
+  name: Recently Added Movies # will create sensor.recently_added_movies
+  token: !secret plex
+  host: 192.168.10.40
+  port: 32400
+  section_types:
+  - movie
+
+- platform: plex_recently_added
+  name: Recently Added TV  # will create sensor.recently_added_tv
+  token: !secret plex
+  host: 192.168.10.40
+  port: 32400
+  section_types:
+  - show
+      
 #- platform: coinmarketcap
 #  currency: 
 #    - ethereum
@@ -11,28 +54,32 @@
 #   payload_on: True
 #   payload_off: False
 
-- platform: command_line
-  name: linkyarnoh
-  # friendly_name: 'Linky'
-  command: "cat /config/www/linky.xml"
-#  json_attributes: hourly
-  value_template: '{{ value_json.hourly[2] }}'
+# - platform: command_line
+#   name: linkyarnoh
+#   # friendly_name: 'Linky'
+#   command: "cat /config/www/linky.xml"
+# #  json_attributes: hourly
+#   value_template: '{{ value_json.hourly[2] }}'
 
-- platform: command_line
-  name: linkyarnom
-  # friendly_name: 'Linky'
-  command: "cat /config/www/linky.xml"
-#  json_attributes: monthly
-  value_template: '{{ value_json.monthly[2] }}'
+# - platform: command_line
+#   name: linkyarnom
+#   # friendly_name: 'Linky'
+#   command: "cat /config/www/linky.xml"
+# #  json_attributes: monthly
+#   value_template: '{{ value_json.monthly[2] }}'
 
-- platform: command_line
-  name: linkyarnoy
-  # friendly_name: 'Linky'
-  command: "cat /config/www/linky.xml"
-#  json_attributes: yearly
-  value_template: '{{ value_json.yearly[2] }}'
+# - platform: command_line
+#   name: linkyarnoy
+#   # friendly_name: 'Linky'
+#   command: "cat /config/www/linky.xml"
+# #  json_attributes: yearly
+#   value_template: '{{ value_json.yearly[2] }}'
 
-
+# - platform: time_date
+#   name: time
+#   display_options:
+#     - 'time'
+    
 - platform: mqtt
   state_topic: 'plex'
   name: 'Plexpymqtt'
@@ -56,9 +103,7 @@
 #  peak_hours_cost: 0.1761
 #  offpeak_hours_cost: 0.1291
 
-- platform: linky
-  username: !secret linky_username
-  password: !secret linky_password
+
 #   monitored_variables:
 #   - halfhourly_00_00_consumption
 #   - halfhourly_00_30_consumption
@@ -235,7 +280,7 @@
 #    - precip_today_string
 #    - solarradiation
 # - platform: worldtidesinfo
-#   api_key: 25463990-3598-470f-b0ba-da3f494082fd
+#   api_key: !secret worldtide
   
 - platform: darksky
   api_key: !secret darksky_api
@@ -262,8 +307,6 @@
 #  options:
 #    mode: driving
 
-# - platform: pi_hole
-#   host: 192.168.3.114
 
 - platform: template
   sensors:
@@ -359,15 +402,15 @@
 #       unit_of_measurement: 'EUR'
 #       value_template: '{{ float(states.sensor.gaineth.state) + float(states.sensor.gainripple.state) + float(states.sensor.gainxem.state) + float(states.sensor.gainverge.state) }}'
 
-- platform: command_line
-  name: surf9h
-  # entity_picture: /local/9h.jpg
-  command: "cat /config/www/surf/today_9h"
+# - platform: command_line
+#   name: surf9h
+#   # entity_picture: /local/9h.jpg
+#   command: "cat /config/www/surf/today_9h"
 
-- platform: command_line
-  name: webcamurl
-  # entity_picture: /local/9h.jpg
-  command: "cat /config/www/surf/webcam"
+# - platform: command_line
+#   name: webcamurl
+#   # entity_picture: /local/9h.jpg
+#   command: "cat /config/www/surf/webcam"
 
 - platform: command_line
   name: tempocean
@@ -375,25 +418,25 @@
   unit_of_measurement: "°C"
   command: "cat /config/www/surf/temp_eau.txt"
 
-- platform: command_line
-  name: mareebm
-  #entity_picture: /local/9h.jpg
-  command: "cat /config/www/surf/maree_bm"
+# - platform: command_line
+#   name: mareebm
+#   #entity_picture: /local/9h.jpg
+#   command: "cat /config/www/surf/maree_bm"
 
-- platform: command_line
-  name: mareepm
-  #entity_picture: /local/9h.jpg
-  command: "cat /config/www/surf/maree_pm"
+# - platform: command_line
+#   name: mareepm
+#   #entity_picture: /local/9h.jpg
+#   command: "cat /config/www/surf/maree_pm"
 
 
-### MAGIC Seaweed
-- platform: magicseaweed
-  api_key: a51fa47ffbff044b38c5fd4c6762965e
-  spot_id: 66
-  monitored_conditions:
-    - max_breaking_swell
-    - min_breaking_swell
-    - swell_forecast
+# ### MAGIC Seaweed
+# - platform: magicseaweed
+#   api_key: a51fa47ffbff044b38c5fd4c6762965e
+#   spot_id: 66
+#   monitored_conditions:
+#     - max_breaking_swell
+#     - min_breaking_swell
+#     - swell_forecast
 
 #- platform: mold_indicator
 #  indoor_temp_sensor: sensor.salon_temperature
@@ -441,25 +484,25 @@
 #   name: news
 #   command: "cat /home/gano/.homeassistant/www/news/news.txt"
 
-- platform: command_line
-  name: surf9h_h
-  command: "cat /config/www/surf/today_9h_hauteur"
+# - platform: command_line
+#   name: surf9h_h
+#   command: "cat /config/www/surf/today_9h_hauteur"
 
-- platform: command_line
-  name: surf13h
-  command: "cat /config/www/surf/today_9h"
+# - platform: command_line
+#   name: surf13h
+#   command: "cat /config/www/surf/today_9h"
 
-- platform: command_line
-  name: surf13h_h
-  command: "cat /config/www/surf/today_13h_hauteur"
+# - platform: command_line
+#   name: surf13h_h
+#   command: "cat /config/www/surf/today_13h_hauteur"
 
-- platform: command_line
-  name: surf17h
-  command: "cat /config/www/surf/today_17h"
+# - platform: command_line
+#   name: surf17h
+#   command: "cat /config/www/surf/today_17h"
 
-- platform: command_line
-  name: surf17h_h
-  command: "cat /config/www/surf/today_17h_hauteur"
+# - platform: command_line
+#   name: surf17h_h
+#   command: "cat /config/www/surf/today_17h_hauteur"
 
 #- platform: command_line
 #  name: datesurf
@@ -628,26 +671,19 @@
 #   name: fr4_h
 #   command: "cat /home/gano/.homeassistant/www/tele/fr4.h"
 
-- platform: mqtt_room
-  device_id: dbb205f26060
-  name: 'NutBlanc'
-  state_topic: 'happy-bubbles/presence/ha'
-  timeout: 5
-  away_timeout: 420
-  
-- platform: mqtt_room
-  device_id: ceeb5d1bea5f
-  name: 'NutOrange'
-  state_topic: 'happy-bubbles/presence/ha'
-  timeout: 5
-  away_timeout: 420
 
+# One entry for each beacon you want to track
+- platform: mqtt_room
+  device_id: "2f234454cf6d4a0fadf2f4911ba9ffa6-1-1"
+   # Note that major version must match, but any minor version will be ignored
+  name: 'arnaud'
+  state_topic: 'room_presence'
+  timeout: 10
+  away_timeout: 15
 
 - platform: tautulli
-  api_key: a06e8417abdb4849813dd6146c73987b
+  api_key: !secret tautulli
   host: 192.168.3.8
-
-  
 
 # - platform: mqtt_room
 #   device_id: c1f42791752e
@@ -752,28 +788,29 @@
 # #      unit_of_measurement: 'mm'
 
 
-- platform: rfxtrx
-  automatic_add: False
-  devices:
-#    0a520d447d0100d2420179:
-#    0a520d027d0100cc400179:
-    0a520d067b01010e380179:
-      name: tempsdb
-      data_type:
-       - Humidity
-       - Temperature
-#    0a520d79a90100d53b0179:
-    0a520d07770101053b0179:
-      name: tempchambre
-      data_type:
-       - Humidity
-       - Temperature
-#    0a520d017a0100c5320179:
-    0a52010cf40200fc3d0079:  
-      name: tempetage
-      data_type:
-       - Humidity
-       - Temperature
+# - platform: rfxtrx
+#   automatic_add: False
+#   devices:
+# #    0a520d447d0100d2420179:
+# #    0a520d027d0100cc400179:
+#     0a520d11df0100cc330179:
+#       name: tempsdb
+#       data_type:
+#        - Humidity
+#        - Temperature
+# #    0a520d79a90100d53b0179:
+#     # 0a520d464d0100c4390179:
+#     0a520d150b0100cd380179:
+#       name: tempchambre
+#       data_type:
+#        - Humidity
+#        - Temperature
+# #    0a520d017a0100c5320179:
+#     0a520d1bca0100d1360179:  
+#       name: tempetage
+#       data_type:
+#        - Humidity
+#        - Temperature
     # 08500907a201006259:
     #   name: tempext
     #   data_type:
@@ -849,10 +886,10 @@
 #      value_template: '{{ states.sensor.pws_precip_today_metric.state }}'
 #      unit_of_measurement: 'km/h'
 
-- platform: statistics
-  entity_id: sensor.tempsdb_humidity
-  max_age:
-    minutes: 15
+# - platform: statistics
+#   entity_id: sensor.tempsdb_humidity
+#   max_age:
+#     minutes: 15
 
 #- platform: template
 #  sensors:
@@ -864,16 +901,16 @@
 #        {%- else -%}
 #        0
 #        {%- endif %}
-- platform: template
-  sensors:
-    doucheon:
-      friendly_name: 'Douche ON'
-      value_template: >
-        {%- if (( float (states.sensor.stats_mean.state) + float(1))|float < float(states.sensor.tempsdb_humidity.state)) -%}
-        on
-        {%- else -%}
-        off
-        {%- endif %}
+# - platform: template
+#   sensors:
+#     doucheon:
+#       friendly_name: 'Douche ON'
+#       value_template: >
+#         {%- if (( float (states.sensor.stats_mean.state) + float(1))|float < float(states.sensor.tempsdb_humidity.state)) -%}
+#         on
+#         {%- else -%}
+#         off
+#         {%- endif %}
 
 # - platform: template
 #   sensors:
@@ -897,17 +934,17 @@
 #         {{ states.sensor.google_travel_time__driving.state }}
 #         {%- endif %}
 
-- platform: template
-  sensors:
-    bonjour:
-      friendly_name: 'Jour'
-      value_template: '0' 
+# - platform: template
+#   sensors:
+#     bonjour:
+#       friendly_name: 'Jour'
+#       value_template: '0' 
 
-- platform: template
-  sensors:
-    douche:
-      friendly_name: 'douche'
-      value_template: '0' 
+# - platform: template
+#   sensors:
+#     douche:
+#       friendly_name: 'douche'
+#       value_template: '0' 
 
 #- platform: mqtt
 #  state_topic: "sensornode/livestream"
@@ -916,13 +953,13 @@
 #  unit_of_measurement: "Lux"
 #  value_template: '{{ value.x }}'
 
-# - binary_sensor:
-#   platform: command_line
-#   scan_interval: 30
-#   name: FreePlayer
-#   command: "/config/scripts/freeplayer.sh"
-#   payload_on: "Success"
-#   payload_off: "Fail"
+- binary_sensor:
+  platform: command_line
+  scan_interval: 30
+  name: FreePlayer
+  command: "bash /config/scripts/freeplayer.sh"
+  payload_on: "Success"
+  payload_off: "Fail"
 
 # - binary_sensor:
 #   platform: octoprint
@@ -1079,33 +1116,6 @@
 #  name: FIND location
 #  scan_interval: 15
 
-
-
-#- platform: forecast
-#  api_key: 15a72d34b210ba6f135359416c9205ed
-#  monitored_conditions:
-#    - precip_intensity
-#    - precip_probability
-#    - temperature
-#    - wind_speed
-#    - cloud_cover
-#    - humidity
-#    - pressure
-#    - ozone
-#    - minutely_summary
-#    - hourly_summary
-#    - daily_summary
-
-# - platform: openweathermap
-#   api_key: fd7f5480e4b7c64b007931c34305d337
-#   forecast: 1
-#   monitored_conditions:
-#     - temperature
-#     - wind_speed
-#     - humidity
-#     - pressure
-#     - rain
-
 #- platform: template
 #  sensors:
 #    windkmh:
@@ -1116,15 +1126,6 @@
 #    - 0
 #    - 30
 
-
-# - platform: google_travel_time
-#   api_key: AIzaSyBFYpVffV-hkFtLBVynk8GLoeQAcq-8xho
-#   origin: Eysines, France
-#   destination: Saint Medard en Jalles, France
-#   entity_picture: /local/cete.jpg 
-#   friendly_name: Travail
-#  options:
-#    mode: driving
 
 # - platform: template
 #   sensors:

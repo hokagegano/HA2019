@@ -1,0 +1,8 @@
+{
+  "domain": "bodymiscale",
+  "name": "Bodymiscale",
+  "documentation": [],
+  "after_dependencies": [],
+  "codeowners": ["dckiller51"],
+  "version": "1.0.0"
+}

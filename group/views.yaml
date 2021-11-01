@@ -1,5 +1,5 @@
   default_view:
-    view: yes
+    # view: yes
     icon: mdi:home
     entities:
       - group.robot
@@ -21,20 +21,20 @@
       - group.conso
   surfg:
     name: Surf group
-    view: yes
+    # view: yes
     icon: mdi:waves
     entities:
       - group.surf
   #    - group.session
   octog:
     name: Imprimantes 3D
-    view: yes
+    # view: yes
     icon: mdi:printer-3d
     entities:
       - group.octo
       - group.octo2
   radio:
-    view: yes
+    # view: yes
     icon: mdi:radio-tower
     name: Radio Maison
     entities:
@@ -43,7 +43,7 @@
   system:
     name: Systeme et Stats
     icon: mdi:desktop-classic
-    view: yes
+    # view: yes
     entities:
       - group.systemg
       # - group.googlemaps
@@ -58,7 +58,7 @@
       - calendar.dalliesagmailcom
       - group.mesrdv
       # - group.googlemaps
-    view: yes
+    # view: yes
   # tempsparcours:
   #   name: Temps de Route
   #   icon: mdi:car
@@ -99,11 +99,11 @@
       - group.group_meteo
       - group.wumeteo
 #      - group.polg
-    view: yes
+    # view: yes
   courses_group:
     name: Les Courses
     icon: mdi:cart-outline
-    view: yes
+    # view: yes
     entities:
       - script.envoiliste
       - script.effacelistemiroir
@@ -117,7 +117,7 @@
   #   entities:
   #    - group.financeg
   themeg:
-    view: yes
+    # view: yes
     icon: mdi:format-paint
     name: themes
     entities:
@@ -125,7 +125,7 @@
   webg:
     name: Liens
     icon: mdi:waves
-    view: yes
+    # view: yes
     entities:
       - weblink.pihole
   # webcam:

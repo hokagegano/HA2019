@@ -1,0 +1,10 @@
+arnaud:
+  sensors:
+   # weight: sensor.weight_arnaud
+   # impedance: sensor.impedance_arnaud
+    weight: sensor.xiaomi_mi_scale_weight
+    impedance: sensor.xiaomi_mi_scale_impedance
+  height: 168
+  born: "1979-11-11"
+  gender: "male"
+  model_miscale: "181B"

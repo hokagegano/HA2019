@@ -14,7 +14,7 @@ default_view:
   - group.internet
   - group.alarmclock
   name: default_view
-  view: true
+  # view: true
 weathergroup:
   entities:
   - camera.surf
@@ -25,11 +25,11 @@ weathergroup:
   - camera.infrarouge
   - camera.france
   name: La meteo
-  view: true
+  # view: true
 stats_sensor:
   entities:
   - sensor.ssl_certificate_expiry
   - sensor.presence_a_la_maison
   - sensor.lumieres_on_today
   name: Statistics sensor
-  view: false
+  # view: false

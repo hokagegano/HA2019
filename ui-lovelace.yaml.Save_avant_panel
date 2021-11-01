@@ -1,0 +1,575 @@
+background: center / cover no-repeat url("/background.png") fixed
+excluded_entities:
+  - weblink.router
+resources:
+  - type: js
+    url: /local/my-custom-card.js
+  - type: css
+    url: /local/my-webfont.css
+  - type: module
+    url: /local/circle-sensor-card.js?v=0
+  - type: module
+    url: /local/custom-lovelace/swipe-card/swipe-card.js?v=1.1.0
+  - type: js
+    url: 'https://unpkg.com/moment@2.22.2/moment.js'
+  - type: module
+    url: /local/calendar-card.js?v=1.0.1
+title: Gano Home
+views:
+  - background: center / cover no-repeat url("/local/bg.jpeg")
+    badges: []
+    cards:
+      - entities:
+          - calendar.dalliesagmailcom
+          - calendar.contacts
+        name: Rendez Vous
+        numberOfDays: 30
+        showProgressBar: false
+        type: 'custom:calendar-card'
+      - entities:
+          - calendar.contacts
+        name: Anniversaire
+        numberOfDays: 30
+        showProgressBar: false
+        type: 'custom:calendar-card'
+      - entities:
+          - calendar.jours_feries_en_france
+          - calendar.rtt
+        name: Jours Feries
+        numberOfDays: 30
+        showProgressBar: false
+        type: 'custom:calendar-card'
+      - type: vertical-stack
+        cards:
+          - entity: group.salonlight
+            entities:
+              - group.salonlight
+              - sensor.salon_temperature
+              - sensor.salon_motion
+            image: /local/salon.jpg
+            state_image:
+              - 'off': /local/salon_off.jpg
+            title: Salon
+            type: picture-glance
+          - entity: light.hall
+            entities:
+              - light.hall
+              - sensor.salon_motion
+            image: /local/hall.jpg
+            state_image:
+              - 'off': /local/hall_off.jpg
+            title: Hall
+            type: picture-glance
+      - type: vertical-stack
+        cards:
+          - entity: light.chambre
+            entities:
+              - light.chambre
+              - sensor.tempchambre_temperature
+              - sensor.tempchambre_humidity
+            image: /local/chambre.jpg
+            state_image:
+              - 'off': /local/chambre_off.jpg
+            title: Chambre
+            type: picture-glance
+          - entity: light.wc
+            entities:
+              - light.wc
+              - binary_sensor.mvtwc
+            image: /local/wc.jpg
+            state_image:
+              - 'off': /local/wc_off.jpg
+            title: Wc
+            type: picture-glance
+          - entity: light.sdb
+            entities:
+              - light.sdb
+              - sensor.tempsdb_temperature
+              - sensor.tempsdb_humidity
+              - binary_sensor.mvtsdb
+            image: /local/sdb.jpg
+            state_image:
+              - 'off': /local/sdb_off.jpg
+            title: Sdb
+            type: picture-glance
+      - entities:
+          - group.alarmclock
+        entity: group.alarmclock
+        image: /local/reveil.png
+        state_image:
+          - 'off': /local/reveil_off.png
+        title: Reveil
+        type: picture-glance
+      - entities:
+          - sensor.xiaomibat
+          - sensor.xiaomistat
+          - sensor.xiaomicleantime
+          - sensor.xiaomicleantimet
+          - input_boolean.vacuumauto
+        image: /local/vaccum.png
+        title: Vaccum
+        type: picture-glance
+      - entity: weather.dark_sky
+        title: Meteo Eysines
+        type: weather-forecast
+      - entity: weather.eysines
+        title: Meteo France Eysines
+        type: weather-forecast
+      - entity: light.chambrechevet
+        name: Lampe Chevet
+        theme: midnight
+        type: light
+      - card:
+          title: Presence
+          type: glance
+        entities:
+          - device_tracker.mi_9t_pro
+          - device_tracker.mi9tpro_t_l_phonem
+        header:
+          image: /local/header.png
+          type: picture
+        state_filter:
+          - home
+        title: Presence
+        type: entity-filter
+    id: home
+    theme: midnight
+    title: Home
+  - background: center / cover no-repeat url("/local/bg.jpeg")
+    badges: []
+    cards:
+      - card_width: 185px
+        cards:
+          - entity: sensor.tempchambre_temperature
+            graph: line
+            line_color: '#FF6384'
+            line_width: 8
+            name: Chambre
+            type: sensor
+          - entity: sensor.salon_temperature
+            graph: line
+            line_color: '#36A2EB'
+            line_width: 8
+            name: Salon
+            type: sensor
+          - entity: sensor.tempsdb_temperature
+            graph: line
+            line_color: '#4BC0C0'
+            line_width: 8
+            name: Salle de Bain
+            type: sensor
+          - entity: sensor.tempetage_temperature
+            graph: line
+            line_color: '#ffce57'
+            line_width: 8
+            name: Chambre 3D
+            type: sensor
+        parameters:
+          centeredSlides: true
+          coverflowEffect:
+            depth: 100
+            modifier: 1
+            rotate: 50
+            slideShadows: true
+            stretch: 0
+          effect: coverflow
+          grabCursor: true
+          pagination:
+            type: bullets
+          slidesPerView: auto
+        start_card: 1
+        type: 'custom:swipe-card'
+      - card_width: 185px
+        cards:
+          - entity: sensor.tempchambre_humidity
+            graph: line
+            line_color: '#FF6384'
+            line_width: 8
+            name: Chambre
+            type: sensor
+          - entity: sensor.tempsdb_humidity
+            graph: line
+            line_color: '#4BC0C0'
+            line_width: 8
+            name: Salle de Bain
+            type: sensor
+          - entity: sensor.tempetage_humidity
+            graph: line
+            line_color: '#ffce57'
+            line_width: 8
+            name: Chambre 3D
+            type: sensor
+        parameters:
+          centeredSlides: true
+          coverflowEffect:
+            depth: 100
+            modifier: 1
+            rotate: 50
+            slideShadows: true
+            stretch: 0
+          effect: coverflow
+          grabCursor: true
+          pagination:
+            type: bullets
+          slidesPerView: auto
+        start_card: 1
+        type: 'custom:swipe-card'
+      - entity: weather.dark_sky
+        title: Meteo Eysines
+        type: weather-forecast
+      - card:
+          title: Presence
+          type: glance
+        entities:
+          - device_tracker.mi_9t_pro
+          - device_tracker.mi9tpro_t_l_phonem
+        state_filter:
+          - home
+        type: entity-filter
+    id: Infos
+    theme: midnight
+    title: Infos
+  - background: center / cover no-repeat url("/local/bg.jpeg")
+    badges: []
+    cards:
+      - cards:
+          - camera_image: camera.webcamsurfnord
+            camera_view: live
+            entities:
+              - sensor.tempocean
+            title: Webcam Lacanau Nord
+            type: picture-glance
+          - camera_image: camera.webcamsurfnord2
+            camera_view: live
+            entities:
+              - sensor.tempocean
+            title: Webcam Lacanau Nord vue 2
+            type: picture-glance
+          - camera_image: camera.webcamsurfcentrale
+            camera_view: live
+            entities:
+              - sensor.tempocean
+            title: Webcam Lacanau Centrale
+            type: picture-glance
+        type: vertical-stack
+      - cards:
+          - camera_image: camera.surf
+            entities:
+              - sensor.tempocean
+            title: Surf
+            type: picture-glance
+          - entity: sensor.tempocean
+            graph: line
+            height: 25
+            line_color: '#3498db'
+            name: Ocean
+            type: sensor
+          - entity: weather.lacanau
+            title: Meteo France Lacanau
+            type: weather-forecast
+          - type: iframe
+            url: >-
+              https://embed.windy.com/embed2.html?lat=44.992&lon=-1.044&zoom=10&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=44.884&detailLon=-0.647&metricWind=default&metricTemp=default&radarRange=-1
+        type: vertical-stack
+    id: surf
+    path: surf
+    theme: midnight
+    title: surf
+  - background: center / cover no-repeat url("/local/bg.jpeg")
+    badges: []
+    cards:
+      - cards:
+          - entity: sensor.anet_a8_actual_bed_temp
+            severity:
+              green: 0
+              red: 60
+              yellow: 35
+            title: Anet Bed
+            type: gauge
+          - entity: sensor.anet_a8_actual_tool0_temp
+            severity:
+              green: 0
+              red: 180
+              yellow: 35
+            title: Anet Buse
+            type: gauge
+          - card:
+              color_stops:
+                '50': '#55FF55'
+                '75': '#5555FF'
+                '100': '#FF5555'
+              entity: sensor.anet_a8_job_percentage
+              fill: grey
+              font_style:
+                color: red
+                font-family: Trebuchet MS
+                font-size: 1.5em
+                text-shadow: 2px 2px black
+              gradient: true
+              max: 100
+              min: 0
+              show_max: true
+              stroke_width: 10
+              style:
+                height: 50px
+                left: 10%
+                top: 10%
+                width: 50px
+              type: 'custom:circle-sensor-card'
+              units: '%'
+            conditions:
+              - entity: switch.anet_a8
+                state: 'on'
+            type: conditional
+        type: vertical-stack
+      - cards:
+          - entity: sensor.octotime
+            severity:
+              green: 0
+              red: 100
+              yellow: 50
+            title: temps restant (min)
+            type: gauge
+          - entity: sensor.creality_cr10_actual_bed_temp
+            severity:
+              green: 0
+              red: 60
+              yellow: 35
+            title: CR10 Bed
+            type: gauge
+          - entity: sensor.creality_cr10_actual_tool0_temp
+            severity:
+              green: 0
+              red: 180
+              yellow: 35
+            title: CR10 Buse
+            type: gauge
+          - card:
+              color_stops:
+                '50': '#55FF55'
+                '75': '#5555FF'
+                '100': '#FF5555'
+              entity: sensor.creality_cr10_job_percentage
+              fill: grey
+              font_style:
+                color: red
+                font-family: Trebuchet MS
+                font-size: 1.5em
+                text-shadow: 2px 2px black
+              gradient: true
+              max: 100
+              min: 0
+              show_max: true
+              stroke_width: 10
+              style:
+                height: 50px
+                left: 10%
+                top: 10%
+                width: 50px
+              type: 'custom:circle-sensor-card'
+              units: '%'
+            conditions:
+              - entity: switch.creality_cr10
+                state: 'on'
+            type: conditional
+        type: vertical-stack
+      - cards:
+          - entity: switch.anet_a8
+            image: /local/anet.png
+            tap_action:
+              action: toggle
+            type: picture-entity
+          - entity: switch.creality_cr10
+            image: /local/cr10.png
+            tap_action:
+              action: toggle
+            type: picture-entity
+        type: vertical-stack
+      - card:
+          camera_image: camera.cama8
+          entities:
+            - sensor.anet_a8_actual_bed_temp
+            - sensor.anet_a8_actual_tool0_temp
+          title: Camera
+          type: picture-glance
+        conditions:
+          - entity: switch.anet_a8
+            state: 'on'
+        type: conditional
+      - card:
+          camera_image: camera.camcr10
+          entities:
+            - sensor.creality_cr10_actual_bed_temp
+            - sensor.creality_cr10_actual_tool0_temp
+            - input_boolean.autoprint
+          title: Camera
+          type: picture-glance
+        conditions:
+          - entity: switch.creality_cr10
+            state: 'on'
+        type: conditional
+    id: 3D
+    theme: midnight
+    title: 3D
+  - background: center / cover no-repeat url("/local/bg.jpeg")
+    badges: []
+    cards:
+      - entity: input_boolean.rainbow_light
+        image: /local/randomhue.png
+        tap_action:
+          action: toggle
+        type: picture-entity
+      - entity: input_boolean.cast_light
+        image: /local/cinema.jpg
+        tap_action:
+          action: toggle
+        type: picture-entity
+      - entities:
+          - entity: switch.fluxer
+        header:
+          image: /local/header.png
+          type: picture
+        show_header_toggle: false
+        title: F.Lux
+        type: entities
+    id: actions
+    theme: midnight
+    title: Actions
+  - background: center / cover no-repeat url("/local/bg.jpeg")
+    badges: []
+    cards:
+      - elements:
+          - entity: light.bibliocolor
+            state_filter:
+              'off': brightness(10%) hue-rotate(45deg)
+              'on': brightness(110%) saturate(1.2)
+            style:
+              left: 42%
+              top: 13%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: light.hue_lightstrip_1
+            style:
+              left: 66%
+              top: 19%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: light.salon_couleur
+            icon: 'mdi:lightbulb'
+            style:
+              left: 67%
+              top: 59%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: light.hue_lightstrip_plus_1
+            style:
+              left: 69%
+              top: 45%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: light.bureau
+            style:
+              left: 38%
+              top: 45%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: script.vacuumon
+            style:
+              left: 28%
+              top: 70%
+            tap_action:
+              action: toggle
+            type: state-icon
+        image: /local/HD.png
+        type: picture-elements
+    panel: false
+    theme: midnight
+    title: Plans RDC
+  - background: center / cover no-repeat url("/local/bg.jpeg")
+    badges: []
+    cards:
+      - elements:
+          - entity: light.chambre
+            style:
+              left: 57%
+              top: 9%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: light.sdb
+            style:
+              left: 60%
+              top: 34%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: light.escalier
+            style:
+              left: 33%
+              top: 26%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: light.wc
+            style:
+              left: 57%
+              top: 45%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: switch.creality_cr10
+            style:
+              left: 17%
+              top: 75%
+            tap_action:
+              action: toggle
+            type: state-icon
+          - entity: switch.anet_a8
+            style:
+              left: 21%
+              top: 64%
+            tap_action:
+              action: toggle
+            type: state-icon
+        image: /local/HD_etage.png
+        type: picture-elements
+    panel: false
+    theme: midnight
+    title: Plans Etage
+  - background: center / cover no-repeat url("/local/bg.jpeg")
+    badges: []
+    cards:
+      - entity: media_player.chambre
+        type: media-control
+      - entity: media_player.chambre_d_ami
+        type: media-control
+      - entity: media_player.entree
+        type: media-control
+      - entity: media_player.salle_de_bains
+        type: media-control
+      - entity: media_player.spotify
+        type: media-control
+    theme: midnight
+    title: Media Player
+  - background: center / cover no-repeat url("/local/bg.jpeg")
+    badges: []
+    cards:
+      - cards:
+          - camera_image: camera.camcr10
+            camera_view: live
+            entities: []
+            title: Camera CR10
+            type: picture-glance
+          - camera_image: camera.cama8
+            camera_view: live
+            entities: []
+            title: Camera Anet A8
+            type: picture-glance
+        type: horizontal-stack
+    path: cast3d
+    title: cast 3d

@@ -10,33 +10,79 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Paris
   customize: !include devices/customize.yaml
-  whitelist_external_dirs:
+  #whitelist_external_dirs:
+  allowlist_external_dirs:
     - /config/www/surf
 
 config:
 
+mobile_app:
+
 system_health:
 
 recorder:
-  purge_interval: 2
-  purge_keep_days: 31
+  purge_keep_days: 10
   #db_url: sqlite:///home/gano/.homeassistant/home-assistant_v2.db
   #db_url: sqlite:///config/home-assistant_v2.db
 
+ssdp:
+zeroconf:
+wake_on_lan:
+
+#influxdb:
+#  host: 192.168.3.8
+  # port: 20000
+#  database: home_assistant
+#  username: home_assistant
+#  password: home_assistant
+  # ssl: true
+  # verify_ssl: true
+#  max_retries: 3
+#  default_measurement: state
+  # exclude:
+  #   entities:
+  #      - entity.id1
+  #      - entity.id2
+  #   domains:
+  #      - automation
+#  include:
+#    entities:
+#       - sensor.tempchambre_temperature
+#       - sensor.salon_temperature
+#       - sensor.tempsdb_temperature
+#       - sensor.linky_current_month
+#       - sensor.linky_current_year
+#       - sensor.linky_yesterday
+  # tags:
+  #   instance: prod
+  #   source: hass
 
 
 lovelace:
   # mode: yaml
 
+bodymiscale: !include custom_components/bodymiscale/bodymiscale.yaml
+
 #weblink:
 #    - name: ElasticSearchKibana
 #      url: http://192.168.2.23:5601/
 
-weblink:
- entities:
-   - name: Pi-Hole
-     url: http://192.168.2.24/admin
-     icon: mdi:router-wireless
+# weblink:
+#  entities:
+#    - name: Pi-Hole
+#      url: http://192.168.2.24/admin
+#      icon: mdi:router-wireless
+
+#freebox:
+#  host: 5lqjvf2q.fbxos.fr
+#  port: 9729
+
+fan:
+  - platform: xiaomi_miio_fan
+    name: Xiaomi Smart Fan
+    host: 192.168.3.134
+    token: !secret mifan
+    model: dmaker.fan.p8
 
 
 ######### DEFINITION DES ZONES ###########
@@ -69,129 +115,13 @@ cast:
   # media_player:
   - host: 192.168.10.4
   - host: 192.168.10.39
+  - host: 192.168.10.42
 
 frontend:
-  javascript_version: latest
-  themes:
-    midnight:
-# Main colors
-      # primary-color: '#5294E2'
-      primary-color: '#1C3033'                                                        # Header
-      accent-color: '#E45E65'
-      divider-color: "rgba(255, 255, 255, 0.12)"                                                         # Accent color
-      dark-primary-color: 'var(--accent-color)'                                       # Hyperlinks                                         
-      light-primary-color: 'var(--accent-color)'                                      # Horizontal line in about                                                                           
-# Text colors                                                                  
-      primary-text-color: '#FFFFFF'                                                   # Primary text colour, here is referencing dark-primary-color
-      text-primary-color: 'var(--primary-text-color)'                                 # Primary text colour
-      secondary-text-color: '#5294E2'                                                 # For secondary titles in more info boxes etc.
-      disabled-text-color: '#7F848E'                                                  # Disabled text colour
-      label-badge-border-color: 'white'                                               # Label badge border, just a reference value   
-# Background colors                                                            
-      primary-background-color: '#383C45'                                             # Settings background
-      secondary-background-color: '#383C45'                                           # Main card UI background  
-      divider-color: 'rgba(0, 0, 0, .12)'                                             # Divider 
-# Table rows                                                                   
-      table-row-background-color: '#353840'                                           # Table row
-      table-row-alternative-background-color: '#3E424B'                               # Table row alternative
-# Nav Menu                                                                   
-      paper-listbox-color: 'var(--primary-color)'                                     # Navigation menu selection hoover
-      paper-listbox-background-color: '#2E333A'                                       # Navigation menu background
-      paper-grey-50: 'var(--primary-text-color)'                                   
-      paper-grey-200: '#414A59'                                                       # Navigation menu selection
-# Paper card                                                               
-      paper-card-header-color: 'var(--accent-color)'                                  # Card header text colour
-      paper-card-background-color: '#434954'                                          # Card background colour
-      paper-dialog-background-color: '#434954'                                        # Card dialog background colour
-      paper-item-icon-color: 'var(--primary-text-color)'                              # Icon color
-      paper-item-icon-active-color: '#ffc107'                                         # Icon color active
-      paper-item-icon_-_color: 'green'           
-      paper-item-selected_-_background-color: '#434954'                               # Popup item select                      
-      paper-tabs-selection-bar-color: 'green'
-# Labels 
-      label-badge-red: 'var(--accent-color)'                                          # References the brand colour label badge border
-      label-badge-text-color: 'var(--primary-text-color)'                             # Now same as label badge border but that's a matter of taste
-      label-badge-background-color: '#2E333A'                                         # Same, but can also be set to transparent here
-# Switches
-      paper-toggle-button-checked-button-color: 'var(--accent-color)'
-      paper-toggle-button-checked-bar-color: 'var(--accent-color)'
-      paper-toggle-button-checked-ink-color: 'var(--accent-color)'
-      paper-toggle-button-unchecked-button-color: 'var(--disabled-text-color)'
-      paper-toggle-button-unchecked-bar-color: 'var(--disabled-text-color)'
-      paper-toggle-button-unchecked-ink-color: 'var(--disabled-text-color)'  
-# Sliders
-      paper-slider-knob-color: 'var(--accent-color)'
-      paper-slider-knob-start-color: 'var(--accent-color)'
-      paper-slider-pin-color: 'var(--accent-color)'
-      paper-slider-active-color: 'var(--accent-color)'
-      paper-slider-container-color: 'linear-gradient(var(--primary-background-color), var(--secondary-background-color)) no-repeat'
-      paper-slider-secondary-color: 'var(--secondary-background-color)'
-      paper-slider-disabled-active-color: 'var(--disabled-text-color)'
-      paper-slider-disabled-secondary-color: 'var(--disabled-text-color)'
-# Google colors
-      google-red-500: '#E45E65'
-      google-green-500: '#39E949'    
-    noir:
-      primary-color: black
-      # paper-card-background-color: "#6e746d"
-      secondary-background-color: grey
-    rouge:
-      primary-color: red
-      # paper-card-background-color: "#6e746d"
-      secondary-background-color: grey
-    vert:
-      primary-color: "#018625"
-      # paper-card-background-color: "#6e746d"
-      secondary-background-color: grey
-    jaune:
-      primary-color: "#E28903"
-      # paper-card-background-color: "#6e746d"
-      secondary-background-color: grey
-    bleu:
-      primary-color: "#10177D"
-      # paper-card-background-color: "#6e746d"
-      secondary-background-color: grey
-    cyan:
-      primary-color: "#149EEF"
-      # paper-card-background-color: "#6e746d"
-      secondary-background-color: grey
-    dark:
-# Main colors that can be changed
-      dark-primary-color: "#c66900"
-      disabled-text-color: "#545454"
-      divider-color: "rgba(255, 255, 255, 0.12)"
-      light-primary-color: "#e06c6c"
-      paper-card-background-color: "#1d1d1d"
-      paper-grey-200: "#191919"
-      paper-item-icon-color: "#d3d3d3"
-      paper-listbox-background-color: "#202020"
-      primary-background-color: "#303030"
-      primary-color: "#d32f2f"
-      primary-text-color: "#cfcfcf"
-      secondary-background-color: "#131313"
-      sidebar-text_-_background: "#62717b" 
-# Colors based on variables, see above
-      paper-card-header-color: "var(--paper-item-icon-color)" 
-      paper-item-icon-active-color: "var(--primary-color)"
-      paper-item-icon_-_color: "var(--primary-text-color)"
-      paper-listbox-color: "var(--primary-text-color)"
-      paper-grey-50: "var(--primary-text-color)"
-      paper-slider-active-color: "var(--primary-color)"
-      paper-slider-knob-color: "var(--primary-color)"
-      paper-slider-knob-start-color: "var(--primary-color)"
-      paper-slider-pin-color: "var(--primary-color)"
-      paper-slider-secondary-color: "var(--light-primary-color)"
-      paper-toggle-button-checked-ink-color: "var(--dark-primary-color)"
-      paper-toggle-button-checked-button-color: "var(--primary-color)"
-      paper-toggle-button-checked-bar-color: "var(--light-primary-color)"
-      paper-toggle-button-unchecked-bar-color: "var(--primary-text-color)"
-      secondary-text-color: "var(--primary-color)"
-      table-row-background-color: "var(--paper-card-background-color)"
-      table-row-alternative-background-color: "var(--sidebar-text_-_background)"
-    white:
-      paper-grey-50: paper-grey-50
-      # paper-card-background-color: "#6e746d"
-      secondary-background-color: grey
+  # javascript_version: latest
+  #themes:
+  
+  themes: !include_dir_merge_named themes
 
 #emulated_hue:
 #  type: google_home
@@ -223,6 +153,7 @@ tts:
 weather:
   - platform: darksky
     api_key: !secret darksky_api
+    mode: daily
     # forecast:
     #   - 0
     #   - 1
@@ -253,66 +184,117 @@ weather:
     #   - daily_summary
     #   - pressure
     #   - visibility
-    scan_interval:
-      minutes: 5    
+   
 
 ######### DEFINITION DES DETECTEURS DE MOUVEMENTS ###########
 meteo_france:
   - city: 'Eysines'
-    monitored_conditions:
-        - rain_chance
-        - freeze_chance
-        - thunder_chance
-        - snow_chance
-        - weather
-        - next_rain
-        - wind_speed
-        - temperature
-        - uv
+#     monitored_conditions:
+#         - rain_chance
+# #        - freeze_chance
+#         - thunder_chance
+# #        - snow_chance
+#         - weather
+#         - next_rain
+#         - wind_speed
+#         - temperature
+# #        - uv
   - city: 'Lacanau'
-    monitored_conditions:
-        - rain_chance
-        - freeze_chance
-        - thunder_chance
-        - snow_chance
-        - weather
-        - next_rain
-        - wind_speed
-        - temperature
-        - uv
+#     monitored_conditions:
+#         - rain_chance
+# #        - freeze_chance
+#         - thunder_chance
+# #        - snow_chance
+#         - weather
+#         - next_rain
+#         - wind_speed
+#         - temperature
+#        - uv
 
 binary_sensor:
-   - platform: rfxtrx
-     automatic_add: False
+#   - platform: rfxtrx
      # automatic_add: True
-     devices:
-         091300479308f9019a70:
-           name: mvtsdb
-           data_bits: 4
-           command_on: 0x9
-           command_off: 0x0
-           device_class: motion
-           fire_event: True
-           off_delay:
-             seconds: 5
-         09130025ecad69019f80:
-           name: mvtwc
-           data_bits: 4
-           command_on: 0x9
-           command_off: 0x0           
-           device_class: motion
-           fire_event: True
-           off_delay:
-             seconds: 5
+     # # automatic_add: True
+     # devices:
+     #     091300479308f9019a70:
+     #       name: mvtsdb
+     #       data_bits: 4
+     #       command_on: 0x9
+     #       command_off: 0x0
+     #       device_class: motion
+     #       fire_event: True
+     #       off_delay:
+     #         seconds: 5
+     #     09130025ecad69019f80:
+     #       name: mvtwc
+     #       data_bits: 4
+     #       command_on: 0x9
+     #       command_off: 0x0           
+     #       device_class: motion
+     #       fire_event: True
+     #       off_delay:
+     #         seconds: 5
+   - platform: mqtt
+     name: trackroomami
+     state_topic: "presence_nodes/trackroomami"
+     json_attributes_topic: "presence_nodes/trackroomami/chambre3d"
+     payload_on: "CONNECTED"
+     payload_off: "DISCONNECTED"
+     device_class: connectivity  
+
+rfxtrx:
+  device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A1RTHG3-if00-port0
+ # automatic_add: False
+  automatic_add: True
+  devices:
+    091300479308f9019a70:
+     # name: mvtsdb
+     data_bits: 4
+     command_on: 0x9
+     command_off: 0x0
+     device_class: motion
+     fire_event: True
+     off_delay:
+       seconds: 5
+    09130025ecad69019f80:
+     # name: mvtwc
+     data_bits: 4
+     command_on: 0x9
+     command_off: 0x0           
+     device_class: motion
+     fire_event: True
+     off_delay:
+       seconds: 5
+    0a520d11df0100cc330179:
+      # name: tempsdb
+      # data_type:
+      #  - Humidity
+      #  - Temperature
+#    0a520d79a90100d53b0179:
+    # 0a520d464d0100c4390179:
+    #0a520d150b0100cd380179:
+    0a520d0d880100fe400179:
+      # name: tempchambre
+      # data_type:
+      #  - Humidity
+      #  - Temperature
+#    0a520d017a0100c5320179:
+    0a520d1bca0100d1360179:  
+      # name: tempetage
+      # data_type:
+      #  - Humidity
+      #  - Temperature
+
 
 timer:
   timerwc:
-    duration: '00:04:00'
-  timersdb:
     duration: '00:07:00'
+  timersdb:
+    duration: '00:10:00'
   timersdbnight:
     duration: '00:03:00'
-
+  timercuisine:
+    duration: '00:02:00'
 
 # apiai:
 #   intents:
@@ -342,7 +324,7 @@ octoprint:
   #   api_key: !secret octoapi
   #   bed: true
   #   number_of_tools: 1
-  - host: 192.168.10.18
+  - host: 192.168.10.32
     api_key: !secret octoapi2
     name: creality_cr10
     bed: true
@@ -366,30 +348,36 @@ alarm_control_panel:
 map:
   
 ######### DEFINITION DU RFXCOM ###########
-rfxtrx:
-  device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A1RTHG3-if00-port0
-  # debug:
+# rfxtrx:
+#   device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A1RTHG3-if00-port0
+  #debug:
 
 
 ################### HISTORY GRAPH ########
-history_graph:
-  gr1:
-    name: Crypto Graph
-    entities:
-#       - sensor.gaineth
-#       - sensor.gainripple
-#       - sensor.gainltc
-      - sensor.gaintotal
-    hours_to_show: 240
-    refresh: 120
+# history_graph:
+#   gr1:
+#     name: Crypto Graph
+#     entities:
+# #       - sensor.gaineth
+# #       - sensor.gainripple
+# #       - sensor.gainltc
+#       - sensor.gaintotal
+#     hours_to_show: 240
+#     refresh: 120
 
 ######### DEFINITION DU PANEL ###########
-panel_custom: 
-  - name: floorplan
-    sidebar_title: Floorplan
-    sidebar_icon: mdi:home
-    url_path: floorplan
-    config: !include floorplan.yaml
+# panel_custom: 
+#   - name: floorplan
+#     sidebar_title: Floorplan
+#     sidebar_icon: mdi:home
+#     url_path: floorplan
+#     config: !include floorplan.yaml
+
+# panel_iframe:    
+#   grafana:
+#     title: 'Grafana' 
+#     icon: mdi:chart-timeline
+#     url: 'http://192.168.3.8:3000/d/CMkcxn8Zz/homeassistant?orgId=1&refresh=5m&from=1580623266064'
     
 
 # image_processing:
@@ -402,6 +390,27 @@ panel_custom:
 #      Arnaud: /home/gano/.homeassistant/faces/arno2.jpg
 #      Maeva: /home/gano/.homeassistant/faces/maeva.jpg
 #      Marina: /home/gano/.homeassistant/faces/marina.jpg
+#image_processing:
+#  - platform: deepstack_object
+#    ip_address: 192.168.3.128
+#    port: 5000
+#    scan_interval: 5
+#    save_file_folder: /config/www/surf/videos/Alarme/
+#    save_timestamped_file: True
+#    always_save_latest_jpg: True
+#    scale: 0.75
+#    roi_x_max: 0.8
+#    roi_y_max: 0.8
+#    targets:
+#      - target: person
+#      - target: cat
+#      - target: bird
+#    source:
+#      - entity_id: camera.camjardin
+#        name: deepstack_person_detector
+#    source:
+#      - entity_id: camera.cr10_cam_esp
+#        name: deepstack_person_detector
 
 
 ######### DEFINITION DU BROKER MQTT LOCAL ###########
@@ -409,10 +418,11 @@ mqtt:
   #broker: 192.168.10.21
   broker: 192.168.3.8
   port: 1883
-  client_id: hadash
+  #client_id: hadash
   keepalive: 60
   username: hadash
-  password: hadash
+  password: !secret mqtt
+
 
 input_text:
   text1:
@@ -422,8 +432,16 @@ input_text:
     name: Deezer link here
     pattern: '[a-fA-F0-9]*'
 
+# linky:
+#   username: !secret linky_username
+#   password: !secret linky_password
+  # timeout: 60
 
+spotify:
+  client_id: !secret spotifyclient
+  client_secret: !secret spotifysecret
 ######### DEFINITION DES INPUT_SLIDER ###########
+
 input_number:
   vacuumhour:
     name: Heure
@@ -444,7 +462,7 @@ input_number:
   alarmhour:
     name: Heure
     icon: mdi:timer
-    initial: 6
+    initial: 7
     min: 0
     max: 23
     step: 1
@@ -452,7 +470,7 @@ input_number:
   alarmminutes:
     name: Minutes
     icon: mdi:timer
-    initial: 35
+    initial: 25
     min: 0
     max: 59
     step: 5
@@ -472,6 +490,20 @@ input_number:
     min: 10
     max: 30
     step: 0.5
+    mode: slider
+  servo_control:
+    name: Servo Control
+    initial: 0
+    min: -100
+    max: 100
+    step: 1
+    mode: slider
+  servo_control2:
+    name: Servo Control Pan
+    initial: 0
+    min: -100
+    max: 100
+    step: 1
     mode: slider
 
  
@@ -718,11 +750,11 @@ input_select:
 shell_command: !include shell_commands.yaml
 
 
-alexa:
-  flash_briefings:
-    surfcastalexa:
-      title: surf ?
-      text: Les conditions de surf sont les suivantes, L'océan est a {{ states.sensor.tempocean.state }} degres, a 9h ce matin, {{ states.sensor.surf9h.state }} avec {{ states.sensor.surf9h_h.state }}, a 13h, {{ states.sensor.surf13h.state }}, avec {{ states.sensor.surf13h_h.state }}, et a 17h, {{ states.sensor.surf17h.state }}, avec {{ states.sensor.surf17h_h.state }}
+# alexa:
+#   flash_briefings:
+#     surfcastalexa:
+#       title: surf ?
+#       text: Les conditions de surf sont les suivantes, L'océan est a {{ states.sensor.tempocean.state }} degres, a 9h ce matin, {{ states.sensor.surf9h.state }} avec {{ states.sensor.surf9h_h.state }}, a 13h, {{ states.sensor.surf13h.state }}, avec {{ states.sensor.surf13h_h.state }}, et a 17h, {{ states.sensor.surf17h.state }}, avec {{ states.sensor.surf17h_h.state }}
 
 ######### DEFINITION DU COMPTE GOOGLE ###########
 google:
@@ -732,10 +764,6 @@ google:
 
 google_assistant:
   project_id: arno-ac1da
-  # client_id: 390885640788lpb
-  # access_token: ge1NN52dKMekngarSOyJKHbX 
-  # agent_user_id: "dalliesa@gmail.com dallies"
-  api_key: !secret gpass 
   expose_by_default: false
   exposed_domains:
     - switch
@@ -745,18 +773,6 @@ google_assistant:
     - scene
     - input_boolean
   entity_config:
-    switch.anet_a8:
-      name: anet A8
-      expose: true
-      aliases:
-        - anet a8
-        - anet
-    switch.creality_cr10:
-      name: Creality CR10
-      expose: true
-      aliases:
-        - creality cr10
-        - cr10
     input_boolean.cast_light:
       name: mode cinema
       expose: true
@@ -810,40 +826,70 @@ google_assistant:
       expose: true
       aliases:
         - la lumière du bureau
-    light.chambre:
-      name: lumières de la chambre
+    light.cuisine:
+      name: lumières de la cuisine
       expose: true
       aliases:
-        - la lumière de la chambre
+        - la lumière de la cuisine
 
 
 ######## #DEFINITION DES SENSORS ###########
 sensor: !include devices/sensors.yaml
 
+wemo:
+  discovery: false  
+  static:
+    - 192.168.10.34
+
+
 
 ######### DEFINITION DES SWITCH WEMO ET DES DETECTEUR DE MVT RFX ###########
 switch:
-    - platform: wemo
-      static: []
-      scan_interval: 10
     - platform: broadlink
-      host: 192.168.10.3
+#      host: 192.168.10.3
       mac: '34:EA:34:C9:A0:4D'
-      friendly_name: MP1
-      type: mp1
-      slots:
+      # friendly_name: MP1
+      # type: mp1
+      #slots:
+      switches:
       # friendly name of slots - optional
       # if not set, slot name will be switch's friendly_name + 'slot {slot_index}'. e.g 'MP1 slot 1'
-       slot_1: 'Lampe Print'
-       slot_2: 'Raspberry'
-       slot_3: 'Creality CR10'
-       slot_4: 'Anet A8'
+       #slot_1: 'Lampe Print'
+        - name: 'Lampe Print'
+       #slot_2: 'Raspberry'
+        - name: 'Raspberry'
+       #slot_3: 'Creality CR10'
+        - name: 'Creality CR10'
+       #slot_4: 'Anet A8'
+        - name: 'Anet A8'
+    - platform: flux
+      lights:
+        - light.bibliocolor
+        - light.bureau
+        - light.escalier
+        - light.hall
+        - light.hue_lightstrip_1
+        - light.hue_lightstrip_plus_1
+        - light.salon_couleur
+        - light.cuisine
+        - light.wc
+        - light.sdb
+      name: Fluxer
+      start_time: '7:00'
+      stop_time: '23:00'
+      start_colortemp: 4000
+      sunset_colortemp: 3000
+      stop_colortemp: 1900
+      brightness: 200
+      disable_brightness_adjust: true
+      mode: xy
+      transition: 30
+      interval: 60       
 
 vacuum:
     - platform: xiaomi_miio
       host: 192.168.3.45
-      #token: 72506f6c724975316453796254733453
-      token: 3046316142784d725568526f58356139
+      token: !secret vacuum
       name: Xiaomi vacuum
 
 # Enables support for tracking state changes over time.
@@ -863,17 +909,30 @@ logger:
     # homeassistant.components.camera: fatal
     requests.packages.urllib3: critical
     urllib3.connectionpool: critical
+    # homeassistant.components.switch: debug
+    # homeassistant.components.broadlink: debug
 
 http:
-  api_password: !secret httpapi_password
-  base_url: !secret httpbase_url
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 172.30.0.3
+    - 172.30.0.4 
+    - 127.0.0.1
+    - ::1
+#  api_password: !secret httpapi_password
+#  base_url: !secret httpbase_url
 
 
 device_tracker: !include devices/tracker.yaml
 
 # Discover some devices automatically
+# discovery:
 discovery:
+  ignore:
+    - yeelight
 
+default_config:
+  
 # Allows you to issue voice commands from the frontend
 conversation:
 
@@ -912,15 +971,22 @@ hue:
     - host: 192.168.3.50
       allow_hue_groups: true
       allow_unreachable: true
-   # scan_interval: 4
 
 light: !include devices/lights.yaml
 
-# stream:
+#stream:
+yeelight:
+  devices:
+    192.168.3.101:
+      name: chambrechevet
+      model: bslamp1
 
 
 ######### DEFINITION DES CAMERAS / IMAGES ###########
 camera:
+  - platform: local_file
+    file_path: /config/www/surf/videos/Alarme/deepstack_person_detector_latest.jpg
+    name: deepstack_snapshot
   - platform: generic
     still_image_url: http://api.sat24.com/animated/EU/infraPolair/2/Romance%20Standard%20Time/628670
     #still_image_url: http://api.sat24.com/crop?type=visual5hdcomplete&lat=44.8378&lon=-0.5792&width=300&height=300&zoom=0.70&continent=eu
@@ -941,34 +1007,61 @@ camera:
     # stream_source: http://192.168.3.8:8123/local/surf/surf.png
     #file_path: /home/gano/.homeassistant/www/surf/surf.png
     name: surf2
+  - platform: generic
+    still_image_url: http://192.168.3.8:3000/render/d-solo/CMkcxn8Zz/homeassistant?orgId=1&refresh=5m&kiosk=tv&panelId=4&width=1000&height=500&tz=Europe%2FParis
+    name: grafanatempsdb
+  - platform: generic
+    still_image_url: http://192.168.3.8:3000/render/d-solo/CMkcxn8Zz/homeassistant?orgId=1&refresh=5m&kiosk=tv&panelId=6&width=1000&height=500&tz=Europe%2FParis
+    name: grafanatempsalon
+  - platform: generic
+    still_image_url: http://192.168.3.8:3000/render/d-solo/CMkcxn8Zz/homeassistant?orgId=1&refresh=5m&kiosk=tv&panelId=2&width=1000&height=500&tz=Europe%2FParis
+    name: grafanatempschambre
+  - platform: generic
+    still_image_url: http://192.168.3.8:3000/render/d-solo/CMkcxn8Zz/homeassistant?orgId=1&refresh=5m&kiosk=tv&panelId=8&width=1000&height=500&tz=Europe%2FParis'
+    name: grafanatraefik
+  - platform: generic
+    still_image_url: http://192.168.3.8:3000/render/d-solo/CMkcxn8Zz/homeassistant?orgId=1&refresh=5m&kiosk=tv&panelId=16&width=1000&height=500&tz=Europe%2FParis'
+    name: grafanaenedis     
+  - platform: generic
+    still_image_url: http://192.168.3.8:3000/render/d-solo/CMkcxn8Zz/homeassistant?orgId=1&refresh=5m&kiosk=tv&panelId=12&width=1000&height=500&tz=Europe%2FParis'
+    name: grafanacpu     
+  - platform: generic
+    still_image_url: http://192.168.3.8:3000/render/d-solo/CMkcxn8Zz/homeassistant?orgId=1&refresh=5m&kiosk=tv&panelId=10&width=1000&height=500&tz=Europe%2FParis'
+    name: grafanamem     
+  - platform: generic
+    still_image_url: http://192.168.3.8:3000/render/d-solo/CMkcxn8Zz/homeassistant?orgId=1&refresh=5m&kiosk=tv&panelId=14&width=1000&height=500&tz=Europe%2FParis'
+    name: grafanadisk     
+  - platform: mjpeg
+    mjpeg_url: http://192.168.10.49:2971/camera/stream
+    name: salon_webcam
 #  - platform: zoneminder
-  # - platform: mjpeg
-  #   mjpeg_url: http://192.168.10.15:9900
-  #   #name: ganovideo
-  #   name: salon1
   # - platform: mjpeg
   #   mjpeg_url: http://192.168.10.15:9902
   #   name: salon2
   - platform: ffmpeg
-    input: /config/www/surf/webcamsurf_nord.mp4
+    input: /config/www/surf/videos/webcamsurf_nord.mp4
     #input: /home/gano/.homeassistant/www/surf/webcamsurf.mp4
     name: webcamsurfnord
   - platform: ffmpeg
-    input: /config/www/surf/webcamsurf_nord2.mp4
+    input: /config/www/surf/videos/webcamsurf_nord2.mp4
     #input: /home/gano/.homeassistant/www/surf/webcamsurf.mp4
     name: webcamsurfnord2
   - platform: ffmpeg
-    input: /config/www/surf/webcamsurf_centrale.mp4
+    input: /config/www/surf/videos/webcamsurf_centrale.mp4
     #input: /home/gano/.homeassistant/www/surf/webcamsurf.mp4
     name: webcamsurfcentrale
   - platform: mjpeg
+    mjpeg_url: https://platforms5.joada.net/embeded/embeded.html?uuid=67eb6464-055f-47cb-3730-3330-6d61-63-abc5-fa5259757cc4d&type=live&liveicon=1&vsheader=1&tz=Europe/Paris&tsp=1594647886&titletext=
+    #input: /home/gano/.homeassistant/www/surf/webcamsurf.mp4
+    name: webcamsurflive
+  - platform: mjpeg
     mjpeg_url: http://192.168.10.18:8080/?action=stream
     name: camcr10
-    still_image_url: http://192.168.10.18:8080/?action=stream
+    still_image_url: http://192.168.10.18:8080/?action=snapshot
   - platform: mjpeg
     mjpeg_url: http://192.168.10.5:8080/?action=stream
     name: cama8
-    still_image_url: http://192.168.10.5:8080/?action=stream
+    still_image_url: http://192.168.10.5:8080/?action=snapshot
 
 
 ######### DEFINITION DES GROUPES ###########

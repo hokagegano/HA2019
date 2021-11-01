@@ -143,26 +143,26 @@
     entities:
         light.bureau:
             state: off
-            transition: 2
+            transition: 5
             #brightness: 170
         light.hue_lightstrip_plus_1:
             state: off
-            transition: 2
+            transition: 5
             #brightness: 170
             #xy_color: [ 0.6111, 0.3261 ]
         light.salon_couleur:
             state: off
-            transition: 2
+            transition: 5
             #brightness: 170
             #xy_color: [ 0.6111, 0.3261 ]
         light.bibliocolor:
             state: off
-            transition: 2
+            transition: 5
             #brightness: 170
             #xy_color: [ 0.6111, 0.3261 ]
         light.hue_lightstrip_1:
             state: off
-            transition: 2
+            transition: 5
   - name: Allume
     entities:
         light.bureau:

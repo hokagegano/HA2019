@@ -17,7 +17,7 @@ entreevacuum:
   alias: Menage Entree
   sequence:
    - alias: entreeVacuum
-     service: vacuum.xiaomi_clean_zone  
+     service: xiaomi_miio.vacuum_clean_zone 
      data:
       entity_id: vacuum.xiaomi_vacuum
       zone: [[25500,25500,26500,28500]]
@@ -26,7 +26,7 @@ cuisinevacuum:
   alias: Menage cuisine
   sequence:
    - alias: cuisineVacuum
-     service: vacuum.xiaomi_clean_zone  
+     service: xiaomi_miio.vacuum_clean_zone  
      data:
       entity_id: vacuum.xiaomi_vacuum
       zone: [[24000,26500,28500,28500]]
