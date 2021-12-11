@@ -1,122 +1,174 @@
-2021-10-16 14:07:38 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration bodymiscale which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
-2021-10-16 14:07:38 WARNING (SyncWorker_2) [homeassistant.loader] We found a custom integration xiaomi_miio_fan which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
-2021-10-16 14:07:38 WARNING (SyncWorker_1) [homeassistant.loader] We found a custom integration deepstack_object which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
-2021-10-16 14:07:38 WARNING (SyncWorker_3) [homeassistant.loader] We found a custom integration plex_recently_added which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
-2021-10-16 14:07:38 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration androidtv which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
-2021-10-16 14:07:38 ERROR (SyncWorker_0) [homeassistant.loader] The custom integration 'androidtv' does not have a version key in the manifest file and was blocked from loading. See https://developers.home-assistant.io/blog/2021/01/29/custom-integration-changes#versions for more details
-2021-10-16 14:07:38 WARNING (SyncWorker_4) [homeassistant.loader] We found a custom integration hacs which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
-2021-10-16 14:07:42 ERROR (MainThread) [homeassistant.components.plex] Plex server (http://192.168.10.40:32400) could not be reached: [HTTPConnectionPool(host='192.168.10.40', port=32400): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e32edc160>: Failed to establish a new connection: [Errno 111] Connection refused'))]
-2021-10-16 14:07:42 WARNING (MainThread) [homeassistant.config_entries] Config entry 'raspberrypi' for plex integration not ready yet: HTTPConnectionPool(host='192.168.10.40', port=32400): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7e32edc160>: Failed to establish a new connection: [Errno 111] Connection refused')); Retrying in background
-2021-10-16 14:07:51 WARNING (MainThread) [homeassistant.setup] Setup of automation is taking over 10 seconds.
-2021-10-16 14:07:54 WARNING (MainThread) [homeassistant.components.meteo_france] The 'meteo_france' option near /config/configuration.yaml:0 is deprecated, please remove it from your configuration
-2021-10-16 14:07:55 WARNING (MainThread) [homeassistant.components.meteo_france] Weather alert for department 33 won't be added with city Eysines - Aquitaine (33) - FR, as it has already been added within another city
-2021-10-16 14:07:58 WARNING (MainThread) [homeassistant.config_entries] Config entry '192.168.3.128' for adguard integration not ready yet: Error occurred while communicating with AdGuard Home.; Retrying in background
-2021-10-16 14:08:01 ERROR (MainThread) [homeassistant.components.media_player] The panasonic_viera platform for the media_player integration does not support platform setup. Please remove it from your config.
-2021-10-16 14:08:01 ERROR (MainThread) [homeassistant.components.media_player] The plex platform for the media_player integration does not support platform setup. Please remove it from your config.
-2021-10-16 14:08:15 WARNING (MainThread) [homeassistant.helpers.entity] Updating state for weather.eysines_2 (<class 'homeassistant.components.meteo_france.weather.MeteoFranceWeather'>) took 5.459 seconds. Please create a bug report at https://github.com/home-assistant/core/issues?q=is%3Aopen+is%3Aissue+label%3A%22integration%3A+meteo_france%22
-2021-10-16 14:08:15 ERROR (MainThread) [homeassistant.components.weather] Platform meteo_france does not generate unique IDs. ID 44.88381,-0.651241 already exists - ignoring weather.eysines_2
-2021-10-16 14:08:15 ERROR (MainThread) [homeassistant.components.weather] Platform meteo_france does not generate unique IDs. ID 44.97852,-1.079956 already exists - ignoring weather.lacanau_2
-2021-10-16 14:08:15 WARNING (MainThread) [homeassistant.components.weather] Setup of weather platform darksky is taking over 10 seconds.
-2021-10-16 14:08:15 WARNING (MainThread) [homeassistant.components.media_player] Setup of media_player platform androidtv is taking over 10 seconds.
-2021-10-16 14:08:15 WARNING (MainThread) [homeassistant.components.weather] Setup of weather platform meteo_france is taking over 10 seconds.
-2021-10-16 14:08:15 WARNING (MainThread) [homeassistant.components.weather] Setup of weather platform meteo_france is taking over 10 seconds.
-2021-10-16 14:08:15 WARNING (MainThread) [homeassistant.components.weather] Setup of weather platform meteo_france is taking over 10 seconds.
-2021-10-16 14:08:15 WARNING (MainThread) [homeassistant.components.weather] Setup of weather platform meteo_france is taking over 10 seconds.
-2021-10-16 14:08:15 WARNING (MainThread) [homeassistant.components.calendar] Setup of calendar platform google is taking over 10 seconds.
-2021-10-16 14:08:15 WARNING (MainThread) [homeassistant.components.switch] Setup of switch platform rfxtrx is taking over 10 seconds.
-2021-10-16 14:08:15 ERROR (MainThread) [homeassistant.components.vacuum] The xiaomi_miio platform for the vacuum integration does not support platform setup. Please remove it from your config.
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.config] Invalid config for [sensor.command_line]: [binary_sensor] is an invalid option for [sensor.command_line]. Check: sensor.command_line->binary_sensor. (See /config/devices/sensors.yaml, line 968). Please check the docs at https://www.home-assistant.io/integrations/command_line
-2021-10-16 14:08:16 WARNING (MainThread) [androidtv.adb_manager.adb_manager_async] Couldn't connect to 192.168.10.41:5555.  TcpTimeoutException: Connecting to 192.168.10.41:5555 timed out (1.0 seconds)
-2021-10-16 14:08:16 WARNING (MainThread) [homeassistant.components.androidtv.media_player] Could not connect to Android TV Shield at 192.168.10.41:5555 using Python ADB implementation with adbkey='/config/.storage/androidtv_adbkey'
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.automation] Platform automation does not generate unique IDs. ID SqueezeBox PI On already exists - ignoring automation.squeezebox_pi_on
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.automation] Platform automation does not generate unique IDs. ID Media player paused/stopped already exists - ignoring automation.media_player_paused_stopped
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.automation] Platform automation does not generate unique IDs. ID Media player playing already exists - ignoring automation.media_player_playing
-2021-10-16 14:08:16 WARNING (MainThread) [homeassistant.components.nmap_tracker.device_tracker] Your Nmap Tracker configuration has been imported into the UI, please remove it from configuration.yaml. 
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.device_tracker] Error setting up platform legacy nmap_tracker
-2021-10-16 14:08:16 WARNING (MainThread) [homeassistant.components.webhook] Received message for unregistered webhook e9596f75d06856c1494f49c84967acbeef3a65f9a5bc05617b034f08e052441f from 172.30.0.1
-2021-10-16 14:08:16 WARNING (MainThread) [homeassistant.components.media_player] Platform androidtv not ready yet: None; Retrying in background in 30 seconds
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 33 Weather alert already exists - ignoring sensor.33_weather_alert
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.97852,-1.079956_uv already exists - ignoring sensor.lacanau_uv_2
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.97852,-1.079956_precipitation already exists - ignoring sensor.lacanau_daily_precipitation
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.97852,-1.079956_cloud already exists - ignoring sensor.lacanau_cloud_cover
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.97852,-1.079956_next_rain already exists - ignoring sensor.lacanau_next_rain_2
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 33 Weather alert already exists - ignoring sensor.33_weather_alert
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.97852,-1.079956_rain_chance already exists - ignoring sensor.lacanau_rain_chance_2
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.97852,-1.079956_snow_chance already exists - ignoring sensor.lacanau_snow_chance_2
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.97852,-1.079956_freeze_chance already exists - ignoring sensor.lacanau_freeze_chance_2
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.88381,-0.651241_uv already exists - ignoring sensor.eysines_uv_2
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.88381,-0.651241_precipitation already exists - ignoring sensor.eysines_daily_precipitation
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.88381,-0.651241_cloud already exists - ignoring sensor.eysines_cloud_cover
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.88381,-0.651241_next_rain already exists - ignoring sensor.eysines_next_rain_2
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.88381,-0.651241_rain_chance already exists - ignoring sensor.eysines_rain_chance_2
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.88381,-0.651241_snow_chance already exists - ignoring sensor.eysines_snow_chance_2
-2021-10-16 14:08:16 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.88381,-0.651241_freeze_chance already exists - ignoring sensor.eysines_freeze_chance_2
-2021-10-16 14:08:17 WARNING (MainThread) [homeassistant.config_entries] Config entry '192.168.10.40:19444' for hyperion integration not ready yet: None; Retrying in background
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.light] The hyperion platform for the light integration does not support platform setup. Please remove it from your config.
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.binary_sensor] Platform esphome does not generate unique IDs. ID couloirbinary_sensorcouloir_motion already exists - ignoring binary_sensor.couloir_motion
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.sensor] Platform esphome does not generate unique IDs. ID 2cf4323d06a7-wifisignal already exists - ignoring sensor.couloir_wifi_signal_sensor_2
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.sensor] Platform esphome does not generate unique IDs. ID 2cf4323d06a7-uptime already exists - ignoring sensor.salon_uptime_sensor_3
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.sensor] Platform esphome does not generate unique IDs. ID couloirsensorcouloir_temperature already exists - ignoring sensor.couloir_temperature_2
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.sensor] Platform esphome does not generate unique IDs. ID couloirsensorlumiere_ambiante already exists - ignoring sensor.lumiere_ambiante
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.sensor] Platform esphome does not generate unique IDs. ID couloirsensorcouloir_humidity already exists - ignoring sensor.couloir_humidity_2
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.sensor] Platform esphome does not generate unique IDs. ID 2cf4323d06a7-version already exists - ignoring sensor.esphome_version_3
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.sensor] Platform esphome does not generate unique IDs. ID 2cf4323d06a7-wifiinfo-ip already exists - ignoring sensor.couloir_ip_address_2
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.switch] Platform esphome does not generate unique IDs. ID camanetswitchrestart_creality_cam already exists - ignoring switch.restart_creality_cam_2
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.light] Platform esphome does not generate unique IDs. ID camanetlightaneta8_lumiere already exists - ignoring light.aneta8_lumiere
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.camera] Platform esphome does not generate unique IDs. ID camanetcameracamaneta8 already exists - ignoring camera.camaneta8
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.camera] Platform esphome does not generate unique IDs. ID crealitycameracreality already exists - ignoring camera.creality
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.light] Platform esphome does not generate unique IDs. ID crealitylightcreality_camera_light already exists - ignoring light.creality_camera_light
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.switch] Platform esphome does not generate unique IDs. ID crealityswitchrestart_creality_cam already exists - ignoring switch.restart_creality_cam
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.camera] Platform esphome does not generate unique IDs. ID crealitycameracreality already exists - ignoring camera.creality
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.light] Platform esphome does not generate unique IDs. ID crealitylightcreality_camera_light already exists - ignoring light.creality_camera_light
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.switch] Platform esphome does not generate unique IDs. ID crealityswitchrestart_creality_cam already exists - ignoring switch.restart_creality_cam
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.light] Platform esphome does not generate unique IDs. ID crealitycr10lightcrealitycr10_camera_light already exists - ignoring light.crealitycr10_camera_light
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.switch] Platform esphome does not generate unique IDs. ID crealitycr10switchrestart_crealitycr10_cam already exists - ignoring switch.restart_crealitycr10_cam
-2021-10-16 14:08:17 ERROR (MainThread) [homeassistant.components.camera] Platform esphome does not generate unique IDs. ID crealitycr10cameracrealitycr10 already exists - ignoring camera.crealitycr10
-2021-10-16 14:08:18 ERROR (MainThread) [homeassistant.components.calendar] Entity id already exists - ignoring: calendar.contacts
-2021-10-16 14:08:18 ERROR (MainThread) [homeassistant.components.tautulli] Error fetching tautulli data: 'NoneType' object is not iterable
-2021-10-16 14:08:20 WARNING (MainThread) [homeassistant.config_entries] Config entry 'chambrechevet' for yeelight integration not ready yet: Failed to read from the socket at 192.168.3.101:55443: [Errno 113] Connect call failed ('192.168.3.101', 55443).; Retrying in background
-2021-10-16 14:08:20 WARNING (MainThread) [homeassistant.components.esphome] Can't connect to ESPHome API for None (192.168.3.137): Error connecting to ('192.168.3.137', 6053): [Errno 113] Connect call failed ('192.168.3.137', 6053)
-2021-10-16 14:08:20 WARNING (MainThread) [homeassistant.components.esphome] Can't connect to ESPHome API for None (192.168.3.138): Error connecting to ('192.168.3.138', 6053): [Errno 113] Connect call failed ('192.168.3.138', 6053)
-2021-10-16 14:08:20 WARNING (MainThread) [homeassistant.components.esphome] Can't connect to ESPHome API for None (192.168.3.138): Error connecting to ('192.168.3.138', 6053): [Errno 113] Connect call failed ('192.168.3.138', 6053)
-2021-10-16 14:08:20 WARNING (MainThread) [homeassistant.components.esphome] Can't connect to ESPHome API for None (192.168.3.136): Error connecting to ('192.168.3.136', 6053): [Errno 113] Connect call failed ('192.168.3.136', 6053)
-2021-10-16 14:08:20 WARNING (MainThread) [homeassistant.components.esphome] Can't connect to ESPHome API for None (192.168.3.141): Error connecting to ('192.168.3.141', 6053): [Errno 113] Connect call failed ('192.168.3.141', 6053)
-2021-10-16 14:08:20 WARNING (MainThread) [homeassistant.components.esphome] Can't connect to ESPHome API for None (192.168.3.141): Error connecting to ('192.168.3.141', 6053): [Errno 113] Connect call failed ('192.168.3.141', 6053)
-2021-10-16 14:08:20 WARNING (MainThread) [homeassistant.components.esphome] Can't connect to ESPHome API for None (192.168.3.140): Error connecting to ('192.168.3.140', 6053): [Errno 113] Connect call failed ('192.168.3.140', 6053)
-2021-10-16 14:08:20 WARNING (MainThread) [homeassistant.components.esphome] Can't connect to ESPHome API for None (192.168.3.145): Error connecting to ('192.168.3.145', 6053): [Errno 113] Connect call failed ('192.168.3.145', 6053)
-2021-10-16 14:08:20 WARNING (MainThread) [homeassistant.components.esphome] Can't connect to ESPHome API for None (192.168.3.144): Error connecting to ('192.168.3.144', 6053): [Errno 113] Connect call failed ('192.168.3.144', 6053)
-2021-10-16 14:08:20 WARNING (MainThread) [homeassistant.components.esphome] Can't connect to ESPHome API for None (192.168.3.142): Error connecting to ('192.168.3.142', 6053): [Errno 113] Connect call failed ('192.168.3.142', 6053)
-2021-10-16 14:08:20 WARNING (MainThread) [homeassistant.components.esphome] Can't connect to ESPHome API for None (192.168.3.142): Error connecting to ('192.168.3.142', 6053): [Errno 113] Connect call failed ('192.168.3.142', 6053)
-2021-10-16 14:08:20 WARNING (MainThread) [homeassistant.components.esphome] Can't connect to ESPHome API for None (192.168.3.142): Error connecting to ('192.168.3.142', 6053): [Errno 113] Connect call failed ('192.168.3.142', 6053)
-2021-10-16 14:08:20 WARNING (MainThread) [homeassistant.components.esphome] Can't connect to ESPHome API for None (192.168.3.143): Error connecting to ('192.168.3.143', 6053): [Errno 113] Connect call failed ('192.168.3.143', 6053)
-2021-10-16 14:08:20 WARNING (MainThread) [homeassistant.components.esphome] Can't connect to ESPHome API for None (192.168.3.147): Error connecting to ('192.168.3.147', 6053): [Errno 113] Connect call failed ('192.168.3.147', 6053)
-2021-10-16 14:08:24 ERROR (MainThread) [homeassistant.config] Invalid config for [image_processing.deepstack_object]: [always_save_latest_jpg] is an invalid option for [image_processing.deepstack_object]. Check: image_processing.deepstack_object->always_save_latest_jpg. (See /config/configuration.yaml, line 393). Please check the docs at https://github.com/robmarkcole/HASS-Deepstack-object
-2021-10-16 14:08:24 WARNING (MainThread) [homeassistant.components.cast] The 'cast' option near /config/configuration.yaml:0 is deprecated, please remove it from your configuration
-2021-10-16 14:08:24 WARNING (MainThread) [homeassistant.components.cast] Invalid config 'OrderedDict([('host', '192.168.2.2')])': extra keys not allowed @ data['host']
-2021-10-16 14:08:24 WARNING (MainThread) [homeassistant.components.cast] Invalid config 'OrderedDict([('host', '192.168.10.7')])': extra keys not allowed @ data['host']
-2021-10-16 14:08:24 WARNING (MainThread) [homeassistant.components.cast] Invalid config 'OrderedDict([('host', '192.168.10.36')])': extra keys not allowed @ data['host']
-2021-10-16 14:08:24 WARNING (MainThread) [homeassistant.components.cast] Invalid config 'OrderedDict([('host', '192.168.10.4')])': extra keys not allowed @ data['host']
-2021-10-16 14:08:24 WARNING (MainThread) [homeassistant.components.cast] Invalid config 'OrderedDict([('host', '192.168.10.39')])': extra keys not allowed @ data['host']
-2021-10-16 14:08:24 WARNING (MainThread) [homeassistant.components.cast] Invalid config 'OrderedDict([('host', '192.168.10.42')])': extra keys not allowed @ data['host']
-2021-10-16 14:08:26 ERROR (SyncWorker_8) [homeassistant.components.octoprint] Failed to connect to Octoprint server. Error: HTTPConnectionPool(host='192.168.10.32', port=80): Max retries exceeded with url: /api/printer (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7f7e26ff7fa0>, 'Connection to 192.168.10.32 timed out. (connect timeout=9)'))
-2021-10-16 14:08:27 ERROR (SyncWorker_3) [homeassistant.components.wemo] Unable to get description url for WeMo at: 192.168.10.34
-2021-10-16 14:08:27 WARNING (MainThread) [homeassistant.setup] Setup of octoprint is taking over 10 seconds.
-2021-10-16 14:08:40 WARNING (MainThread) [homeassistant.config_entries] Config entry '192.168.10.47' for wled integration not ready yet: Invalid response from API: Timeout occurred while connecting to WLED device at 192.168.10.47; Retrying in background
-2021-10-16 14:08:41 WARNING (MainThread) [homeassistant.config_entries] Config entry '192.168.10.2' for wled integration not ready yet: Invalid response from API: Timeout occurred while connecting to WLED device at 192.168.10.2; Retrying in background
-2021-10-16 14:08:44 ERROR (SyncWorker_8) [homeassistant.components.octoprint] Failed to connect to Octoprint server. Error: HTTPConnectionPool(host='192.168.10.5', port=80): Max retries exceeded with url: /api/printer (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7f7e26750160>, 'Connection to 192.168.10.5 timed out. (connect timeout=9)'))
-2021-10-16 14:08:52 WARNING (MainThread) [homeassistant.bootstrap] Waiting on integrations to complete setup: octoprint
-2021-10-16 14:09:03 WARNING (MainThread) [homeassistant.components.binary_sensor] Setup of binary_sensor platform octoprint is taking over 10 seconds.
-2021-10-16 14:09:03 WARNING (MainThread) [homeassistant.components.sensor] Setup of sensor platform octoprint is taking over 10 seconds.
-2021-10-16 14:09:40 ERROR (MainThread) [frontend.js.latest.202110071] https://ganhome.duckdns.org/lovelace/0:0:0 Uncaught 
-2021-10-16 14:09:40 ERROR (MainThread) [frontend.js.latest.202110071] https://ganhome.duckdns.org/lovelace/0:0:0 Uncaught 
-2021-10-16 14:09:52 WARNING (MainThread) [homeassistant.bootstrap] Waiting on integrations to complete setup: sensor.octoprint_2
-2021-10-16 14:10:11 WARNING (MainThread) [homeassistant.components.binary_sensor] Updating octoprint binary_sensor took longer than the scheduled update interval 0:00:30
-2021-10-16 14:10:52 WARNING (MainThread) [homeassistant.bootstrap] Waiting on integrations to complete setup: sensor.octoprint_2
-2021-10-16 14:11:05 WARNING (MainThread) [homeassistant.components.sensor] Updating octoprint sensor took longer than the scheduled update interval 0:00:30
-2021-10-16 14:11:11 WARNING (MainThread) [homeassistant.components.binary_sensor] Updating octoprint binary_sensor took longer than the scheduled update interval 0:00:30
-2021-10-16 14:11:35 WARNING (MainThread) [homeassistant.components.sensor] Updating octoprint sensor took longer than the scheduled update interval 0:00:30
-2021-10-16 14:12:05 WARNING (MainThread) [homeassistant.components.sensor] Updating octoprint sensor took longer than the scheduled update interval 0:00:30
-2021-10-16 14:12:11 WARNING (MainThread) [homeassistant.components.binary_sensor] Updating octoprint binary_sensor took longer than the scheduled update interval 0:00:30
-2021-10-16 14:12:35 WARNING (MainThread) [homeassistant.components.sensor] Updating octoprint sensor took longer than the scheduled update interval 0:00:30
-2021-10-16 14:13:11 WARNING (MainThread) [homeassistant.components.binary_sensor] Updating octoprint binary_sensor took longer than the scheduled update interval 0:00:30
-2021-10-16 14:13:36 WARNING (MainThread) [homeassistant.components.sensor] Updating octoprint sensor took longer than the scheduled update interval 0:00:30
+2021-11-30 20:43:51 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration bodymiscale which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2021-11-30 20:43:51 WARNING (SyncWorker_1) [homeassistant.loader] We found a custom integration deepstack_object which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2021-11-30 20:43:51 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration xiaomi_miio_fan which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2021-11-30 20:43:51 WARNING (SyncWorker_1) [homeassistant.loader] We found a custom integration xiaomi_cloud_map_extractor which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2021-11-30 20:43:51 WARNING (SyncWorker_2) [homeassistant.loader] We found a custom integration androidtv which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2021-11-30 20:43:51 ERROR (SyncWorker_2) [homeassistant.loader] The custom integration 'androidtv' does not have a version key in the manifest file and was blocked from loading. See https://developers.home-assistant.io/blog/2021/01/29/custom-integration-changes#versions for more details
+2021-11-30 20:43:51 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration plex_recently_added which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2021-11-30 20:43:51 WARNING (SyncWorker_1) [homeassistant.loader] We found a custom integration hacs which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2021-11-30 20:43:59 WARNING (MainThread) [homeassistant.components.meteo_france] The 'meteo_france' option near /config/configuration.yaml:0 is deprecated, please remove it from your configuration
+2021-11-30 20:44:00 WARNING (MainThread) [homeassistant.components.meteo_france] Weather alert for department 33 won't be added with city Eysines - Aquitaine (33) - FR, as it has already been added within another city
+2021-11-30 20:44:01 ERROR (MainThread) [homeassistant.components.calendar] Entity id already exists - ignoring: calendar.contacts
+2021-11-30 20:44:03 WARNING (MainThread) [homeassistant.setup] Setup of automation is taking over 10 seconds.
+2021-11-30 20:44:09 WARNING (MainThread) [homeassistant.components.octoprint] The 'octoprint' option near /config/configuration.yaml:0 is deprecated, please remove it from your configuration
+2021-11-30 20:44:15 ERROR (MainThread) [homeassistant.components.vacuum] The xiaomi_miio platform for the vacuum integration does not support platform setup. Please remove it from your config.
+2021-11-30 20:44:19 WARNING (MainThread) [homeassistant.helpers.entity] Updating state for weather.lacanau_2 (<class 'homeassistant.components.meteo_france.weather.MeteoFranceWeather'>) took 1.354 seconds. Please create a bug report at https://github.com/home-assistant/core/issues?q=is%3Aopen+is%3Aissue+label%3A%22integration%3A+meteo_france%22
+2021-11-30 20:44:19 ERROR (MainThread) [homeassistant.components.weather] Platform meteo_france does not generate unique IDs. ID 44.97852,-1.079956 already exists - ignoring weather.lacanau_2
+2021-11-30 20:44:19 ERROR (MainThread) [homeassistant.components.weather] Platform meteo_france does not generate unique IDs. ID 44.88381,-0.651241 already exists - ignoring weather.eysines_2
+2021-11-30 20:44:19 WARNING (MainThread) [homeassistant.components.weather] Setup of weather platform darksky is taking over 10 seconds.
+2021-11-30 20:44:19 WARNING (MainThread) [homeassistant.components.weather] Setup of weather platform meteo_france is taking over 10 seconds.
+2021-11-30 20:44:19 WARNING (MainThread) [homeassistant.components.weather] Setup of weather platform meteo_france is taking over 10 seconds.
+2021-11-30 20:44:19 WARNING (MainThread) [homeassistant.components.weather] Setup of weather platform meteo_france is taking over 10 seconds.
+2021-11-30 20:44:19 WARNING (MainThread) [homeassistant.components.weather] Setup of weather platform meteo_france is taking over 10 seconds.
+2021-11-30 20:44:19 ERROR (MainThread) [homeassistant.components.media_player] The panasonic_viera platform for the media_player integration does not support platform setup. Please remove it from your config.
+2021-11-30 20:44:20 ERROR (MainThread) [homeassistant.config] Invalid config for [sensor.command_line]: [binary_sensor] is an invalid option for [sensor.command_line]. Check: sensor.command_line->binary_sensor. (See /config/devices/sensors.yaml, line 955). Please check the docs at https://www.home-assistant.io/integrations/command_line
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.light] The hyperion platform for the light integration does not support platform setup. Please remove it from your config.
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.automation] Platform automation does not generate unique IDs. ID SqueezeBox PI On already exists - ignoring automation.squeezebox_pi_on
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.automation] Platform automation does not generate unique IDs. ID Media player paused/stopped already exists - ignoring automation.media_player_paused_stopped
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.automation] Platform automation does not generate unique IDs. ID Media player playing already exists - ignoring automation.media_player_playing
+2021-11-30 20:44:21 WARNING (MainThread) [homeassistant.components.nmap_tracker.device_tracker] Your Nmap Tracker configuration has been imported into the UI, please remove it from configuration.yaml. 
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.device_tracker] Error setting up platform legacy nmap_tracker
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.media_player] The plex platform for the media_player integration does not support platform setup. Please remove it from your config.
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.97852,-1.079956_uv already exists - ignoring sensor.lacanau_uv_2
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.97852,-1.079956_precipitation already exists - ignoring sensor.lacanau_daily_precipitation
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.97852,-1.079956_cloud already exists - ignoring sensor.lacanau_cloud_cover
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.97852,-1.079956_next_rain already exists - ignoring sensor.lacanau_next_rain_2
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 33 Weather alert already exists - ignoring sensor.33_weather_alert
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.97852,-1.079956_rain_chance already exists - ignoring sensor.lacanau_rain_chance_2
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.97852,-1.079956_snow_chance already exists - ignoring sensor.lacanau_snow_chance_2
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.97852,-1.079956_freeze_chance already exists - ignoring sensor.lacanau_freeze_chance_2
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 33 Weather alert already exists - ignoring sensor.33_weather_alert
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.88381,-0.651241_uv already exists - ignoring sensor.eysines_uv_2
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.88381,-0.651241_precipitation already exists - ignoring sensor.eysines_daily_precipitation
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.88381,-0.651241_cloud already exists - ignoring sensor.eysines_cloud_cover
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.88381,-0.651241_next_rain already exists - ignoring sensor.eysines_next_rain_2
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.88381,-0.651241_rain_chance already exists - ignoring sensor.eysines_rain_chance_2
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.88381,-0.651241_snow_chance already exists - ignoring sensor.eysines_snow_chance_2
+2021-11-30 20:44:21 ERROR (MainThread) [homeassistant.components.sensor] Platform meteo_france does not generate unique IDs. ID 44.88381,-0.651241_freeze_chance already exists - ignoring sensor.eysines_freeze_chance_2
+2021-11-30 20:44:22 WARNING (MainThread) [homeassistant.components.cast] The 'cast' option near /config/configuration.yaml:0 is deprecated, please remove it from your configuration
+2021-11-30 20:44:22 WARNING (MainThread) [homeassistant.components.cast] Invalid config 'OrderedDict([('host', '192.168.2.2')])': extra keys not allowed @ data['host']
+2021-11-30 20:44:22 WARNING (MainThread) [homeassistant.components.cast] Invalid config 'OrderedDict([('host', '192.168.10.7')])': extra keys not allowed @ data['host']
+2021-11-30 20:44:22 WARNING (MainThread) [homeassistant.components.cast] Invalid config 'OrderedDict([('host', '192.168.10.36')])': extra keys not allowed @ data['host']
+2021-11-30 20:44:22 WARNING (MainThread) [homeassistant.components.cast] Invalid config 'OrderedDict([('host', '192.168.10.4')])': extra keys not allowed @ data['host']
+2021-11-30 20:44:22 WARNING (MainThread) [homeassistant.components.cast] Invalid config 'OrderedDict([('host', '192.168.10.39')])': extra keys not allowed @ data['host']
+2021-11-30 20:44:22 WARNING (MainThread) [homeassistant.components.cast] Invalid config 'OrderedDict([('host', '192.168.10.42')])': extra keys not allowed @ data['host']
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.light] Platform esphome does not generate unique IDs. ID crealitylightcreality_camera_light already exists - ignoring light.creality_camera_light
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.camera] Platform esphome does not generate unique IDs. ID crealitycameracreality already exists - ignoring camera.creality
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.switch] Platform esphome does not generate unique IDs. ID crealityswitchrestart_creality_cam already exists - ignoring switch.restart_creality_cam
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.light] Platform esphome does not generate unique IDs. ID camanetlightaneta8_lumiere already exists - ignoring light.aneta8_lumiere
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.camera] Platform esphome does not generate unique IDs. ID camanetcameracamaneta8 already exists - ignoring camera.camaneta8
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.switch] Platform esphome does not generate unique IDs. ID camanetswitchrestart_creality_cam already exists - ignoring switch.restart_creality_cam_2
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.camera] Platform esphome does not generate unique IDs. ID crealitycameracreality already exists - ignoring camera.creality
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.light] Platform esphome does not generate unique IDs. ID crealitylightcreality_camera_light already exists - ignoring light.creality_camera_light
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.switch] Platform esphome does not generate unique IDs. ID crealityswitchrestart_creality_cam already exists - ignoring switch.restart_creality_cam
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.light] Platform esphome does not generate unique IDs. ID crealitycr10lightcrealitycr10_camera_light already exists - ignoring light.crealitycr10_camera_light
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.switch] Platform esphome does not generate unique IDs. ID crealitycr10switchrestart_crealitycr10_cam already exists - ignoring switch.restart_crealitycr10_cam
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.camera] Platform esphome does not generate unique IDs. ID crealitycr10cameracrealitycr10 already exists - ignoring camera.crealitycr10
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.helpers.template] Template variable error: 'list object' has no attribute 'state' when rendering '{{ value_json.state.status }}'
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.sensor] Platform esphome does not generate unique IDs. ID 2cf4323d06a7-wifisignal already exists - ignoring sensor.couloir_wifi_signal_sensor_2
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.sensor] Platform esphome does not generate unique IDs. ID 2cf4323d06a7-uptime already exists - ignoring sensor.salon_uptime_sensor_3
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.sensor] Platform esphome does not generate unique IDs. ID couloirsensorcouloir_temperature already exists - ignoring sensor.couloir_temperature_2
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.sensor] Platform esphome does not generate unique IDs. ID couloirsensorlumiere_ambiante already exists - ignoring sensor.lumiere_ambiante
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.sensor] Platform esphome does not generate unique IDs. ID couloirsensorcouloir_humidity already exists - ignoring sensor.couloir_humidity_2
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.sensor] Platform esphome does not generate unique IDs. ID 2cf4323d06a7-version already exists - ignoring sensor.esphome_version_3
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.sensor] Platform esphome does not generate unique IDs. ID 2cf4323d06a7-wifiinfo-ip already exists - ignoring sensor.couloir_ip_address_2
+2021-11-30 20:44:23 ERROR (MainThread) [homeassistant.components.binary_sensor] Platform esphome does not generate unique IDs. ID couloirbinary_sensorcouloir_motion already exists - ignoring binary_sensor.couloir_motion
+2021-11-30 20:44:25 WARNING (MainThread) [homeassistant.config_entries] Config entry 'chambrechevet' for yeelight integration not ready yet: Failed to read from the socket at 192.168.3.101:55443: [Errno 113] Connect call failed ('192.168.3.101', 55443).; Retrying in background
+2021-11-30 20:44:25 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for 192.168.3.137 @ 192.168.3.137: Error connecting to ('192.168.3.137', 6053): [Errno 113] Connect call failed ('192.168.3.137', 6053)
+2021-11-30 20:44:25 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for 192.168.3.136 @ 192.168.3.136: Error connecting to ('192.168.3.136', 6053): [Errno 113] Connect call failed ('192.168.3.136', 6053)
+2021-11-30 20:44:25 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for 192.168.3.144 @ 192.168.3.144: Error connecting to ('192.168.3.144', 6053): [Errno 113] Connect call failed ('192.168.3.144', 6053)
+2021-11-30 20:44:25 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for 192.168.3.138 @ 192.168.3.138: Error connecting to ('192.168.3.138', 6053): [Errno 113] Connect call failed ('192.168.3.138', 6053)
+2021-11-30 20:44:25 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for 192.168.3.138 @ 192.168.3.138: Error connecting to ('192.168.3.138', 6053): [Errno 113] Connect call failed ('192.168.3.138', 6053)
+2021-11-30 20:44:25 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for 192.168.3.141 @ 192.168.3.141: Error connecting to ('192.168.3.141', 6053): [Errno 113] Connect call failed ('192.168.3.141', 6053)
+2021-11-30 20:44:25 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for 192.168.3.141 @ 192.168.3.141: Error connecting to ('192.168.3.141', 6053): [Errno 113] Connect call failed ('192.168.3.141', 6053)
+2021-11-30 20:44:25 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for 192.168.3.140 @ 192.168.3.140: Error connecting to ('192.168.3.140', 6053): [Errno 113] Connect call failed ('192.168.3.140', 6053)
+2021-11-30 20:44:25 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for 192.168.3.142 @ 192.168.3.142: Error connecting to ('192.168.3.142', 6053): [Errno 113] Connect call failed ('192.168.3.142', 6053)
+2021-11-30 20:44:25 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for 192.168.3.142 @ 192.168.3.142: Error connecting to ('192.168.3.142', 6053): [Errno 113] Connect call failed ('192.168.3.142', 6053)
+2021-11-30 20:44:25 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for 192.168.3.142 @ 192.168.3.142: Error connecting to ('192.168.3.142', 6053): [Errno 113] Connect call failed ('192.168.3.142', 6053)
+2021-11-30 20:44:26 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for 192.168.3.145 @ 192.168.3.145: Error connecting to ('192.168.3.145', 6053): [Errno 113] Connect call failed ('192.168.3.145', 6053)
+2021-11-30 20:44:26 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for 192.168.3.143 @ 192.168.3.143: Error connecting to ('192.168.3.143', 6053): [Errno 113] Connect call failed ('192.168.3.143', 6053)
+2021-11-30 20:44:26 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for 192.168.3.147 @ 192.168.3.147: Error connecting to ('192.168.3.147', 6053): [Errno 113] Connect call failed ('192.168.3.147', 6053)
+2021-11-30 20:44:31 ERROR (SyncWorker_8) [homeassistant.components.wemo] Unable to get description url for WeMo at: 192.168.10.34
+2021-11-30 20:44:42 WARNING (MainThread) [homeassistant.config_entries] Config entry '192.168.10.47' for wled integration not ready yet: Invalid response from API: Timeout occurred while connecting to WLED device at 192.168.10.47; Retrying in background
+2021-11-30 20:44:43 WARNING (MainThread) [homeassistant.config_entries] Config entry '192.168.10.2' for wled integration not ready yet: Invalid response from API: Timeout occurred while connecting to WLED device at 192.168.10.2; Retrying in background
+2021-11-30 20:44:53 ERROR (MainThread) [homeassistant.helpers.template] Template variable error: 'list object' has no attribute 'state' when rendering '{{ value_json.state.status }}'
+2021-11-30 20:45:04 WARNING (MainThread) [homeassistant.bootstrap] Waiting on integrations to complete setup: octoprint
+2021-11-30 20:45:23 ERROR (MainThread) [homeassistant.helpers.template] Template variable error: 'list object' has no attribute 'state' when rendering '{{ value_json.state.status }}'
+2021-11-30 20:45:53 ERROR (MainThread) [homeassistant.helpers.template] Template variable error: 'list object' has no attribute 'state' when rendering '{{ value_json.state.status }}'
+2021-11-30 20:46:04 WARNING (MainThread) [homeassistant.bootstrap] Waiting on integrations to complete setup: octoprint
+2021-11-30 20:46:23 ERROR (MainThread) [homeassistant.helpers.template] Template variable error: 'list object' has no attribute 'state' when rendering '{{ value_json.state.status }}'
+2021-11-30 20:46:29 WARNING (MainThread) [homeassistant.helpers.template] Template warning: 'int' got invalid input 'unknown' when rendering template '{{ states("sensor.creality_cr10_time_remaining")|int / 60 }}' but no default was specified. Currently 'int' will return '0', however this template will fail to render in Home Assistant core 2022.1
+2021-11-30 20:46:29 WARNING (MainThread) [homeassistant.helpers.template] Template warning: 'int' got invalid input 'unknown' when rendering template '{{ states("sensor.creality_cr10_time_remaining")|int / 60 }}' but no default was specified. Currently 'int' will return '0', however this template will fail to render in Home Assistant core 2022.1
+2021-11-30 20:46:29 ERROR (MainThread) [homeassistant] Error doing job: Task exception was never retrieved
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/components/template/template_entity.py", line 260, in _async_template_startup
+    result_info.async_refresh()
+  File "/usr/src/homeassistant/homeassistant/helpers/event.py", line 869, in async_refresh
+    self._refresh(None)
+  File "/usr/src/homeassistant/homeassistant/helpers/event.py", line 1044, in _refresh
+    self.hass.async_run_hass_job(self._job, event, updates)
+  File "/usr/src/homeassistant/homeassistant/core.py", line 433, in async_run_hass_job
+    hassjob.target(*args)
+  File "/usr/src/homeassistant/homeassistant/components/template/template_entity.py", line 232, in _handle_results
+    self.async_write_ha_state()
+  File "/usr/src/homeassistant/homeassistant/helpers/entity.py", line 486, in async_write_ha_state
+    self._async_write_ha_state()
+  File "/usr/src/homeassistant/homeassistant/helpers/entity.py", line 596, in _async_write_ha_state
+    self.hass.states.async_set(
+  File "/usr/src/homeassistant/homeassistant/core.py", line 1222, in async_set
+    state = State(
+  File "/usr/src/homeassistant/homeassistant/core.py", line 912, in __init__
+    raise InvalidStateError(
+homeassistant.exceptions.InvalidStateError: Invalid state encountered for entity ID: sensor.luminositedim. State max length is 255 characters.
+2021-11-30 20:46:29 WARNING (MainThread) [homeassistant.helpers.template] Template variable warning: 'mappingproxy object' has no attribute 'cleaning_time' when rendering '{{ states.vacuum.xiaomi_vacuum.attributes.cleaning_time }}'
+2021-11-30 20:46:29 WARNING (MainThread) [homeassistant.helpers.template] Template variable warning: 'mappingproxy object' has no attribute 'cleaning_time' when rendering '{{ states.vacuum.xiaomi_vacuum.attributes.cleaning_time }}'
+2021-11-30 20:46:29 WARNING (MainThread) [homeassistant.helpers.template] Template variable warning: 'mappingproxy object' has no attribute 'total_cleaning_time' when rendering '{{ states.vacuum.xiaomi_vacuum.attributes.total_cleaning_time }}'
+2021-11-30 20:46:29 WARNING (MainThread) [homeassistant.helpers.template] Template variable warning: 'mappingproxy object' has no attribute 'total_cleaning_time' when rendering '{{ states.vacuum.xiaomi_vacuum.attributes.total_cleaning_time }}'
+2021-11-30 20:46:29 ERROR (MainThread) [homeassistant.components.google_assistant.http] No configuration for request_sync available
+2021-11-30 20:46:29 WARNING (MainThread) [homeassistant.components.homeassistant.triggers.numeric_state] Error initializing 'Print 3D fini sur la CR10' trigger: In 'numeric_state' condition: unknown entity sensor.creality_cr10_job_percentage
+2021-11-30 20:46:29 WARNING (MainThread) [homeassistant.components.homeassistant.triggers.numeric_state] Error initializing 'Print 3D fini sur la Anet A8' trigger: In 'numeric_state' condition: unknown entity sensor.anet_a8_job_percentage
+2021-11-30 20:46:29 ERROR (stream_worker) [homeassistant.components.stream.worker] Error demuxing stream: 
+2021-11-30 20:46:30 ERROR (stream_worker) [homeassistant.components.stream.worker] Error demuxing stream: 
+2021-11-30 20:46:30 ERROR (stream_worker) [homeassistant.components.stream.worker] Error demuxing stream: 
+2021-11-30 20:46:33 ERROR (MainThread) [homeassistant.components.tautulli] Error fetching tautulli data: Request exception for 'http://192.168.3.8:8181/api/v2?apikey=[REDACTED_API_TOKEN]&cmd=get_users' with - Server disconnected
+2021-11-30 20:46:33 ERROR (MainThread) [homeassistant.components.template.template_entity] TemplateError('UndefinedError: 'mappingproxy object' has no attribute 'hokagegano'') while processing template 'Template("{{ states.sensor.tautulli.attributes.hokagegano["Activity"] }}")' for attribute '_attr_native_value' in entity 'sensor.plextautulli'
+2021-11-30 20:46:40 ERROR (stream_worker) [homeassistant.components.stream.worker] Error demuxing stream: 
+2021-11-30 20:46:40 ERROR (stream_worker) [homeassistant.components.stream.worker] Error demuxing stream: 
+2021-11-30 20:46:40 ERROR (stream_worker) [homeassistant.components.stream.worker] Error demuxing stream: 
+2021-11-30 20:46:53 ERROR (MainThread) [homeassistant.helpers.template] Template variable error: 'list object' has no attribute 'state' when rendering '{{ value_json.state.status }}'
+2021-11-30 20:47:00 ERROR (stream_worker) [homeassistant.components.stream.worker] Error demuxing stream: 
+2021-11-30 20:47:00 ERROR (stream_worker) [homeassistant.components.stream.worker] Error demuxing stream: 
+2021-11-30 20:47:00 ERROR (stream_worker) [homeassistant.components.stream.worker] Error demuxing stream: 
+2021-11-30 20:47:23 ERROR (MainThread) [homeassistant.helpers.template] Template variable error: 'list object' has no attribute 'state' when rendering '{{ value_json.state.status }}'
+2021-11-30 20:47:30 ERROR (stream_worker) [homeassistant.components.stream.worker] Error demuxing stream: 
+2021-11-30 20:47:30 ERROR (stream_worker) [homeassistant.components.stream.worker] Error demuxing stream: 
+2021-11-30 20:47:30 ERROR (stream_worker) [homeassistant.components.stream.worker] Error demuxing stream: 
+2021-11-30 20:47:53 ERROR (MainThread) [homeassistant.helpers.template] Template variable error: 'list object' has no attribute 'state' when rendering '{{ value_json.state.status }}'
+2021-11-30 20:48:10 ERROR (stream_worker) [homeassistant.components.stream.worker] Error demuxing stream: 
+2021-11-30 20:48:10 ERROR (stream_worker) [homeassistant.components.stream.worker] Error demuxing stream: 
+2021-11-30 20:48:10 ERROR (stream_worker) [homeassistant.components.stream.worker] Error demuxing stream: 
+2021-11-30 20:48:23 ERROR (MainThread) [homeassistant.helpers.template] Template variable error: 'list object' has no attribute 'state' when rendering '{{ value_json.state.status }}'
+2021-11-30 20:48:39 WARNING (Thread-10) [homeassistant.util.executor] Thread[SyncWorker_6] is still running at shutdown: File "/usr/local/lib/python3.9/threading.py", line 930, in _bootstrap
+    self._bootstrap_inner()
+  File "/usr/local/lib/python3.9/threading.py", line 973, in _bootstrap_inner
+    self.run()
+  File "/usr/local/lib/python3.9/threading.py", line 910, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/local/lib/python3.9/concurrent/futures/thread.py", line 77, in _worker
+    work_item.run()
+  File "/usr/local/lib/python3.9/concurrent/futures/thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.9/site-packages/miio/fan_miot.py", line 455, in status
+    for prop in self.get_properties_for_mapping()
+  File "/usr/local/lib/python3.9/site-packages/miio/miot_device.py", line 65, in get_properties_for_mapping
+    return self.get_properties(
+  File "/usr/local/lib/python3.9/site-packages/miio/device.py", line 188, in get_properties
+    values.extend(self.send(property_getter, _props[:max_properties]))
+  File "/usr/local/lib/python3.9/site-packages/miio/device.py", line 97, in send
+    return self._protocol.send(
+  File "/usr/local/lib/python3.9/site-packages/miio/miioprotocol.py", line 161, in send
+    self.send_handshake()
+  File "/usr/local/lib/python3.9/site-packages/miio/miioprotocol.py", line 65, in send_handshake
+    m = MiIOProtocol.discover(self.ip)
+  File "/usr/local/lib/python3.9/site-packages/miio/miioprotocol.py", line 119, in discover
+    data, recv_addr = s.recvfrom(1024)

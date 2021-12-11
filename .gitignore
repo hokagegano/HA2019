@@ -1,10 +1,12 @@
+configuration.yaml.*
 deps.old
 custom_components.OLD
 temps
 www
 home-assistant.log
-home-assistant.log.old
+home-assistant.log.*
 home-assistant_v2.db
+home-assistant_v2.db.*
 lib
 deps
 tts
@@ -32,5 +34,7 @@ phue.conf
 faces
 gtfs
 ha.tar
+devices/*.yaml.*
+devices/cours*
 garmin-connect-export-master
 

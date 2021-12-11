@@ -2,7 +2,7 @@
 # Base component constants
 NAME = "Body Xiaomi Miscale Esphome"
 DOMAIN = "bodymiscale"
-VERSION = "1.0.0"
+VERSION = "1.1.3"
 
 ISSUE_URL = "https://github.com/dckiller51/bodymiscale/issues"
 DOC_URL = "https://github.com/dckiller51/bodymiscale"
@@ -41,6 +41,7 @@ ATTR_FATMASSTOLOSE = "fat_mass_to_lose"
 ATTR_FATMASSTOGAIN = "fat_mass_to_gain"
 ATTR_PROTEIN = "protein"
 ATTR_BODY = "body_type"
+ATTR_BODY_SCORE = "body_score"
 ATTR_METABOLIC = "metabolic_age"
 
 # Defaults

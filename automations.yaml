@@ -1627,10 +1627,6 @@
     data:
       brightness: 250
     entity_id: light.hall
-  - service: light.turn_on
-    data:
-      brightness: 250
-    entity_id: light.escalier
   mode: single
 - id: '1613035895897'
   alias: Eteint Hall Escalier
@@ -1645,9 +1641,6 @@
   - data:
       entity_id: light.hall
     service: light.turn_off
-  - service: light.turn_off
-    data:
-      entity_id: light.escalier
   mode: single
 - id: '1613375781958'
   alias: scan deepstack Jardin
@@ -1695,10 +1688,6 @@
     data:
       brightness: 250
     entity_id: light.hall
-  - service: light.turn_on
-    data:
-      brightness: 250
-    entity_id: light.escalier
   mode: single
 - id: '1613829588898'
   alias: Allume Couloir et Hall nuit
@@ -1716,10 +1705,6 @@
     data:
       brightness: 110
     entity_id: light.hall
-  - service: light.turn_on
-    data:
-      brightness: 110
-    entity_id: light.escalier
   mode: single
 - id: '1613943840576'
   alias: wled chambre 3d
